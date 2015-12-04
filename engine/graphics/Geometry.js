@@ -18,7 +18,3 @@ export default class Geometry {
         return !(this.texCoords === null);
     }
 }
-
-
-
-
