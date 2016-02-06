@@ -1,0 +1,32 @@
+{
+  "name": "cruftengine",
+  "version": "0.0.0",
+  "description": "[Tracuer Features](https://github.com/google/traceur-compiler/wiki/LanguageFeatures)",
+  "main": "gulpfile.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjneil/CruftEngine"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/mjneil/CruftEngine/issues"
+  },
+  "devDependencies": {
+    "vinyl-source-stream": "~1.1.0",
+    "del": "~2.2.0",
+    "gulp": "~3.9.0",
+    "gulp-concat": "~2.6.0",
+    "gulp-traceur": "~0.17.2",
+    "browserify": "~13.0.0",
+    "gulp-live-server": "0.0.29",
+    "express": "~4.13.4"
+  }
+}

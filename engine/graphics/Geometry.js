@@ -1,3 +1,6 @@
+
+import Actor from "engine/core/Actor";
+
 export default class Geometry {
     constructor() {
         this.vertices = null;
