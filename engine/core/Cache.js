@@ -1,5 +1,5 @@
 import Pipline from "./Pipeline";
-import http from "http";
+import *  as http from "engine/core/http";
 
 export default class Cache {
 	constructor() {
@@ -15,7 +15,12 @@ export default class Cache {
 				return;
 			}
 
-			//#TODO 
+			http.get(url).then((e)=>{
+				assets[url] = e.target.responseText;
+				resolve(assets[url]);
+			}, (e)=> {
+				reject(e);
+			})
 
 		})
 	}
