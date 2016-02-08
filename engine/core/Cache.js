@@ -1,27 +1,61 @@
-import Pipline from "./Pipeline";
+
 import *  as http from "engine/core/http";
+
+
+var imageLoader = (url) => {
+	return new Promise( (resolve, reject) => {
+		var image = new Image();
+			image.addEventListener("load", ()=>{
+				resolve(image);
+			});
+			image.addEventListener("error", reject);
+			image.src = url;
+	})
+}
+
+var jsonLoader = (url) => {
+	return http.get(url).then((e)=>{
+		return JSON.parse(e.target.responseText) ;
+	}, (err)=> {
+		return e;
+	})
+}
+
+var defaultLoader = (url) => {
+	return http.get(url).then((e) =>{
+		return e.target.responseText;
+	}, (err) => {
+		return err
+	})
+}
 
 export default class Cache {
 	constructor() {
 		this.assets = {};
-		this.plugins = [];
+		this.plugins = {
+			"png" : imageLoader,
+			"json" : jsonLoader
+		};
 	}
+
 
 	get(url){
 		return new Promise((resolve, reject) => {
 			var assets = this.assets;
-			if(assets[url] !== undefined){
+
+			if(assets[url]!==undefined){
 				resolve(assets[url]);
-				return;
 			}
 
-			http.get(url).then((e)=>{
-				assets[url] = e.target.responseText;
-				resolve(assets[url]);
-			}, (e)=> {
-				reject(e);
-			})
+			var fileType = url.split(".").pop();
+			var loader = this.plugins[fileType] || defaultLoader;
 
+			loader(url).then((data) =>{
+				resolve(data)
+			}, (err) => {
+				reject(err);
+			})
+			
 		})
 	}
 }

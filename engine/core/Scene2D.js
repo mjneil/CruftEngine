@@ -1,6 +1,6 @@
-import Actor2D from "./Actor3D";
+import Actor2D from "./Actor2D";
 
-export default class Scene3D extends Actor3D{
+export default class Scene2D extends Actor2D{ 
 	constructor() {
 		super();
 		this.actors = {};

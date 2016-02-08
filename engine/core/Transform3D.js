@@ -17,9 +17,9 @@ export default class Transform3D extends Component {
 	}
 
 	set position (position) {
-		this._position = position;
+		this._position = position;//COPY THIS
 		this.updateMatrix();
-		eventManager.emit("actor:move", this.actor);
+		eventManager.emit("transform:move", this.actor);
 	}
 
 	get rotation () {
@@ -29,7 +29,7 @@ export default class Transform3D extends Component {
 	set rotation (rotation) {
 		this._rotation = rotation;
 		this.updateMatrix();
-		eventManager.emit("actor:move", this.actor);
+		eventManager.emit("transform:rotate", this.actor);
 	}
 
 	updateMatrix() {
