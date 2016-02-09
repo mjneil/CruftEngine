@@ -1,5 +1,7 @@
 import Actor2D from "./Actor2D";
 
+
+//todo add scale
 export default class Scene2D extends Actor2D{ 
 	constructor() {
 		super();
