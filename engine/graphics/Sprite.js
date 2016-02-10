@@ -12,6 +12,7 @@ class SpriteGlob {
 		this.vertices = null
 		this.texCoords = null
 		this.buffers = null;
+		this.texture = null;
 		this.lastDirt = null;
 	}
 
@@ -21,6 +22,7 @@ class SpriteGlob {
 		this.vertices = new Float32Array(12);
 		this.texCoords = new Float32Array(12);
 		this.buffers = [gl.createBuffer(), gl.createBuffer()];
+		this.texture = gl.createTexture();
 		this.initialized = true;
 	}
 
@@ -33,6 +35,7 @@ class SpriteGlob {
 		var vertices = this.vertices;
 		var texCoords = this.texCoords;
 		var buffers = this.buffers;
+		var texture = this.texture;
 
 		var hw = sprite._width/2;
 		var hh = sprite._height/2;
@@ -73,6 +76,14 @@ class SpriteGlob {
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffers[1]);
 		gl.bufferData(gl.ARRAY_BUFFER, texCoords, gl.STATIC_DRAW);
 		gl.bindBuffer(gl.ARRAY_BUFFER, null);
+
+
+
+		gl.bindTexture(gl.TEXTURE_2D, texture);
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, sprite.image);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR); //prob want 2 change these at some point aheh
+	  	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+		gl.bindTexture(gl.TEXTURE_2D, null);
 	}
 
 	destroy() {
@@ -84,6 +95,7 @@ class SpriteGlob {
 		
 		var gl = this.gl;
 		var buffers = this.buffers;
+		var texture = this. texture;
 		var program = programManager.program;
 
 		var actor = this.sprite.actor;
@@ -100,6 +112,10 @@ class SpriteGlob {
 
 		gl.uniformMatrix3fv(program.uniforms.vMatrix, gl.FALSE, cameraTransform.inverse);
 		gl.uniformMatrix3fv(program.uniforms.mMatrix, gl.FALSE, transform.toWorld);
+
+
+		gl.activeTexture(gl.TEXTURE0);
+		gl.bindTexture(gl.TEXTURE_2D, texture);
 
 
 	}

@@ -21,8 +21,15 @@ var createProgram = (gl, vSrc, fSrc) => {
 	return program;
 }
 
-var createTexture = () => {
-
+var createTexture = (gl, type, image) => {
+	var texture = gl.createTexture();
+	gl.bindTexture(type, texture);
+	gl.texImage2D(type, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR); //prob want 2 change these at some point aheh
+  	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_NEAREST);
+  	gl.generateMipmap(gl.TEXTURE_2D);
+	gl.bindTexture(type, null);
+	return texture;
 }
 
 var createBufferWithData = (gl, type, data, usage) => {

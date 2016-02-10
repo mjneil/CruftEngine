@@ -10,4 +10,9 @@ export default class Component {
 	setActor(actor) {
 		this.actor = actor;
 	}
+
+	//todo? :/
+	update(deltaMs) {
+
+	}
 }

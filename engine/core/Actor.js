@@ -34,5 +34,16 @@ export default class Actor {
         console.log("FUNCTION NOT DONE. ")
     }
 
+    update(deltaMs) {
+
+        for(let key in this.components) {
+            this.components[key].update(deltaMs);
+        }
+
+        for(let child of this.children) {
+            child.update(deltaMs);
+        }
+    }
+
 
 }

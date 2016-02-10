@@ -1,7 +1,8 @@
 import Actor from "engine/core/Actor";
 import Transform2D from "engine/core/Transform2D";
 import Sprite from "engine/graphics/Sprite"
-
+import PlayerController from "./PlayerController";
+import PlayerComponent from "./PlayerComponent"
 export default function () {
 	var actor = new Actor();
 		//add transform 
@@ -17,5 +18,14 @@ export default function () {
 			sprite.height = 100;
 			//I dont like this part
 		actor.addComponent(sprite);
+
+		//add controller
+		var controller = new PlayerController();
+		actor.addComponent(controller);
+
+		///add player
+		var playerComponent = new PlayerComponent();
+		actor.addComponent(playerComponent);
+
 	return actor;
 }
