@@ -58,4 +58,16 @@ export default class Cache {
 			
 		})
 	}
+
+	getAll(urls) {
+		var promises = urls.map((url)=>{ return this.get(url); })
+		return Promise.all(promises).then((assets)=>{
+			var data = {}
+			for(var i = 0; i < assets.length;i++){
+				var url = urls[i], asset = assets[i];
+				data[url] = asset;
+			}
+			return data;
+		})
+	}
 }

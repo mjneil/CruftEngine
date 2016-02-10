@@ -1,12 +1,13 @@
-import Component from "core/engine/Component";
+import AsyncComponent from "engine/core/AsyncComponent";
 
 //think about makeing a "dirtable class "
 //possibly make a global array for vertices so we arent creating a lot of arrays :/. 
 //or just make a vertices cache thingy                           
-class GLSprite {
+class SpriteGlob {
 
 	constructor() {
 		this.initialized = false;
+		this.sprite = null;
 		this.gl = null;
 		this.vertices = null
 		this.texCoords = null
@@ -17,23 +18,24 @@ class GLSprite {
 	initialize(gl, sprite) {
 		this.gl = gl;
 		this.sprite = sprite;
-		this.vertices = new Float32Array(8);
-		this.texCoords = new Float32Array(8);
+		this.vertices = new Float32Array(12);
+		this.texCoords = new Float32Array(12);
 		this.buffers = [gl.createBuffer(), gl.createBuffer()];
 		this.initialized = true;
 	}
 
 	update() {
+		var sprite = this.sprite;
 		if(this.lastDirt === sprite.dirt) return;
 		this.lastDirt = sprite.dirt;
 
 		var gl = this.gl;
-		var sprite = this.sprite;
 		var vertices = this.vertices;
 		var texCoords = this.texCoords;
 		var buffers = this.buffers;
 
-		
+		var hw = sprite._width/2;
+		var hh = sprite._height/2;
 
 		vertices[0] =  hw;
 		vertices[1] =  hh;
@@ -50,8 +52,6 @@ class GLSprite {
 		vertices[10] =  hw;
 		vertices[11] = -hh;
 
-
-
 		texCoords[0] = 1;
 		texCoords[1] = 1;
 		texCoords[2] = 0;
@@ -60,15 +60,16 @@ class GLSprite {
 		texCoords[5] = 0;
 
 
-		texCoords[0] = 1;
-		texCoords[1] = 1;
-		texCoords[2] = 0;
-		texCoords[3] = 0;
-		texCoords[4] = 1;
-		texCoords[5] = 0;
+		texCoords[6] = 1;
+		texCoords[7] = 1;
+		texCoords[8] = 0;
+		texCoords[9] = 0;
+		texCoords[10] = 1;
+		texCoords[11] = 0;
 
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffers[0]);
 		gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffers[1]);
 		gl.bufferData(gl.ARRAY_BUFFER, texCoords, gl.STATIC_DRAW);
 		gl.bindBuffer(gl.ARRAY_BUFFER, null);
@@ -79,22 +80,34 @@ class GLSprite {
 		gl.deleteBuffer(buffers[1]);
 	}
 
-	preRender(programManager) {
+	preRender(programManager, camera) {
+		
 		var gl = this.gl;
+		var buffers = this.buffers;
+		var program = programManager.program;
 
-		var program = programManager.current;
+		var actor = this.sprite.actor;
+		var transform = actor.getComponent("transform");
+
+		var cameraTransform = camera.getComponent("transform");
+
 
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffers[0]);
 		gl.vertexAttribPointer(program.attributes.aPosition, 2, gl.FLOAT, false, 0, 0);
 
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffers[1]);
-		gl.vertexAttribPointer(program.attributes.aTexCoord, 2, gl.FLOAT, false, 0, 0);
+		gl.vertexAttribPointer(program.attributes.aTexCoord, 2, gl.FLOAT, false, 0, 0); 
+
+		gl.uniformMatrix3fv(program.uniforms.vMatrix, gl.FALSE, cameraTransform.inverse);
+		gl.uniformMatrix3fv(program.uniforms.mMatrix, gl.FALSE, transform.toWorld);
 
 
 	}
 
-	render() {
-
+	render(programManager, camera) {
+		var gl = this.gl;
+		var program = programManager.program;
+		gl.drawArrays(gl.TRIANGLES, 0, 6);
 	}
 
 	postRender() {
@@ -103,7 +116,7 @@ class GLSprite {
 
 }
 
-export default class Sprite extends Component {
+export default class Sprite extends AsyncComponent {
 	constructor() {
 		super("sprite");
 		this.dirt = 0;
@@ -140,19 +153,18 @@ export default class Sprite extends Component {
 
 	set image (image) {
 		this._image = image;
+		console.log(this._width, this._height, "ASd")
 
 		if(!this._width) this._width = image.width;
 		if(!this.height) this._height = image.height;
-		dirty();
+		this.dirt++;
 	}
 
 	
-	createGL(gl) {
-		return new SpriteGlob(gl);
-	}
-
-	updateGL(glob) {
-		return glob.update();
+	createGlob(gl) {
+		var glob = new SpriteGlob();
+			glob.initialize(gl, this);
+		return glob;
 	}
 
 }

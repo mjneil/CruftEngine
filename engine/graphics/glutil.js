@@ -6,13 +6,14 @@ var createShader = (gl, type, src) => {
 		console.log(gl.getShaderInfoLog(shader));
 		return null;//or somthing else?
 	}
+	return shader
 }
 
 var createProgram = (gl, vSrc, fSrc) => {
 	var program = gl.createProgram();
-	gl.attachShader(createShader(gl.VERTEX_SHASDER, vSrc));
-	gl.attachShader(createShader(gl.FRAGMENT_SHADER, fSrc));
-	gl.linkProgram();
+	gl.attachShader(program, createShader(gl, gl.VERTEX_SHADER, vSrc));
+	gl.attachShader(program, createShader(gl, gl.FRAGMENT_SHADER, fSrc));
+	gl.linkProgram(program);
 	if(!gl.getProgramParameter(program, gl.LINK_STATUS)) {
 		console.log("FAILED TO COMPILE SHADER");
 		return null;
@@ -31,3 +32,5 @@ var createBufferWithData = (gl, type, data, usage) => {
 	gl.bindBuffer(type, null);
 	return buffer;
 }
+
+export {createShader, createProgram, createTexture, createBufferWithData}

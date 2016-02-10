@@ -18,11 +18,12 @@ export default class Actor {
     }
 
     removeComponent() {
-
+        console.log("FUNCTION NOT DONE")
     }
 
-    addChild() {
-
+    addChild(child) {
+        this.children.push(child);
+        child.parent = this;
     }
 
     setEventManager(eventManager) {
@@ -30,7 +31,7 @@ export default class Actor {
     }
 
     removeChild() {
-
+        console.log("FUNCTION NOT DONE. ")
     }
 
 
