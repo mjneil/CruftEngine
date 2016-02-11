@@ -45,5 +45,27 @@ export default class Actor {
         }
     }
 
+    //make a more effecient thing later :/
+    toJSON() {
+
+        var json = {
+            id : this.id,
+            parentId : (this.parent !== null)? this.parent.id:null,
+            components : {},
+            children : [] 
+        }
+
+        for(var key in this.components) {
+            json.components[key] = this.components[key].toJSON()
+        }
+
+        for(let child of this.children) {
+            json.children.push(child.toJSON());
+        }
+
+        return json;
+       
+    }
+
 
 }

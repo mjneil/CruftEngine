@@ -80,6 +80,7 @@ class SpriteGlob {
 
 
 		gl.bindTexture(gl.TEXTURE_2D, texture);
+		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, sprite.image);
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR); //prob want 2 change these at some point aheh
 	  	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
@@ -133,12 +134,16 @@ class SpriteGlob {
 }
 
 export default class Sprite extends AsyncComponent {
-	constructor() {
+	constructor(url) {
 		super("sprite");
 		this.dirt = 0;
 		this._width = null;
 		this._height = null;
 		this._image = null;
+
+		this.loadAsync([url]).then((assets) => {
+			this.image = assets[url];
+		})
 	}
 
 	dirty () {
@@ -169,8 +174,6 @@ export default class Sprite extends AsyncComponent {
 
 	set image (image) {
 		this._image = image;
-		console.log(this._width, this._height, "ASd")
-
 		if(!this._width) this._width = image.width;
 		if(!this.height) this._height = image.height;
 		this.dirt++;
@@ -181,6 +184,16 @@ export default class Sprite extends AsyncComponent {
 		var glob = new SpriteGlob();
 			glob.initialize(gl, this);
 		return glob;
+	}
+
+
+	toJSON() {
+		var json = {
+			width : this._width,
+			height : this._height,
+			src : image.src
+		}
+		return json;
 	}
 
 }

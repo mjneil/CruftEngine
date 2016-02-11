@@ -15,4 +15,8 @@ export default class Component {
 	update(deltaMs) {
 
 	}
+
+	toJSON () {
+		return {};
+	}
 }

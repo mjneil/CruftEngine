@@ -8,6 +8,7 @@ export default class PlayerComponent extends Component {
 		this.movingRight = false;
 		this.movingUp = false;
 		this.movingDown = false;
+		this.direction = [0, 0];
 		this.speed = 1;
 	}
 
@@ -35,6 +36,8 @@ export default class PlayerComponent extends Component {
 		}
 
 		transform.position = position;
+
+		transform.setDirection(this.direction);
 
 	}
 }

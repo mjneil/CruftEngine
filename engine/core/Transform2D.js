@@ -42,6 +42,21 @@ export default class Transform2D extends Component {
 		eventManager.emit("transform:rotate", this.actor);
 	}
 
+	getWorldPosition() {
+		var pos = vec2.create();
+		pos[0] = this.toWorld[6];
+		pos[1] = this.toWorld[7];
+		return pos;
+	}
+	setDirection(vec) {
+		var tmp = vec2.clone(vec);
+			vec2.scale(tmp, tmp, 1/vec2.length(tmp));
+		var theta = Math.acos(tmp[0]);
+		if(vec[1] < 0) theta *= -1;
+		this.rotation = theta;
+
+	}
+
 	get scale() {
 		return vec2.clone(this._scale);
 	}
@@ -78,5 +93,16 @@ export default class Transform2D extends Component {
 		for(let child of this.actor.children){
 			child.updateMatrix();
 		}
+	}
+
+	toJSON() {
+		var position = vec2.copy([0, 0], this._position);
+		var scale = vec2.copy([0, 0], this._scale)
+		var json = {
+			position ,
+			rotation : this.rotation,
+			scale : scale
+		}
+		return json;
 	}
 }

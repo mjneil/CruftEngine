@@ -5,8 +5,11 @@ import Component from "engine/core/Component";
 export default class PlayerController extends Component {
 	constructor() {
 		super("PlayerController");
+
+		this.state = {};//TMP
+
 		var keyStates = this.keyStates = {};
-		var mouse = this.mouse = vec2.create();
+		var mouse = this.mouse = vec2.create(); //move this to the camera at some point :/
 		//todo isLeftMouseDown()
 		//to isRightMouseDown();
 		addEventListener("keydown", (e) => {
@@ -30,11 +33,22 @@ export default class PlayerController extends Component {
 	update(deltaMs) {
 
 		var pc = this.actor.getComponent("PlayerComponent");
-
+		var mouse = this.mouse;
 		//somehow turn this into events rather than direct access :/
-		pc.movingLeft = this.isKeyDown("A");
-		pc.movingRight = this.isKeyDown("D");
-		pc.movingUp = this.isKeyDown("W");
-		pc.movingDown = this.isKeyDown("S");
+		//this is all very bad. 
+		this.state = {
+			MOVING_UP : this.isKeyDown("W"),
+			MOVING_DOWN : this.isKeyDown("S"),
+			MOVING_LEFT : this.isKeyDown("A"),
+			MOVING_RIGHT  : this.isKeyDown("D")
+		}
+		/*
+
+		//get directional vector
+		var dif = vec2.create();
+		var playerPos = this.actor.getComponent("transform").getWorldPosition();
+		var mousePos =  [mouse[0]- GAME_WIDTH/2, GAME_HEIGHT - mouse[1] - GAME_HEIGHT/2]//for now just pretend cam is always 0,0
+		vec2.sub(dif, mousePos, playerPos);
+		pc.direction = dif; */
 	}
 }

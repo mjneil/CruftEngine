@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "traceur": "^0.0.95"
+    "traceur": "^0.0.95",
+    "peerjs": "^0.3.14"
   }
 }
