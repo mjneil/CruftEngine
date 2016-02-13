@@ -13,4 +13,9 @@ export default class Scene2D extends Actor{
 		super.addChild(child);
 		this.actors[child.id] = child;
 	}
+
+	removeActor(actor) {
+		if(actor.parent) actor.parent.removeChild(actor);
+		delete this.actors[actor.id];
+	}
 }

@@ -49,6 +49,15 @@ peer.on("connection", (conn) => {
 			event : "game:initialize", 
 			scene : generateSceneState()
 		})
+
+		connection.connection.on("close", () => {
+			var meta = connections[conn.peer];
+			if(!meta) return;
+			if(meta.reliable) meta.reliable.connection.close();
+			if(meta.unreliable) meta.unreliable.connection.close();
+			if(meta.actor) destroyPlayer(meta.actor);
+			delete connections[conn.peer];
+		});
 	})
 });
 
@@ -73,6 +82,8 @@ var addReliableListeners = (connection, actor) => {
 var scene = new Scene2D("server-" + uuid.create().toString());//should def automate that in the future :O
 var eventManager = getEventManager();
 var processManager = getProcessManager();
+
+//scene.addChild();
 
 
 eventManager.on("SET_MOVING_UP", function (e) {
@@ -119,12 +130,30 @@ window.kill = function () { processManager.kill(); }
 
 
 
-
+var destroyPlayer = (actor) => {
+	if(scene.actors[actor.id]){
+		scene.removeActor(actor);
+	}
+}
 
 var addPlayerToGame = (owner) => {
 	var actor = factories.Player(owner);
 	scene.addChild(actor);
-	//emit the add person here
+
+	var packet = {
+		event : "game:add_player",
+		timestamp : Date.now(),
+		id : actor.id,
+		owner : actor.owner
+	};
+
+	for(var key in connections) {
+		var meta = connections[key]
+		if(meta.reliable) {
+			meta.reliable.connection.send(packet);
+		}
+	}
+
 	return actor;
 }
 

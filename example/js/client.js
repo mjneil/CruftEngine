@@ -6,6 +6,7 @@ import Camera2D from "engine/graphics/Camera2D";
 import Connection from "engine/net/Connection"//could make this getConnection but prob dont want to give
 import * as factories from "./clientFactories"
 import ScriptProcess from "engine/core/ScriptProcess"
+import CameraFollow from "./CameraFollow";
 //global access to the server connection :/ 
 //WARNING. MAY BE MAKING DUPLICATE UUIDS. THIS IS A MUST DO. FIND OUT HOW TO MAKE UUIDS FREAL M8
 
@@ -16,6 +17,8 @@ var cache = getCache();
 var renderer = new Renderer2D(GAME_WIDTH, GAME_HEIGHT);
 var scene = null;
 var camera = new Camera2D(GAME_WIDTH, GAME_HEIGHT);
+var follow = new CameraFollow();
+camera.addComponent(follow);
 
 var latency = null;
 var timeDif = null;
@@ -55,6 +58,12 @@ reliable.connection.on("open", () => {
 		console.log(scene)
 		main();
 	});
+
+	reliable.on("game:add_player", (data) => {
+		if(scene == null || scene.actors[data.id]) return;
+		var actor = factories.Player(data.id, data.owner, peerjsKey, reliable );//decouple this shit plz. 
+		scene.addChild(actor);
+	})
 
 
 })
@@ -152,7 +161,6 @@ unreliable.connection.on("open", () => {
 		})
 })
 
-
 var draw = function () {
 	renderer.render(scene, camera);
 	requestAnimationFrame(draw);
@@ -163,8 +171,6 @@ processManager.addChild(new ScriptProcess((now, deltaMs) => {
 	var simulatedTime = now + timeDif - gameDelay; //prob should just make that latency. 
 	var state = interpStates(simulatedTime);
 	applyState(state);
-
-
 	scene.update(deltaMs);
 	
 
@@ -179,6 +185,10 @@ var main = function () {
 //#testinglyf
 window.onload = function () { document.body.appendChild(renderer.canvas); }
 window.kill = function () { processManager.kill(); }
+window.onbeforeonload = function () {
+	console.log("TERMINATING CONNECTION!");
+	peer.destroy();
+}
 
 
 
@@ -189,6 +199,9 @@ var makeGameFromServer = (data) => {
 
 	for(var actorid in data.actors){
 		var actor = factories.Player(actorid, data.actors[actorid].owner, peerjsKey, reliable );
+		if(actor.owner == peerjsKey) {//todo make actor.isOwn()
+			follow.setTarget(actor);
+		}
 		actor.getComponent("transform").position = data.actors[actorid].position;
 		actors[actorid] = actor;
 	}
@@ -199,4 +212,6 @@ var makeGameFromServer = (data) => {
 	}
 
 	scene = actors[data.id];
+	scene.addChild(camera);
+
 }

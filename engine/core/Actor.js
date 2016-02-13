@@ -23,16 +23,24 @@ export default class Actor {
     }
 
     addChild(child) {
+        if(child.parent !== null) console.log("WARNING: ATTEMPTING TO BREAK EVERYTHING")
         this.children.push(child);
         child.parent = this;
     }
 
-    setEventManager(eventManager) {
-        this.eventManager = eventManager;
+    removeChild(child) {
+        var children = this.children;
+        for(let i = 0; i < children.length;i++){
+            if(children[i] === child){
+                child.parent = null;
+                this.children = children.splice(i, 1);
+                return;
+            }
+        }
     }
 
-    removeChild() {
-        console.log("FUNCTION NOT DONE. ")
+    setEventManager(eventManager) {
+        this.eventManager = eventManager;
     }
 
     update(deltaMs) {

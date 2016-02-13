@@ -37,7 +37,7 @@ var fSrc = `
 
 export default class Renderer2D {
 	constructor(width, height) {
-		this.canvas = document.createElement("canvas");
+		this.canvas = document.createElement("canvas" , {preserveDrawingBuffer:true});
 		this.canvas.width = width;
 		this.canvas.height = height;
 		this.globs = {};
@@ -45,6 +45,8 @@ export default class Renderer2D {
 			gl.viewport(0, 0, width, height);
 			gl.clearColor(0, 0, 0, 1);
 			gl.disable(gl.DEPTH_TEST)
+			gl.enable(gl.BLEND);
+			gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 
 
 		this.programManager = new ProgramManager(gl);
