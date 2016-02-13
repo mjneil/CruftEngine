@@ -4,7 +4,7 @@ export default class Component {
 	constructor(type) {
 		this.type = type;
 		this.actor = null;
-		this.guid = nextComponentGuid++;
+		this.id = nextComponentGuid++;
 	}
 
 	setActor(actor) {

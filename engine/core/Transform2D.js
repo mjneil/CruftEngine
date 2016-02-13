@@ -1,5 +1,8 @@
 import Component from "./Component.js";
+import {mat3, vec2} from "engine/lib/gl-matrix";
+import {getEventManager} from "engine/core/globals";
 
+var eventManager = getEventManager();
 var IDENTITY_MATRIX = mat3.create();
 	mat3.identity(IDENTITY_MATRIX)//DO NOT CHANGE THIS.
 

@@ -1,5 +1,5 @@
 import Component from "engine/core/Component";
-
+import {vec2} from "engine/lib/gl-matrix"
 
 export default class PlayerComponent extends Component {
 	constructor() {
@@ -9,7 +9,7 @@ export default class PlayerComponent extends Component {
 		this.movingUp = false;
 		this.movingDown = false;
 		this.direction = [0, 0];
-		this.speed = 1;
+		this.speed = .7;
 	}
 
 	update(deltaMs) {
@@ -36,7 +36,6 @@ export default class PlayerComponent extends Component {
 		}
 
 		transform.position = position;
-
 		transform.setDirection(this.direction);
 
 	}

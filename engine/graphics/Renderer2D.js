@@ -62,15 +62,15 @@ export default class Renderer2D {
 
 	//todo remove references to sprite
 	hasGlob (sprite) {
-		return this.globs[sprite.guid] !== undefined;
+		return this.globs[sprite.id] !== undefined;
 	}
 
 	addGlob(sprite) {
-		this.globs[sprite.guid] = sprite.createGlob(this.gl);
+		this.globs[sprite.id] = sprite.createGlob(this.gl);
 	}
 
 	getGlob(sprite) {
-		return this.globs[sprite.guid];
+		return this.globs[sprite.id];
 	}
 
 	render(scene, camera) { //ignore camera matrix for now :/

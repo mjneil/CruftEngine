@@ -5549,7 +5549,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = vec2;
 
 
+
+
 /***/ }
 /******/ ])
 });
-;
+
+
+var mat3 = module.exports.mat3;
+var mat4 = module.exports.mat4;
+var vec2 = module.exports.vec2;
+var vec3 = module.exports.vec3;
+export {mat3, mat4, vec2, vec3}
+

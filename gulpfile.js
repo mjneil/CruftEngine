@@ -6,10 +6,11 @@ var concat = require("gulp-concat");
 var del = require("del");
 var gls = require('gulp-live-server');
 var runSequence = require('run-sequence');
+var server = gls.new("server.js");
+var ENGINE_SRC = ["engine/**/*.js"];
+var GAME_SRC = ["example/js/**.js", "example/server.js"];
 
-var ENGINE_SRC = ["engine/**/*.js", "!engine/lib/**/*.js"];
-var CLIENT_SRC = ["example/public/**/*.js", "!example/public/bower_components/**/*.js", "!example/public/dist/**/*.js", "!example/public/server.js"];
-var SERVER_SRC = ["example/public/**/*.js", "!example/public/bower_components/**/*.js", "!example/public/dist/**/*.js", "!example/public/client.js"];
+
 
 var onerror = function (e) {
   console.log("\033[31m WARNING: YOUR STUFF ISNT TRANSPILING")
@@ -17,9 +18,12 @@ var onerror = function (e) {
   this.emit("end");
 }
 
-
-gulp.task("js:clean", function () {
+gulp.task("js:clean:tmp", function () {
   return del(["tmp/"]);
+})
+
+gulp.task("js:clean:dist", function () {
+  return del(["example/dist/**.js"]);
 })
 
 gulp.task("js:engine", function () {
@@ -29,63 +33,59 @@ gulp.task("js:engine", function () {
     .pipe(gulp.dest("tmp/node_modules/engine"))
 })
 
-gulp.task("js:client", function () {
-  return gulp.src(CLIENT_SRC)
+gulp.task("js:game", function () {
+  return gulp.src(GAME_SRC, {base :"./example"})
     .pipe(tracuer())
     .on("error", onerror)
     .pipe(gulp.dest("tmp/"))
 })
-
-gulp.task("js:server", function () {
-  return gulp.src(SERVER_SRC)
-    .pipe(tracuer())
-    .on("error", onerror)
-    .pipe(gulp.dest("tmp/"))
-})
-
 
 gulp.task("js:browserify:client", function () {
-  return browserify("tmp/client.js")
+  return browserify("tmp/js/client.js")
   .bundle()
   .on("error", onerror)
-  .pipe(source('clientbundle.js'))
-  .pipe(gulp.dest("tmp/build/"))
+  .pipe(source('client.js'))
+  .pipe(gulp.dest("example/dist/"))
 })
 
 gulp.task("js:browserify:server", function () {
   return browserify("tmp/server.js")
   .bundle()
   .on("error", onerror)
-  .pipe(source('serverbundle.js'))
-  .pipe(gulp.dest("tmp/build/"))
+  .pipe(source('server.js'))
+  .pipe(gulp.dest("example/dist/"))
 })
 
-
 gulp.task("js:build:client", function () {
-  return gulp.src(["engine/lib/gl-matrix.js", "tmp/build/clientbundle.js"])
+  return gulp.src(["engine/lib/gl-matrix.js", "tmp/dist/client.js"])
     .pipe(concat("client.js"))
-    .pipe(gulp.dest("example/public/dist/"))
+    .pipe(gulp.dest("example/dist"))
 })
 
 gulp.task("js:build:server", function () {
-  return gulp.src(["engine/lib/gl-matrix.js", "tmp/build/serverbundle.js"])
+  return gulp.src(["engine/lib/gl-matrix.js", "tmp/dist/server.js"])
     .pipe(concat("server.js"))
-    .pipe(gulp.dest("example/public/dist/"))
+    .pipe(gulp.dest("example/dist/"))
 })
 
 gulp.task("js:all", function () {
-  runSequence("js:clean", 
-    ["js:engine", "js:client", "js:server"], 
-    ["js:browserify:client", "js:browserify:server"], 
-    ["js:build:client", "js:build:server"]
+  //server.start(server);
+  runSequence(
+    ["js:clean:tmp", "js:clean:dist"], 
+    ["js:engine", "js:game"], 
+    ["js:browserify:client", "js:browserify:server"],
+    "server"
     );
+})
+
+gulp.task("server", function () {
+  server.start.bind(server)();
 })
 
 //echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 gulp.task("default", ["js:all"], function () {
-  var server = gls.new("server.js");
-  server.start();
+  
   gulp.watch(ENGINE_SRC, ["js:all"]);
-  gulp.watch(CLIENT_SRC, ["js:all"]);
-  gulp.watch(SERVER_SRC, ["js:all"]);
+  gulp.watch(GAME_SRC, ["js:all"]);
+  //gulp.watch(SERVER_SRC, ["js:all"]);
 })

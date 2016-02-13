@@ -1,5 +1,6 @@
 import Component from "engine/core/Component"
-
+import {getCache} from "engine/core/globals"
+var cache = getCache();
 export default class AsyncComponent extends Component {
 
 	constructor(type) {

@@ -1,8 +1,9 @@
-var nextActorGuid = 0;
+import uuid from "engine/lib/uuid";
+
 export default class Actor {
-    constructor() {
+    constructor(id) {
     	this.parent = null;
-    	this.id = nextActorGuid++;
+    	this.id = id || uuid.create().toString();//or somthing like that. 
         this.components = {};
         this.children = [];
         this.eventManager = null;
@@ -44,28 +45,4 @@ export default class Actor {
             child.update(deltaMs);
         }
     }
-
-    //make a more effecient thing later :/
-    toJSON() {
-
-        var json = {
-            id : this.id,
-            parentId : (this.parent !== null)? this.parent.id:null,
-            components : {},
-            children : [] 
-        }
-
-        for(var key in this.components) {
-            json.components[key] = this.components[key].toJSON()
-        }
-
-        for(let child of this.children) {
-            json.children.push(child.toJSON());
-        }
-
-        return json;
-       
-    }
-
-
 }
