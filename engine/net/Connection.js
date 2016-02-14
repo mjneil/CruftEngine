@@ -8,6 +8,7 @@ export default class Connection extends EventEmitter { //wrapper for peer connec
 		this.connection = connection;
 
 		this.connection.on("data", (data) => {
+			this.emit("data", data);
 			this.emit(data.event, data);//for now assume its always json
 		})
 
@@ -17,6 +18,12 @@ export default class Connection extends EventEmitter { //wrapper for peer connec
 				timestamp : Date.now()
 			})
 		})
+	}
+
+
+
+	send(data) {
+		this.connection.send(data);
 	}
 
 	//assume no other ping_requests durring this time :I

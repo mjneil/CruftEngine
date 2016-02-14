@@ -1,22 +1,50 @@
-import {PEERJS_API_KEY} from "./js/constants"
+import {PEERJS_API_KEY} from "./js/constants";
+import Scene2D from "engine/core/Scene2D"
+import NetworkManager from "engine/net/NetworkManager";
+import ProcessManager from "engine/core/ProcessManager";
+import EventEmitter from "events";
 
+//initialize everything. 
+var scene = new Scene2D(0);//sceneid= 0;
+var networkManager = new NetworkManager("server", PEERJS_API_KEY);
+var processManager = new ProcessManager();
+var eventManager = new EventEmitter();
+
+
+
+
+
+networkManager.on("connection", (session) => {
+	console.log(session)
+})
+
+networkManager.on("close", (session) => {
+	console.log(session);
+})
+
+/*
+
+import {PEERJS_API_KEY} from "./js/constants"
 import Scene2D from "engine/core/Scene2D"
 import ProcessManager from "engine/core/ProcessManager";
 import EventManager from "events";
-import Actor from "engine/core/Actor"
-import PlayerComponent from "./js/PlayerComponent"
-import Transform2D from "engine/core/Transform2D"
+import Actor from "engine/core/Actor";
+import PlayerComponent from "./js/PlayerComponent";
+import Transform2D from "engine/core/Transform2D";
 import {getEventManager, getProcessManager} from "engine/core/globals"
 import Connection from "engine/net/Connection";
 import * as factories from "./js/serverFactories";
-import uuid from "engine/lib/uuid"
-import {vec2} from "engine/lib/gl-matrix"
-import ScriptProcess from "engine/core/ScriptProcess"
+import uuid from "engine/lib/uuid";
+import {vec2} from "engine/lib/gl-matrix";
+import ScriptProcess from "engine/core/ScriptProcess";
 
-//prefix all actor's with thing so as not to conflic with locally created uuids. 
-//make a real serializer class thingy. freal m8s
-//I gess the server needs to limit the ranges of people hmmmmm. 
+*/
 
+
+
+
+
+/*
 var connections = {};
 
 var peer = new Peer("server", {key : PEERJS_API_KEY });
@@ -190,3 +218,4 @@ var generateSceneState = () => {
 	return json;
 }
 
+*/

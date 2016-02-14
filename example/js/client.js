@@ -1,15 +1,28 @@
 import {PEERJS_API_KEY} from "./constants";
-import {getProcessManager, getEventManager, getCache} from "engine/core/globals"
 import Scene2D from "engine/core/Scene2D"
 import Renderer2D from "engine/graphics/Renderer2D"
-import Camera2D from "engine/graphics/Camera2D";
-import Connection from "engine/net/Connection"//could make this getConnection but prob dont want to give
-import * as factories from "./clientFactories"
-import ScriptProcess from "engine/core/ScriptProcess"
-import CameraFollow from "./CameraFollow";
+import NetworkManager from "engine/net/NetworkManager";
+import ProcessManager from "engine/core/ProcessManager";
+import EventEmitter from "events";
+
+//initialize everything. 
+var scene = new Scene2D(0);//sceneid= 0;
+var networkManager = new NetworkManager(null, PEERJS_API_KEY);
+var processManager = new ProcessManager();
+var eventManager = new EventEmitter();
+var renderer = new Renderer2D(GAME_WIDTH, GAME_HEIGHT);//todo fix aspect ratio stuff. 
+
+
+networkManager.createSession("server").then((session) => {
+	console.log(session);
+})
+
+
+
+
 //global access to the server connection :/ 
 //WARNING. MAY BE MAKING DUPLICATE UUIDS. THIS IS A MUST DO. FIND OUT HOW TO MAKE UUIDS FREAL M8
-
+/*
 var processManager = getProcessManager()
 var eventManager = getEventManager();
 var cache = getCache();
@@ -215,3 +228,4 @@ var makeGameFromServer = (data) => {
 	scene.addChild(camera);
 
 }
+*/

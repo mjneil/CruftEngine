@@ -1,8 +1,6 @@
 import Component from "./Component.js";
 import {mat3, vec2} from "engine/lib/gl-matrix";
-import {getEventManager} from "engine/core/globals";
 
-var eventManager = getEventManager();
 var IDENTITY_MATRIX = mat3.create();
 	mat3.identity(IDENTITY_MATRIX)//DO NOT CHANGE THIS.
 
@@ -32,7 +30,6 @@ export default class Transform2D extends Component {
 	set position (position) {
 		vec2.copy(this._position, position);
 		this.updateMatrix();
-		eventManager.emit("transform:move", this.actor);
 	}
 
 	get rotation () {
@@ -42,7 +39,6 @@ export default class Transform2D extends Component {
 	set rotation (rotation) {
 		this._rotation = rotation;
 		this.updateMatrix();
-		eventManager.emit("transform:rotate", this.actor);
 	}
 
 	getWorldPosition() {
@@ -97,15 +93,5 @@ export default class Transform2D extends Component {
 			child.updateMatrix();
 		}
 	}
-
-	toJSON() {
-		var position = vec2.copy([0, 0], this._position);
-		var scale = vec2.copy([0, 0], this._scale)
-		var json = {
-			position ,
-			rotation : this.rotation,
-			scale : scale
-		}
-		return json;
-	}
+	
 }
