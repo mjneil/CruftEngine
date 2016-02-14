@@ -46,6 +46,10 @@ export default class NetworkManager extends EventEmitter {
 	}
 	addSession(session) {
 		this.sessions[session.peer] = session;
+		session.on("data", (data) => {
+			this.emit("data" , data );
+			this.emit(data.event, data);
+		}
 	}
 
 	//temp util functions
