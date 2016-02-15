@@ -14,4 +14,13 @@ export default class Session extends EventEmitter {
 			this.emit("data", data);
 		})
 	}
+
+	emitReliable(event, data) {
+		var packet = {
+			event : event,
+			timestamp : Date.now(),
+			data : data
+		}
+		this.reliable.send(packet);
+	}
 }

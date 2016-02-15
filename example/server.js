@@ -41,8 +41,22 @@ var main = () => {
 		console.log("LOST SESSION : ", session);
 	})
 
-	engine.network.on("game:events", (data) => {
-		console.log(data);
+	//in fiture might just batch this. 
+	engine.network.on("PlayerController:events", (data) => {
+		var session = data.session;
+		var packet = data.packet;
+		var actor = scene.findActorById(session.peerId);
+		var events = packet.data;
+		if(!actor || !events) return;
+		engine.emit("PlayerController:events". { actor , events });
+	})
+
+	//I dont like that this is here. Should just inherently work. 
+	//but at the same time I dont want every single player to be listening
+	//for every other player's events. 
+	//this is very temp. 
+	engine.on("PlayerController:events", (e) => { 
+		e.actor.getComponent("PlayerComponent").handleEvents(e.events);
 	})
 
 	engine.scheduler.addChild(new Script((now, deltaMs) => {
