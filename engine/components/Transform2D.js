@@ -93,5 +93,28 @@ export default class Transform2D extends Component {
 			child.updateMatrix();
 		}
 	}
-	
+
+	setFromJSON(json) { //lazy. update this to not call updateMatrix 3 times. 
+		if(!json) return;
+		var needsUpdate = false;
+		
+		if(json.position){
+			vec2.copy(this._position, json.position);
+			needsUpdate = true;
+		}
+
+		if(json.rotation !== undefined){
+			this._rotation= json.rotation;
+			needsUpdate = true;
+		}
+
+		if(json.scale){
+			vec2.copy(this._scale, json.scale);
+			needsUpdate = true;
+		}
+
+		if(needsUpdate) {
+			this.updateMatrix();
+		}
+	}
 }

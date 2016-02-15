@@ -39,9 +39,10 @@ export default class Actor {
         }
     }
 
-    setEventManager(eventManager) {
-        this.eventManager = eventManager;
+    setEngine(engine) {
+        this.engine = engine;
     }
+
 
     update(deltaMs) {
 

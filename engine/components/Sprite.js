@@ -1,9 +1,79 @@
 import AsyncComponent from "engine/components/AsyncComponent";
 
+export default class Sprite extends AsyncComponent {
+
+	constructor() {
+		super("sprite");
+		this.dirt = 0;
+		this._width = null;
+		this._height = null;
+		this._url = null;
+		this._image = null;
+	}
+
+	dirty () {
+		this.dirt++;
+	}
+
+	get width() {
+		return this._width;
+	}
+
+	set width (width) {
+		this._width = width;
+		this.dirt++;
+	}
+
+	get height() {
+		return this._height;
+	}
+
+	set height(height) {
+		this._height = height;
+		this.dirt++;
+	}
+
+	get image () {
+		return this._image;
+	}
+
+	set image (image) {
+		this._image = image;
+		if(!this._width) this._width = image.width;
+		if(!this.height) this._height = image.height;
+		this.dirt++;
+	}
+
+	get url() {
+		return this._url;
+	}
+
+	set url(url) {
+		this._url = url;
+		this.loadAsync([url]).then((assets) => {
+			this.image = assets[url];
+		})
+	}
+
+	setFromJSON(json) {
+		if(!json) return;
+		if(json.width) this._width = json.width;
+		if(json.height) this._height = json.height;
+		if(json.url) this.url = json.url;
+	}
+
+	
+
+}
+
+
+
 //think about makeing a "dirtable class "
 //possibly make a global array for vertices so we arent creating a lot of arrays :/. 
 //or just make a vertices cache thingy
-//move render function outside of sprite class .-.                           
+//move render function outside of sprite class .-.     
+
+/*                      
 class SpriteGlob {
 
 	constructor() {
@@ -197,4 +267,4 @@ export default class Sprite extends AsyncComponent {
 		return json;
 	}
 
-}
+} */

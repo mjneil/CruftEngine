@@ -8,12 +8,10 @@ export default class Session extends EventEmitter {
 
 		this.reliable.on("data", (data) => {
 			this.emit("data", data);
-			this.emit(data.event, data);
 		})
 
 		this.unreliable.on("data", (data) => {
 			this.emit("data", data);
-			this.emit(data.event, data);
 		})
 	}
 }

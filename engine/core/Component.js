@@ -11,6 +11,10 @@ export default class Component {
 		this.actor = actor;
 	}
 
+	setFromJSON() {
+		console.log("WARNING: THIS WAS NOT IMPLEMENTED. PROB SHOULD HAVE DONE THAT IF ITS BEING CALLED")
+	}
+
 	//todo? :/
 	update(deltaMs) {
 

@@ -7,7 +7,6 @@ export default class Network extends EventEmitter {
 		this.peerId = null;
 		this.peer = new Peer(name, { key });
 		this.sessions = {};
-
 		var builder = {};
 		
 		this.peer.on("open", (id) => {
@@ -48,21 +47,36 @@ export default class Network extends EventEmitter {
 	addSession(session) {
 		this.sessions[session.peer] = session;
 		session.on("data", (data) => {
-			this.emit("data" , data );
-			this.emit(data.event, data);
+			this.emit(data.event, {
+				session : session,
+				packet : data
+			});
 		});
 	}
 
-	//temp util functions
-	sendReliable(data) {
+	//temp util functions @TODO figure out how to do binary stuff.
+	emitReliable(event, data) {
+
+		var packet = {
+			event : event,
+			timestamp : Date.now(),
+			data : data
+		}
+
 		for(var key in this.sessions){
-			this.sessions[key].reliable.send(data);
+			this.sessions[key].reliable.send(packet);
 		}
 	}
 
-	sendUnreliable(data) {
+	emitUnreliable(event, data) {
+		var packet = {
+			event : event,
+			timestamp : Date.now(),
+			data : data
+		}
+
 		for(var key in this.sessions){
-			this.sessions[key].unreliable.send(data);
+			this.sessions[key].unreliable.send(packet);
 		}
 	}
 

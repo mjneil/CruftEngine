@@ -11,12 +11,9 @@ export default class AsyncComponent extends Component {
 		this.cache = null;
 	}
 
-	setCache(cache) {
-		this.cache = cache;
-	}
-
 	loadAsync (urls) {
-		return this.cache.getAll(urls).then((assets) =>{
+		this._loaded = false;
+		return this.actor.engine.cache.getAll(urls).then((assets) =>{//wow is that long. 
 			this.assets = assets;
 			this._loaded = true;
 			return assets;

@@ -2,71 +2,65 @@ import {PEERJS_API_KEY} from "./js/constants";
 import Scene from "engine/core/Scene"
 import Engine from "engine/Engine";
 import Script from "engine/processes/Script";
-import * as factories from "./js/server/factories"
+import ActorFactory from "./js/ActorFactory";
+import * as http from "engine/net/http";
 
 var engine = new Engine({ 
 	network : { 
-		name : "server", 
+		name : "gameserver", 
 		key : PEERJS_API_KEY 
+	},
+	scene : {
+		id : 0
 	}
 });
 
-factories.initialize(engine);
 
-var scene = factories.createScene();
+var factory = new ActorFactory(engine);
+engine.cache.get("assets/entities/server/player.json").then((skeleton) => {//todo move this into the factory class. 
+	factory.skeletons["player"] = skeleton;
+	
+	/* //this is how it works. everything is optional. (except the type. ) 
+	var actor = factory.create("player", {
+		id : 12, 
+		Transform2D: { position : [10, 10] }
+	});*/
 
-
-var sessionActorMap = {};
-
-engine.network.on("connection", (session) => {
-	if(sessionActorMap[session.key]) return;
-	sessionActorMap[session.key] = factories.Player();//TODO
-	scene.addChild(sessionActorMap[session.key]);
-})
-
-engine.network.on("close", (session) => {
-	if(!sessionActorMap[session.key]) return;
-	scene.removeActor(sessionActorMap[session.key]);
-	delete sessionActorMap[session.key];
-})
-
-engine.network.on("game:update", (data) => {
-	//todo some ID thing (aka make this work )
-	var events = data.data.events;
-	for(var key in events) {
-		eventManager.emit(key, {
-			actor : actor,
-			value : events[key]
-		})
-	}
-})
-
-//move this into stuffs
-engine.on("SET_MOVING_UP", function (e) {
-	e.actor.components.PlayerComponent.movingUp = e.value;
-})
-
-engine.on("SET_MOVING_DOWN", function (e) {
-	e.actor.components.PlayerComponent.movingDown = e.value;
-})
-
-engine.on("SET_MOVING_LEFT", function (e) {
-	e.actor.components.PlayerComponent.movingLeft = e.value;
-})
-
-engine.on("SET_MOVING_RIGHT", function (e) {
-	e.actor.components.PlayerComponent.movingRight = e.value;
+	main();
 })
 
 
 
+var main = () => {
 
-engine.scheduler.addChild(new Script((now, deltaMs) => {
-	scene.update(deltaMs);
-}));
+	engine.network.on("connection", (session) => {
+		console.log("NEW SESSION : ", session);
+	})
 
-engine.scheduler.start(33);
-window.kill = function () { engine.scheduler.kill(); }
+	engine.network.on("close", (session) => {
+		console.log("LOST SESSION : ", session);
+	})
+
+	engine.network.on("game:events", (data) => {
+		console.log(data);
+	})
+
+	engine.scheduler.addChild(new Script((now, deltaMs) => {
+		engine.scene.update(deltaMs);
+	}));
+
+	engine.scheduler.start(33);
+	window.kill = function () { engine.scheduler.kill(); }
+}
+
+
+
+
+
+
+
+
+
 
 
 

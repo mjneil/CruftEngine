@@ -2,27 +2,21 @@ import {PEERJS_API_KEY} from "./js/constants";
 import Scene from "engine/core/Scene"
 import Renderer2D from "engine/graphics/Renderer2D"
 import Engine from "engine/Engine"
-import Transform2D from "engine/components/Transform2D";
+
 
 //initialize everything. 
 var engine = new Engine({ 
 	network : { 
-		name : null, 
 		key : PEERJS_API_KEY 
 	}
 });
 
-var scene = new Scene(0);//sceneid= 0;
-	scene.addComponent(new Transform2D());
 var renderer = new Renderer2D(GAME_WIDTH, GAME_HEIGHT);//todo fix aspect ratio stuff. 
 
-
-engine.network.createSession("server").then((session) => {
+console.log(engine)
+engine.network.createSession("gameserver").then((session) => {
 	console.log(session);
-	session.sendReliable({
-		event:"game:events",
-		events : ["I", "AM", "12"]
-	})
+	engine.network.emitReliable("game:events", { "PLAYER_MOVE" : "NORTH_PLZ"  })
 })
 
 
