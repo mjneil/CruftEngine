@@ -1,6 +1,6 @@
-import setIntervalMs from "./setIntervalMs";
+import setIntervalMs from "engine/util/setIntervalMs";
 
-export default class ProcessManager {
+export default class Scheduler {
 	constructor(){
 		this.processes = [];
 		this.interval = null;

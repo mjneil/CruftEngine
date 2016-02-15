@@ -1,4 +1,4 @@
-import Component from "./Component.js";
+import Component from "engine/core/Component"
 import {mat3, vec2} from "engine/lib/gl-matrix";
 
 var IDENTITY_MATRIX = mat3.create();

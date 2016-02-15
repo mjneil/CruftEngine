@@ -1,6 +1,6 @@
 import Process from "engine/core/Process"
 
-export default class TimerProcess extends Process {
+export default class Delay extends Process {
 	constructor(delay, cb) {
 		super();
 		this.cb = cb;

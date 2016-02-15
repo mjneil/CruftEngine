@@ -1,9 +1,7 @@
 import EventEmitter from "events"
 import Session from "./Session"
-//this is for da servvvvveeeerr. 
-//var session = NetworkManager.getSession("default");
-//var sessions = NetworkManager.sessions 
-export default class NetworkManager extends EventEmitter {
+
+export default class Network extends EventEmitter {
 	constructor(name, key) {
 		super();
 		this.peerId = null;
@@ -26,7 +24,8 @@ export default class NetworkManager extends EventEmitter {
 			conn.once("data", (data) => {
 				built[data.connectionType] = conn;
 				if(built.reliable && built.unreliable){
-					this.addSession(new Session( peer, built.reliable, built.unreliable ));
+					var session = new Session( peer, built.reliable, built.unreliable );
+					this.addSession(session);
 					this.emit("connection", session);
 				}
 			})
@@ -44,12 +43,14 @@ export default class NetworkManager extends EventEmitter {
 
 
 	}
+
+	//change how many listeners we add here,. 
 	addSession(session) {
 		this.sessions[session.peer] = session;
 		session.on("data", (data) => {
 			this.emit("data" , data );
 			this.emit(data.event, data);
-		}
+		});
 	}
 
 	//temp util functions
@@ -76,7 +77,8 @@ export default class NetworkManager extends EventEmitter {
 			var tryResolve = () => {
 				loaded++;
 				if(loaded == 2){
-					this.addSession(new Session( peer, built.reliable, built.unreliable ));
+					var session = new Session( peer, reliable, unreliable )
+					this.addSession(session);
 					resolve(session)
 				}
 			}

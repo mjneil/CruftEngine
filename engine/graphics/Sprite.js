@@ -1,8 +1,9 @@
-import AsyncComponent from "engine/core/AsyncComponent";
+import AsyncComponent from "engine/components/AsyncComponent";
 
 //think about makeing a "dirtable class "
 //possibly make a global array for vertices so we arent creating a lot of arrays :/. 
-//or just make a vertices cache thingy                           
+//or just make a vertices cache thingy
+//move render function outside of sprite class .-.                           
 class SpriteGlob {
 
 	constructor() {

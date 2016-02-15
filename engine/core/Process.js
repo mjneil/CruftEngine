@@ -1,11 +1,3 @@
-/*
-var STATES = {
-	UNINITIALIZED : 0,
-	RUNNING : 1,
-	SUCCEDED : 2,
-	FAILED : 3
-}*/
-
 export default class Process {
 	constructor(){
 		this.state = "UNINITIALIZED";

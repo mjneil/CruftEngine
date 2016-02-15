@@ -1,6 +1,5 @@
 import Component from "engine/core/Component"
-import {getCache} from "engine/core/globals"
-var cache = getCache();
+
 export default class AsyncComponent extends Component {
 
 	constructor(type) {
@@ -9,10 +8,15 @@ export default class AsyncComponent extends Component {
 		this.urls = [];
 		this.assets = null;
 		this.children = [];
+		this.cache = null;
+	}
+
+	setCache(cache) {
+		this.cache = cache;
 	}
 
 	loadAsync (urls) {
-		return cache.getAll(urls).then((assets) =>{
+		return this.cache.getAll(urls).then((assets) =>{
 			this.assets = assets;
 			this._loaded = true;
 			return assets;

@@ -8,7 +8,7 @@ var gls = require('gulp-live-server');
 var runSequence = require('run-sequence');
 var server = gls.new("server.js");
 var ENGINE_SRC = ["engine/**/*.js"];
-var GAME_SRC = ["example/js/**.js", "example/server.js"];
+var GAME_SRC = ["example/js/**/**.js", "example/server.js", "example/client.js"];
 
 
 
@@ -41,7 +41,7 @@ gulp.task("js:game", function () {
 })
 
 gulp.task("js:browserify:client", function () {
-  return browserify("tmp/js/client.js")
+  return browserify("tmp/client.js")
   .bundle()
   .on("error", onerror)
   .pipe(source('client.js'))

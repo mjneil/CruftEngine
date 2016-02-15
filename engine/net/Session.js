@@ -1,5 +1,5 @@
 import EventEmitter from "events";
-export default class Session extends Emitter {
+export default class Session extends EventEmitter {
 	constructor(key, reliable, unreliable) {
 		super();
 		this.key = key;

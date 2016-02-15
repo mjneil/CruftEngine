@@ -1,12 +1,6 @@
 var PEERJS_API_KEY = "vu5babwam1tnjyvi" 
 
 
-
-var SET_MOVING_UP_TRUE = 0x1;
-var SET_MOVING_UP_FALSE = 0x2;
-var SET_MOVING_DOWN_TRUE = 0x3;
-var SET_MOVING_DOWN_FALSE = 0x4;
-
 export {PEERJS_API_KEY}
 
 

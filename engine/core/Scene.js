@@ -1,12 +1,10 @@
 import Actor from "./Actor";
-import Transform2D from "./Transform2D";
 
 //todo add scale
-export default class Scene2D extends Actor{ 
+export default class Scene extends Actor { 
 	constructor(id) {
 		super(id);
 		this.actors = {};
-		this.addComponent(new Transform2D());
 	}
 
 	addChild(child){

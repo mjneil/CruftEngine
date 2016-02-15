@@ -1,5 +1,5 @@
 import Actor from "engine/core/Actor";
-import Transform2D from "engine/core/Transform2D";
+import Transform2D from "engine/components/Transform2D";
 
 export default class Camera2D extends Actor {
 	constructor(width, height) {

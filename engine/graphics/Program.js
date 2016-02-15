@@ -1,4 +1,4 @@
-import * as glutil from "./glutil"
+import * as glutil from "./util"
 
 export default class Program {
 	constructor(gl, vSrc, fSrc, config) {

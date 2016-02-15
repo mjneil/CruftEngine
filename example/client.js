@@ -1,20 +1,28 @@
-import {PEERJS_API_KEY} from "./constants";
-import Scene2D from "engine/core/Scene2D"
+import {PEERJS_API_KEY} from "./js/constants";
+import Scene from "engine/core/Scene"
 import Renderer2D from "engine/graphics/Renderer2D"
-import NetworkManager from "engine/net/NetworkManager";
-import ProcessManager from "engine/core/ProcessManager";
-import EventEmitter from "events";
+import Engine from "engine/Engine"
+import Transform2D from "engine/components/Transform2D";
 
 //initialize everything. 
-var scene = new Scene2D(0);//sceneid= 0;
-var networkManager = new NetworkManager(null, PEERJS_API_KEY);
-var processManager = new ProcessManager();
-var eventManager = new EventEmitter();
+var engine = new Engine({ 
+	network : { 
+		name : null, 
+		key : PEERJS_API_KEY 
+	}
+});
+
+var scene = new Scene(0);//sceneid= 0;
+	scene.addComponent(new Transform2D());
 var renderer = new Renderer2D(GAME_WIDTH, GAME_HEIGHT);//todo fix aspect ratio stuff. 
 
 
-networkManager.createSession("server").then((session) => {
+engine.network.createSession("server").then((session) => {
 	console.log(session);
+	session.sendReliable({
+		event:"game:events",
+		events : ["I", "AM", "12"]
+	})
 })
 
 

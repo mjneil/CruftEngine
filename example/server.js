@@ -1,32 +1,36 @@
 import {PEERJS_API_KEY} from "./js/constants";
-import Scene2D from "engine/core/Scene2D"
-import NetworkManager from "engine/net/NetworkManager";
-import ProcessManager from "engine/core/ProcessManager";
-import EventEmitter from "events";
+import Scene from "engine/core/Scene"
+import Engine from "engine/Engine";
+import Script from "engine/processes/Script";
+import * as factories from "./js/server/factories"
 
-//initialize everything. 
-var scene = new Scene2D(0);//sceneid= 0;
-var networkManager = new NetworkManager("server", PEERJS_API_KEY);
-var processManager = new ProcessManager();
-var eventManager = new EventEmitter();
+var engine = new Engine({ 
+	network : { 
+		name : "server", 
+		key : PEERJS_API_KEY 
+	}
+});
+
+factories.initialize(engine);
+
+var scene = factories.createScene();
 
 
-//TODO figure out how to handle the creation/deletion events. 
 var sessionActorMap = {};
 
-networkManager.on("connection", (session) => {
+engine.network.on("connection", (session) => {
 	if(sessionActorMap[session.key]) return;
 	sessionActorMap[session.key] = factories.Player();//TODO
 	scene.addChild(sessionActorMap[session.key]);
 })
 
-networkManager.on("close", (session) => {
+engine.network.on("close", (session) => {
 	if(!sessionActorMap[session.key]) return;
 	scene.removeActor(sessionActorMap[session.key]);
 	delete sessionActorMap[session.key];
 })
 
-networkManager.on("game:update", (data) => {
+engine.network.on("game:update", (data) => {
 	//todo some ID thing (aka make this work )
 	var events = data.data.events;
 	for(var key in events) {
@@ -37,30 +41,32 @@ networkManager.on("game:update", (data) => {
 	}
 })
 
-eventManager.on("SET_MOVING_UP", function (e) {
+//move this into stuffs
+engine.on("SET_MOVING_UP", function (e) {
 	e.actor.components.PlayerComponent.movingUp = e.value;
 })
-eventManager.on("SET_MOVING_DOWN", function (e) {
+
+engine.on("SET_MOVING_DOWN", function (e) {
 	e.actor.components.PlayerComponent.movingDown = e.value;
 })
-eventManager.on("SET_MOVING_LEFT", function (e) {
+
+engine.on("SET_MOVING_LEFT", function (e) {
 	e.actor.components.PlayerComponent.movingLeft = e.value;
 })
-eventManager.on("SET_MOVING_RIGHT", function (e) {
+
+engine.on("SET_MOVING_RIGHT", function (e) {
 	e.actor.components.PlayerComponent.movingRight = e.value;
 })
 
 
-processManager.addChild(new ScriptProcess((now, deltaMs) => {
+
+
+engine.scheduler.addChild(new Script((now, deltaMs) => {
 	scene.update(deltaMs);
-	networkManager.sendUnreliable({ 
-		event : "game:update", 
-		timestamp : now, 
-		scene : generateSceneState() 
-	});
 }));
-processManager.start(33);
-window.kill = function () { processManager.kill(); }
+
+engine.scheduler.start(33);
+window.kill = function () { engine.scheduler.kill(); }
 
 
 
