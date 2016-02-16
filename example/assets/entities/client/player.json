@@ -1,0 +1,6 @@
+{
+	"Transform2D" : null,
+	"PlayerSync" : null,
+	"Sprite" : { "width" : 100, "height" : 100, "url" : "assets/images/player.png" },
+	"PlayerController" : null
+}

@@ -2,18 +2,19 @@ import Actor from "./Actor";
 
 //todo add scale
 export default class Scene extends Actor { 
+	
 	constructor(id) {
 		super(id);
 		this.actors = {};
 	}
 
-	addChild(child){
-		super.addChild(child);
-		this.actors[child.id] = child;
+	addActor(actor) {
+		this.actors[actor.id] = actor;
 	}
 
-	removeActor(actor) {
-		if(actor.parent) actor.parent.removeChild(actor);
-		delete this.actors[actor.id];
+	findActorById(id) {
+		var actor = this.actors[id];
+		if(!actor) return null;
+		return actor;
 	}
 }

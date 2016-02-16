@@ -48,10 +48,9 @@ export default class PlayerController extends Component {
 		}
 
 		//make events have nothing to do with letters. w
-		if(Object.keys(events).length) {
-			this.connection.connection.send({
-				event : "game:events",
-				events : events
+		if(Object.keys(events).length) { //for now direct access to network TOD CHANGE
+			this.actor.engine.network.emitReliable("game:events", {
+				events : events;
 			})
 			this.keyStates = {};
 		}

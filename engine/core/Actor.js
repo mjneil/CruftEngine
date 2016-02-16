@@ -5,8 +5,7 @@ export default class Actor {
     	this.parent = null;
     	this.id = id || uuid.create().toString();//or somthing like that. 
         this.components = {};
-        this.children = [];
-        this.eventManager = null;
+        this.children = {};
     }
 
     addComponent(component)  {
@@ -18,31 +17,24 @@ export default class Actor {
         return this.components[type]
     }
 
-    removeComponent() {
-        console.log("FUNCTION NOT DONE")
+    removeComponent(type) {//todo remove listeners
+        delete this.components[type];
     }
 
     addChild(child) {
         if(child.parent !== null) console.log("WARNING: ATTEMPTING TO BREAK EVERYTHING")
-        this.children.push(child);
         child.parent = this;
+        this.children[child.id] = child;
     }
 
     removeChild(child) {
         var children = this.children;
-        for(let i = 0; i < children.length;i++){
-            if(children[i] === child){
-                child.parent = null;
-                this.children = children.splice(i, 1);
-                return;
-            }
-        }
+        console.log("TODO PLZ")
     }
 
     setEngine(engine) {
         this.engine = engine;
     }
-
 
     update(deltaMs) {
 

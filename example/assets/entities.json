@@ -1,8 +1,0 @@
-{
-	"Player" : {
-		"Transform2D" : {},
-		"Sprite" : {
-			"image" : "assets/images/player.png"
-		}
-	}
-}

@@ -1,3 +1,5 @@
 {
-	"Transform2D" : null
+	"Transform2D" : null,
+	"PlayerSync" : null,
+	"PlayerComponent" : null
 }

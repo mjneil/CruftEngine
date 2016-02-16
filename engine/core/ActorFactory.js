@@ -1,6 +1,4 @@
 import Actor from "engine/core/Actor"
-import Sprite from "engine/components/Sprite";
-import Transform2D from "engine/components/Transform2D";
 
 export default class ActorFactory { //def move this to core at some point 
 
@@ -8,14 +6,26 @@ export default class ActorFactory { //def move this to core at some point
 		this.engine = engine;
 
 		this.skeletons = {};
-
 		this.constructors = {};
-		this.constructors["Sprite"] = Sprite;
-		this.constructors["Transform2D"] = Transform2D;
+	}
+
+	registerClass(type, constructor) {
+		this.constructors[type] = constructor;
+	}
+
+	loadSkeletons(skeletons) {
+		return this.engine.cache.getAll(Object.keys(skeletons)).then((assets)=>{
+			for(var url in skeletons) {
+				this.skeletons[skeletons[url]] = assets[url];
+			}
+			return assets;
+		})
 	}
 
 	create(type, config) {
 		var actor = new Actor(config.id);
+			actor.setEngine(this.engine);
+
 		var constructors = this.constructors;
 		var skeleton = this.skeletons[type];
 
@@ -36,6 +46,9 @@ export default class ActorFactory { //def move this to core at some point
 				
 		}
 
+
+
+		this.engine.scene.addActor(actor);
 		return actor;
 
 	}
