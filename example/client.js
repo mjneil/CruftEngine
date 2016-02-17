@@ -2,22 +2,146 @@ import {PEERJS_API_KEY} from "./js/constants";
 import Scene from "engine/core/Scene"
 import Renderer2D from "engine/graphics/Renderer2D"
 import Engine from "engine/Engine"
+import Sprite from "engine/components/Sprite";
+import Transform2D from "engine/components/Transform2D";
+import PlayerSync from "./js/PlayerSync";
+import SceneSync from "./js/SceneSync";
+import SpriteRenderer from "engine/graphics/plugins/SpriteRenderer";
+import Script from "engine/processes/Script"
+import Camera2D from "engine/graphics/Camera2D";
+import PlayerController from "./js/PlayerController";
 
 
-//initialize everything. 
 var engine = new Engine({ 
 	network : { 
-		key : PEERJS_API_KEY 
+		key : PEERJS_API_KEY,
+		session : "game" //optionally do it on intialization IF U want UP 2 UUUUUUU
+	},
+	scene : {
+		id : 0
+	},
+	scheduler : {
+		deltaMs : 17
+	},
+	factory : {
+		components : {
+			"Sprite" : Sprite,
+			"Transform2D" : Transform2D,
+			"PlayerSync" : PlayerSync,
+			"PlayerController" : PlayerController,
+		},
+		skeletons : {
+			"assets/entities/client/player.json" : "Player"
+		}
 	}
 });
 
-var renderer = new Renderer2D(GAME_WIDTH, GAME_HEIGHT);//todo fix aspect ratio stuff. 
 
-console.log(engine)
-engine.network.createSession("gameserver").then((session) => {
-	console.log(session);
-	engine.network.emitReliable("game:events", { "PLAYER_MOVE" : "NORTH_PLZ"  })
+
+
+
+engine.scene.addComponent(new SceneSync());
+var renderer = new Renderer2D(GAME_WIDTH, GAME_HEIGHT);//todo fix aspect ratio stuff. //make sure I'm updating worldTransforms on add/remove. NOT DOING IT RIGHT NOW
+	renderer.registerPlugin(new SpriteRenderer());
+var camera = new Camera2D(GAME_WIDTH, GAME_HEIGHT);//TODO this camera class is @$$. get rid of it. 
+engine.scene.addChild(camera);
+
+window.onload = function () { document.body.appendChild(renderer.canvas); }
+
+
+var main = () => {
+
+	engine.scheduler.addChild(new Script((now, deltaMs) => {
+		engine.scene.update(deltaMs);
+		renderer.render(engine.scene, camera);
+	}));
+
+}
+
+
+
+
+
+engine.network.on("scene:sync:initialize", (e) => { //move this into a thingy that isnt here. 
+	var packet = e.packet;
+	var data = packet.data;
+
+	for(var id in data.actors){
+		var config = data.actors[id]
+		engine.factory.create(config.type, config);
+	}
+
+	for(var id in data.actors){
+		var actor = engine.scene.actors[id];
+		var config = data.actors[id]
+		if(config.parentId === engine.scene.id){
+			engine.scene.addChild(actor);
+		}else{
+			if(config.parentId) engine.scene.actors[config.parentId].addChild(actor);
+		}
+	}
+
+	for(var id in engine.scene.actors){
+		var actor = engine.scene.actors[id];
+		var sync = actor.getComponent("sync");
+		if(sync.owner === engine.network.peerId) {
+			actor.addComponent(new PlayerController());
+		}
+	}
+
+	console.log("HELLO, MR.SQUNCH")
+
 })
+
+engine.network.on("sync:update", (e) => {
+	var packet = e.packet;
+	var data = packet.data;
+
+	//temp just do this for now :/
+	for(var id in data) {
+		var config = data[id];
+		var actor = engine.scene.actors[id];
+		if(actor ){
+			var sync = actor.getComponent("sync");
+			if(sync) {
+				sync.applyPartialState(null, null, config);
+			}
+		}
+	}
+})
+
+engine.network.on("engine:factory:create", (e) => {
+	var packet = e.packet;
+	var config = packet.data;
+
+	engine.factory.create(config.type, config);
+
+	var actor = engine.scene.actors[config.id];
+	if(config.parentId === engine.scene.id){
+		engine.scene.addChild(actor);
+	}else{
+		if(config.parentId) engine.scene.actors[config.parentId].addChild(actor);
+	}
+
+})
+
+engine.network.on("destroy", (e) => {
+	var actor = engine.scene.actors[e.packet.data.id];
+	console.log(e)
+	if(actor) {
+		engine.scene.removeActor(actor);
+	}
+})
+
+
+engine.ready.then(main);
+
+
+window.engine = engine;
+window.kill = function () { engine.scheduler.kill(); }
+window.onbeforeonload = function () {
+	engine.network.peer.destroy();
+}
 
 
 
@@ -25,65 +149,11 @@ engine.network.createSession("gameserver").then((session) => {
 //global access to the server connection :/ 
 //WARNING. MAY BE MAKING DUPLICATE UUIDS. THIS IS A MUST DO. FIND OUT HOW TO MAKE UUIDS FREAL M8
 /*
-var processManager = getProcessManager()
-var eventManager = getEventManager();
-var cache = getCache();
 
-var renderer = new Renderer2D(GAME_WIDTH, GAME_HEIGHT);
-var scene = null;
-var camera = new Camera2D(GAME_WIDTH, GAME_HEIGHT);
-var follow = new CameraFollow();
-camera.addComponent(follow);
 
 var latency = null;
 var timeDif = null;
 var gameDelay = 100;
-
-var peer = new Peer({key : PEERJS_API_KEY });
-var peerjsKey = null;
-peer.on("open", (id) => {
-	console.log("PEERJS KEY : " + id);
-	peerjsKey = id;
-})
-
-
-var reliable = new Connection(peer.connect("server", {reliable : true, ordered : true}));
-var unreliable = new Connection(peer.connect("server", {reliable : false, ordered : false}));
-
-
-//friggan really T_T. 
-
-reliable.connection.on("open", () => {
-
-	reliable.latency().then((data) => {
-		console.log("RTT : " + data.latency + "ms");
-		latency = data.latency/2;
-
-		var serverTime = data.timestamp + latency;
-		timeDif = (serverTime - Date.now());
-	}).then(() => {
-		reliable.connection.send({
-			event : "connection:initialize", 
-			connectionType : "RemoteViewReliable"
-		})
-	})
-
-	reliable.on("game:initialize", (data) => {
-		makeGameFromServer(data.scene);
-		console.log(scene)
-		main();
-	});
-
-	reliable.on("game:add_player", (data) => {
-		if(scene == null || scene.actors[data.id]) return;
-		var actor = factories.Player(data.id, data.owner, peerjsKey, reliable );//decouple this shit plz. 
-		scene.addChild(actor);
-	})
-
-
-})
-
-
 
 var states = [];
 
@@ -163,71 +233,4 @@ var applyState = function (state) {
 	}
 }
 
-
-unreliable.connection.on("open", () => {
-		unreliable.connection.send({
-			event : "connection:initialize", 
-			connectionType : "RemoteViewUnReliable"
-		})
-
-
-		unreliable.on("game:update", (data) => {
-			updateStates(data);
-		})
-})
-
-var draw = function () {
-	renderer.render(scene, camera);
-	requestAnimationFrame(draw);
-};
-
-processManager.addChild(new ScriptProcess((now, deltaMs) => {
-
-	var simulatedTime = now + timeDif - gameDelay; //prob should just make that latency. 
-	var state = interpStates(simulatedTime);
-	applyState(state);
-	scene.update(deltaMs);
-	
-
-}));
-
-
-var main = function () {
-	processManager.start(17);
-	draw();
-}
-
-//#testinglyf
-window.onload = function () { document.body.appendChild(renderer.canvas); }
-window.kill = function () { processManager.kill(); }
-window.onbeforeonload = function () {
-	console.log("TERMINATING CONNECTION!");
-	peer.destroy();
-}
-
-
-
-//toLocaleString()
-var makeGameFromServer = (data) => {
-	var actors = {}
-		actors[data.id] = new Scene2D(data.id);
-
-	for(var actorid in data.actors){
-		var actor = factories.Player(actorid, data.actors[actorid].owner, peerjsKey, reliable );
-		if(actor.owner == peerjsKey) {//todo make actor.isOwn()
-			follow.setTarget(actor);
-		}
-		actor.getComponent("transform").position = data.actors[actorid].position;
-		actors[actorid] = actor;
-	}
-
-	for(var actorid in data.actors){
-		var actormeta = data.actors[actorid];
-		if(actormeta.parent) actors[actormeta.parent].addChild(actors[actormeta.id]); 
-	}
-
-	scene = actors[data.id];
-	scene.addChild(camera);
-
-}
 */

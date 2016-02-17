@@ -1,9 +1,9 @@
 import uuid from "engine/lib/uuid";
-
+import EventEmitter from "events";
 export default class Actor {
     constructor(id) {
+        this.id = (id === null || id === undefined)? uuid.create().toString() : id;
     	this.parent = null;
-    	this.id = id || uuid.create().toString();//or somthing like that. 
         this.components = {};
         this.children = {};
     }
@@ -29,7 +29,7 @@ export default class Actor {
 
     removeChild(child) {
         var children = this.children;
-        console.log("TODO PLZ")
+        delete children[child.id];
     }
 
     setEngine(engine) {
@@ -42,8 +42,8 @@ export default class Actor {
             this.components[key].update(deltaMs);
         }
 
-        for(let child of this.children) {
-            child.update(deltaMs);
+        for(let id in this.children) {
+            this.children[id].update(deltaMs);
         }
     }
 }

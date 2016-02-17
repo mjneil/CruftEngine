@@ -8,7 +8,7 @@ export default class PlayerComponent extends Component {
 		this.movingRight = false;
 		this.movingUp = false;
 		this.movingDown = false;
-		this.direction = [0, 0];
+		this.direction = [1, 0];
 		this.speed = .7;
 	}
 
@@ -36,15 +36,14 @@ export default class PlayerComponent extends Component {
 		}
 
 		transform.position = position;
-		transform.setDirection(this.direction);
+		transform.setDirection(this.direction); 
 
 	}
 
 	handleEvents(events) {
-		if(events["SET_MOVING_UP"])   this.movingUp = events["SET_MOVING_UP"];
-		if(events["SET_MOVING_DOWN"]) this.movingDown = events["SET_MOVING_DOWN"];
-		if(events["SET_MOVING_LEFT"]) this.movingLeft = events["SET_MOVING_LEFT"];
-		if(events["SET_MOVING_RIGHT"]) this.movingRight = events["SET_MOVING_RIGHT"];
-
+		if(events["SET_MOVING_UP"]!==undefined)   this.movingUp = events["SET_MOVING_UP"];
+		if(events["SET_MOVING_DOWN"]!==undefined) this.movingDown = events["SET_MOVING_DOWN"];
+		if(events["SET_MOVING_LEFT"]!==undefined) this.movingLeft = events["SET_MOVING_LEFT"];
+		if(events["SET_MOVING_RIGHT"]!==undefined) this.movingRight = events["SET_MOVING_RIGHT"];
 	}
 }

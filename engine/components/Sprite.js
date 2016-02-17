@@ -1,14 +1,16 @@
-import AsyncComponent from "engine/components/AsyncComponent";
+import Component from "engine/core/Component";
 
-export default class Sprite extends AsyncComponent {
+export default class Sprite extends Component {
 
 	constructor() {
-		super("sprite");
+		super("render");
+		this.renderType = "Sprite";//todo get this renderType to be enforced somehow(like RenderComponent)
 		this.dirt = 0;
 		this._width = null;
 		this._height = null;
 		this._url = null;
 		this._image = null;
+		this.loaded = false;
 	}
 
 	dirty () {
@@ -50,8 +52,10 @@ export default class Sprite extends AsyncComponent {
 
 	set url(url) {
 		this._url = url;
-		this.loadAsync([url]).then((assets) => {
-			this.image = assets[url];
+		this.loaded = false;
+		this.actor.engine.cache.get(url).then((image) => {
+			this.image = image;
+			this.loaded = true;
 		})
 	}
 

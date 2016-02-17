@@ -1,4 +1,5 @@
 import Component from "engine/core/Component"
+import {vec2} from "engine/lib/gl-matrix";
 
 //define some standard sync interface :^)
 
@@ -6,7 +7,7 @@ import Component from "engine/core/Component"
 //Like all Float64Array(0), index 
 //for debugging going to just JSON
 
-export default class PlayerSync {
+export default class PlayerSync extends Component {
 
 	constructor() {
 		super("sync");
@@ -19,7 +20,28 @@ export default class PlayerSync {
 		return this.owner === this.actor.engine.network.peerId;
 	}
 
-	createState() {
+	createFullState() {
+
+		var actor = this.actor;
+		var transform = actor.getComponent("transform");
+
+		var position = [], scale = [];
+		var rotation = transform._rotation;
+		vec2.copy(position, transform._position);
+		vec2.copy(scale, transform._scale);
+		
+
+		var state = {
+			type : "Player",
+			id : actor.id,
+			parentId : (actor.parent)? actor.parent.id:null,
+			"Transform2D" : { position, rotation, scale },
+			"PlayerSync" : {owner : this.owner },
+		}
+		return state;
+	}
+
+	createPartialState () {
 		var actor = this.actor;
 		var transform = actor.getComponent("transform");
 		var position = [], scale = [];
@@ -30,8 +52,14 @@ export default class PlayerSync {
 		return { position, rotation, scale };
 	}
 
-	updateStuffInrealTimeK(now, past, future) {
+	applyPartialState(now, past, future) {
+		//just set it to da futuuuuurrrreeee.
+		var actor = this.actor;
+		var transform = actor.getComponent("transform");
 
+		transform.position = future.position; //todo dont do it the slow way. 
+		transform.rotation = future.rotation;
+		transform.scale = future.scale;
 	}
 
 	setFromJSON(json) {

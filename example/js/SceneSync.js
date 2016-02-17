@@ -1,34 +1,59 @@
 import Component from "engine/core/Component"
 
-export default class SceneSync {
+export default class SceneSync extends Component{
 
 	constructor() {
 		super("sync");
 	}
 	
-	createState() {
-		var scene = this.actor;
-		var actors = scene.actors;
+	createFullState() {
+		var actor = this.actor; //somehow convery what stuff goes on a scene but yolo I gess. 
+		
 		var state = {
-			id : this.id,
+			id : actor.id, 
+			"SceneSync" : {owner : this.owner },
 			actors : {}
 		}
-		var stateActors = state.actors;
-		//for now scan every single actor. 
-		//in the future might want to explicity add them to 
-		//a tracked list so we only loop over things that are being synced. (ie emit sync on addComponent(type = sync))
-		//for large projects this could actually be a lot faster. 
-		for(var id in actors){
-			var syncComponent = actors[id].getComponent("sync");
-			if(syncComponent) {
-				stateActors[id] = syncComponent.createState();
+
+		var children = actor.actors;//put thus into the createFullStateSuper for a Sync Comp
+		for(var id in children) {
+			var child = children[id];
+			var sync = child.getComponent("sync");
+			if(sync){
+				state.actors[id] = sync.createFullState();
 			}
 		}
-
-
+		return state;
 	}
 
-	setState(now, past, future) {
-		//todo aheh. aheh. 
+	createPartialState() {
+		var actor = this.actor;
+		var state = {};
+		for(var id in actor.actors){
+			var sync = actor.actors[id].getComponent("sync");
+			if(sync) state[id] = sync.createPartialState();
+			
+		}
+		return state;
+	}
+
+
+	findActorByOwner(owner) {
+		//for now brute it
+		var actors = this.actor.actors;
+		for(var id in actors){
+			var sync = actors[id].getComponent("sync");
+			if(sync && sync.owner === owner) return actors[id];
+		}
+		return null;
+	}
+
+
+	applyState(state) {
+		if(!state) return;
+	}
+
+	setFromJSON(json) {
+		console.log("TODO Scene::setFromJSON");
 	}
 }

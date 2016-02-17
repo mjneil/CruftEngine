@@ -12,7 +12,7 @@ export default class Component {
 	}
 
 	setFromJSON() {
-		console.log("WARNING: THIS WAS NOT IMPLEMENTED. PROB SHOULD HAVE DONE THAT IF ITS BEING CALLED")
+		//console.log("WARNING: THIS WAS NOT IMPLEMENTED. PROB SHOULD HAVE DONE THAT IF ITS BEING CALLED")
 	}
 
 	//todo? :/

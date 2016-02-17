@@ -45,7 +45,7 @@ export default class Network extends EventEmitter {
 
 	//change how many listeners we add here,. 
 	addSession(session) {
-		this.sessions[session.peer] = session;
+		this.sessions[session.key] = session;
 		session.on("data", (data) => {
 			this.emit(data.event, {
 				session : session,

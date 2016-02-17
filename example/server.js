@@ -2,59 +2,65 @@ import {PEERJS_API_KEY} from "./js/constants";
 import Scene from "engine/core/Scene"
 import Engine from "engine/Engine";
 import Script from "engine/processes/Script";
-import ActorFactory from "./js/ActorFactory";
+import Sprite from "engine/components/Sprite";
 import * as http from "engine/net/http";
 import Transform2D from "engine/components/Transform2D";
-import PlayerSync from "engine/components/PlayerSync";
+import PlayerSync from "./js/PlayerSync";
+import SceneSync from "./js/SceneSync";
+import PlayerComponent from "./js/PlayerComponent";
 
 var engine = new Engine({ 
 	network : { 
-		name : "gameserver", 
+		name : "game", 
 		key : PEERJS_API_KEY 
 	},
 	scene : {
 		id : 0
+	},
+	scheduler : {
+		deltaMs : 33
+	},
+	factory : {
+		skeletons : {
+			"assets/entities/server/player.json" : "Player"  ,
+		},
+		components : {
+			"Transform2D" : Transform2D,
+			"PlayerSync" : PlayerSync,
+			"SceneSync" : SceneSync,
+			"PlayerComponent" : PlayerComponent
+		}
 	}
 });
 
 
+engine.scene.addComponent(new SceneSync());
 
-var factory = new ActorFactory(engine);
-	factory.registerClass("Sprite", Sprite);
-	factory.registerClass("Transform2D", Transform2D)	
-	factory.registerClass("PlayerSync", PlayerSync);
 
-	factory.loadSkeletons({
-		"assets/entities/server/player.json" : "Player"
-	}).then(() => {
-		main();
-	})
+
 
 var main = () => {
 
 	engine.network.on("connection", (session) => {
-		var actor = factory.create("Player", {
-			PlayerSync : { 
-				owner : session.peerId
-			}
+		var actor = engine.factory.create("Player", {
+			PlayerSync : { owner : session.key }
 		});
 		engine.scene.addChild(actor);
+		session.emitReliable("scene:sync:initialize", engine.scene.getComponent("sync").createFullState());
+		engine.network.emitReliable("engine:factory:create", actor.getComponent("sync").createFullState());
 	})
 
 	engine.network.on("close", (session) => {
-		var actor = engine.scene.findActorById(session.peerId);
-		engine.scene.removeActor(actor);
-		//problem is if this is running in the past this event might get there after you see stuff
-		//somehow all events need to get procd in the past. 
-		engine.network.emitReliable("actor:destroy", {id : actor.id});
-		console.log("LOST SESSION : ", session);
+		var actor = engine.scene.getComponent("sync").findActorByOwner(session.key);
+		engine.scene.removeActor(actor); //todo make a destroy method to clean up remove listeners and whatnot 
+		engine.network.emitReliable("destroy", {id : actor.id}); //todo think about event ordering for TCP/UDP + 100ms delay. 
 	})
 
 	//in fiture might just batch this. 
 	engine.network.on("PlayerController:events", (data) => {
 		var session = data.session;
 		var packet = data.packet;
-		var actor = scene.findActorById(session.peerId); //what if person is of owning multiple actors. 
+		var actor =  engine.scene.getComponent("sync").findActorByOwner(session.key);//what if person is of owning multiple actors. 
 		var events = packet.data;
 		if(!actor || !events) return;//todo somehow make actors auto listen. 
 		actor.getComponent("PlayerComponent").handleEvents(events);
@@ -62,21 +68,18 @@ var main = () => {
 
 	engine.scheduler.addChild(new Script((now, deltaMs) => {
 		engine.scene.update(deltaMs);
+		engine.network.emitUnreliable("sync:update", engine.scene.getComponent("sync").createPartialState() );
 	}));
 
-	engine.scheduler.start(33);
 
-	window.kill = function () { engine.scheduler.kill(); }
 }
 
 
+engine.ready.then(main)
 
 
-
-
-
-
-
+window.engine = engine;
+window.kill = function () { engine.scheduler.kill(); }
 
 
 
@@ -85,7 +88,6 @@ var main = () => {
 
 
 /*
-
 
 var destroyPlayer = (actor) => {
 	if(scene.actors[actor.id]){

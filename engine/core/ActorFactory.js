@@ -2,14 +2,18 @@ import Actor from "engine/core/Actor"
 
 export default class ActorFactory { //def move this to core at some point 
 
-	constructor(engine) {
-		this.engine = engine;
+	constructor() {
+		this.engine = null;
 
 		this.skeletons = {};
 		this.constructors = {};
 	}
 
-	registerClass(type, constructor) {
+	setEngine(engine) {
+		this.engine = engine;
+	}
+
+	registerComponent(type, constructor) {
 		this.constructors[type] = constructor;
 	}
 
@@ -42,11 +46,7 @@ export default class ActorFactory { //def move this to core at some point
 					var settings = config[componentType];
 					component.setFromJSON(settings);
 				}
-
-				
 		}
-
-
 
 		this.engine.scene.addActor(actor);
 		return actor;

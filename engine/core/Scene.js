@@ -17,4 +17,13 @@ export default class Scene extends Actor {
 		if(!actor) return null;
 		return actor;
 	}
+
+	removeActor(actor) {
+		var actor = this.actors[actor.id];
+		delete this.actors[actor.id];
+
+		if(actor.parent){
+			actor.parent.removeChild(actor);
+		}
+	}
 }

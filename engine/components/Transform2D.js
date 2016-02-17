@@ -63,10 +63,10 @@ export default class Transform2D extends Component {
 	set scale(scale) {
 		vec2.copy(this._scale, scale);
 		this.updateMatrix();
-		eventManager.emit("transform:scale");
 	}
 
 	updateMatrix() { //possibly also keep track of inverse matrix? of both toWorld and local ? Useful for camera class.
+		//also setting matrix then adding to actor = not live toWorld matrix. :^)
 		var actor = this.actor;
 		var parent = this.parent;
 		var toWorld = this.toWorld;
@@ -89,8 +89,9 @@ export default class Transform2D extends Component {
 			mat3.copy(toWorld, matrix);
 		}
 
-		for(let child of this.actor.children){
-			child.updateMatrix();
+		var children = this.actor.children;
+		for(let key in children){
+			children[key].updateMatrix();
 		}
 	}
 
