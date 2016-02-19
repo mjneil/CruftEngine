@@ -10,7 +10,6 @@ initialize();
 //think about map loading in terms of syncing id's of every asset. Like what if a rock needs to be of the sync.
 
 
-
 var main = () => {
 
 	engine.camera = new Camera2D(window.innerWidth, window.innerHeight); //also todo make a real camera class.

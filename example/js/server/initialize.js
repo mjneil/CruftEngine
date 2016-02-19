@@ -4,8 +4,8 @@ import Transform2D from "engine/components/Transform2D";
 import Synchronizer from "engine/components/Synchronizer";
 
 //example
-import {PEERJS_API_KEY} from "../constants";
-import PlayerLogic from "./PlayerLogic";
+import {PEERJS_API_KEY} from "../shared/constants";
+import PlayerLogic from "../shared/PlayerLogic";
 
 
 export default () =>{

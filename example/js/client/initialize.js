@@ -1,14 +1,14 @@
 //engine
 import Initialize from "engine/Initialize";
 import Transform2D from "engine/components/Transform2D";
-import PlayerLogic from "../server/PlayerLogic";
+import PlayerLogic from "../shared/PlayerLogic";
 import PlayerController from "./PlayerController";
-import GameLogic from "../server/GameLogic"
+import GameLogic from "../shared/GameLogic"
 import Sprite from "engine/components/Sprite";
 import Physics from "./Physics";
 import Lifetime from "engine/components/Lifetime";
 //example
-import {PEERJS_API_KEY} from "../constants";
+import {PEERJS_API_KEY} from "../shared/constants";
 //maybe include some of this stuff within the Map File?
 //No reason map file can't be valid javacript
 //could just have like a //map.get.init() or somthing 
