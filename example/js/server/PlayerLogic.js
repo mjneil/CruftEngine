@@ -1,14 +1,14 @@
 import Component from "engine/core/Component";
 import {vec2} from "engine/lib/gl-matrix"
 
-export default class PlayerComponent extends Component {
+export default class PlayerLogic extends Component {
 	constructor() {
-		super("PlayerComponent");
+		super("PlayerLogic");
 		this.movingLeft = false;
 		this.movingRight = false;
 		this.movingUp = false;
 		this.movingDown = false;
-		this.direction = [1, 0];
+		this.target = [1, 0];
 		this.speed = .7;
 	}
 
@@ -36,7 +36,10 @@ export default class PlayerComponent extends Component {
 		}
 
 		transform.position = position;
-		transform.setDirection(this.direction); 
+		var dif = vec2.create();
+
+		vec2.sub(dif, this.target, position);
+		transform.setDirection(dif); 
 
 	}
 
@@ -45,5 +48,9 @@ export default class PlayerComponent extends Component {
 		if(events["SET_MOVING_DOWN"]!==undefined) this.movingDown = events["SET_MOVING_DOWN"];
 		if(events["SET_MOVING_LEFT"]!==undefined) this.movingLeft = events["SET_MOVING_LEFT"];
 		if(events["SET_MOVING_RIGHT"]!==undefined) this.movingRight = events["SET_MOVING_RIGHT"];
+	}
+
+	handleMouse(mouse) {
+		//vec2.copy(this.target, mouse);
 	}
 }

@@ -1,10 +1,12 @@
-
+import EventEmitter from "events"
 var nextComponentGuid = 0;
-export default class Component {
+export default class Component extends EventEmitter {
+	
 	constructor(type) {
+		super();
 		this.type = type;
-		this.actor = null;
 		this.id = nextComponentGuid++;
+		this.actor = null;
 	}
 
 	setActor(actor) {
@@ -12,7 +14,7 @@ export default class Component {
 	}
 
 	setFromJSON() {
-		//console.log("WARNING: THIS WAS NOT IMPLEMENTED. PROB SHOULD HAVE DONE THAT IF ITS BEING CALLED")
+		console.warn(`${this.type}:setFromJSON has not been implemented`);
 	}
 
 	//todo? :/

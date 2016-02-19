@@ -1,19 +1,16 @@
 import Component from "engine/core/Component";
 import {vec2} from "engine/lib/gl-matrix"
-import * as CONSTANTS from "./constants"
-
-//@Todo maybe not hijack global window? Maybe add to canvas or somthing :/
-//should prob clarify networkedPlayerController hmm this headache is kill me
+import engine from "engine/Engine"
 
 export default class PlayerController extends Component {//todo only send difs >_>
 
-	constructor(connection) { //for now pass owner into constructor but that will prob need to change at some point. 
+	constructor(connection) {
 		super("PlayerController");
-
-		this.connection = connection;//TODO remove this from here. Turn this into NetworkManager.etc. 
 
 		this.keyStates = {};
 		this.last = {};
+
+		this.mouse = [0, 1];
 
 		addEventListener("keydown", (e) => {
 			this.keyStates[String.fromCharCode(e.which)] = true;
@@ -23,13 +20,16 @@ export default class PlayerController extends Component {//todo only send difs >
 			this.keyStates[String.fromCharCode(e.which)] = false;
 		})
 
+		addEventListener("mousemove", (e) => {//temp camera logic in here. Need a refereance frame for things like. Camera.domToWorld() etc. 
+			this.mouse[0] = (e.pageX - window.innerWidth/2);
+			this.mouse[1] = (window.innerHeight - e.pageY - window.innerHeight/2);
+		})
+
 	}
 
 	//add a global like NetworkManager.emit("asdasdasdasddasd"); then bundle them all up and send em. 
 	//for now just send them at the end of update. 
 	update(deltaMs) {
-
-
 
 		var events = {};
 
@@ -52,10 +52,12 @@ export default class PlayerController extends Component {//todo only send difs >
 			}
 		}
 
-		if(Object.keys(events).length) { //for now direct access to network TOD CHANGE
-			this.actor.engine.network.emitReliable("PlayerController:events", events);
-			this.last = JSON.parse(JSON.stringify(this.keyStates));
+		if(Object.keys(events).length) { 
+			engine.emit("PlayerController:events", events);
+			this.last = JSON.parse(JSON.stringify(this.keyStates)); //stringifying is never the answer. 
 		}
+
+		engine.emit("PlayerController:mouse", this.mouse);
 
 
 		

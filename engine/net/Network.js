@@ -10,7 +10,7 @@ export default class Network extends EventEmitter {
 		var builder = {};
 		
 		this.peer.on("open", (id) => {
-			console.log("PEERJS ID : " + id );
+			console.info("Peerjs ID : " + id );
 			this.peerId = id;
 			this.emit("open", id);
 		})

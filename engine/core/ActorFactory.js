@@ -1,24 +1,35 @@
-import Actor from "engine/core/Actor"
+import engine from "engine/Engine";
 
 export default class ActorFactory { //def move this to core at some point 
 
 	constructor() {
-		this.engine = null;
-
+		
 		this.skeletons = {};
-		this.constructors = {};
-	}
-
-	setEngine(engine) {
-		this.engine = engine;
+		this.components = {};
 	}
 
 	registerComponent(type, constructor) {
-		this.constructors[type] = constructor;
+		this.components[type] = constructor;
+	}
+
+	registerComponents(components){
+		for(var name in components){
+			this.registerComponent(name, components[name]);
+		}
+	}
+
+	registerSkeleton(type, skeleton) {
+		this.skeletons[type] = skeleton;
+	}
+
+	registerSkeletons(skeletons) {
+		for(var type in skeletons){
+			this.registerSkeleton(type, skeletons[type]);
+		}
 	}
 
 	loadSkeletons(skeletons) {
-		return this.engine.cache.getAll(Object.keys(skeletons)).then((assets)=>{
+		return engine.cache.getAll(Object.keys(skeletons)).then((assets)=>{
 			for(var url in skeletons) {
 				this.skeletons[skeletons[url]] = assets[url];
 			}
@@ -26,34 +37,33 @@ export default class ActorFactory { //def move this to core at some point
 		})
 	}
 
-	create(type, config) {
-		var actor = new Actor(config.id);
-			actor.setEngine(this.engine);
+	create(base, type, config) {
+		var id = (config)? config.id : null;
 
-		var constructors = this.constructors;
+		var actor = new base(id);
+
 		var skeleton = this.skeletons[type];
-
+		var components = this.components;
+		
 		for(var componentType in skeleton) {
-			var constructor = this.constructors[componentType];
+			var CC = this.components[componentType];
+			if(!CC) console.error(`Component ${componentType} Does Not Exist`);
+			var component = new CC();
 
-			var component = new constructor();
-				actor.addComponent(component);
-
-				var defaults = skeleton[componentType];
-				component.setFromJSON(defaults);
-				
-				if(config) {
-					var settings = config[componentType];
-					component.setFromJSON(settings);
-				}
+			actor.addComponent(component);
+			var defaults = skeleton[componentType];
+			component.setFromJSON(defaults);	
 		}
 
-		this.engine.scene.addActor(actor);
+		if(config) {
+			for(var componentType in skeleton) {
+				var settings = config[componentType];
+				component.setFromJSON(settings);
+			}			
+		}
+
 		return actor;
 
 	}
-
-
-
 
 }

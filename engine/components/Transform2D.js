@@ -47,12 +47,19 @@ export default class Transform2D extends Component {
 		pos[1] = this.toWorld[7];
 		return pos;
 	}
+
 	setDirection(vec) {
 		var tmp = vec2.clone(vec);
-			vec2.scale(tmp, tmp, 1/vec2.length(tmp));
-		var theta = Math.acos(tmp[0]);
-		if(vec[1] < 0) theta *= -1;
-		this.rotation = theta;
+		var len = vec2.length(tmp);
+		if(len == 0){
+			this.rotation = 0;
+		}else{
+			vec2.scale(tmp, tmp, 1/len);
+			var theta = Math.acos(tmp[0]);
+			if(vec[1] < 0) theta *= -1;
+			this.rotation = theta;
+		}
+		
 
 	}
 
@@ -88,6 +95,8 @@ export default class Transform2D extends Component {
 		}else{
 			mat3.copy(toWorld, matrix);
 		}
+		
+		actor.emit("transform:change");
 
 		var children = this.actor.children;
 		for(let key in children){
