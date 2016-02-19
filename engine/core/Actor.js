@@ -51,4 +51,5 @@ export default class Actor extends EventEmitter {
             this.children[id].update(deltaMs);
         }
     }
+
 }

@@ -9,8 +9,9 @@ export default class PlayerController extends Component {//todo only send difs >
 
 		this.keyStates = {};
 		this.last = {};
+		this.fire = false;
 
-		this.mouse = [0, 1];
+		this.mouse = [window.innerWidth/2, window.innerHeight/2];
 
 		addEventListener("keydown", (e) => {
 			this.keyStates[String.fromCharCode(e.which)] = true;
@@ -21,8 +22,12 @@ export default class PlayerController extends Component {//todo only send difs >
 		})
 
 		addEventListener("mousemove", (e) => {//temp camera logic in here. Need a refereance frame for things like. Camera.domToWorld() etc. 
-			this.mouse[0] = (e.pageX - window.innerWidth/2);
-			this.mouse[1] = (window.innerHeight - e.pageY - window.innerHeight/2);
+			this.mouse[0] = e.pageX; //(e.pageX - window.innerWidth/2);
+			this.mouse[1] = e.pageY; //(window.innerHeight - e.pageY - window.innerHeight/2);
+		})
+
+		addEventListener("mousedown", (e) => {//temp camera logic in here. Need a refereance frame for things like. Camera.domToWorld() etc. 
+			this.fire = true;
 		})
 
 	}
@@ -57,8 +62,11 @@ export default class PlayerController extends Component {//todo only send difs >
 			this.last = JSON.parse(JSON.stringify(this.keyStates)); //stringifying is never the answer. 
 		}
 
-		engine.emit("PlayerController:mouse", this.mouse);
-
+		engine.emit("PlayerController:mouse", engine.camera.mouseToWorld(this.mouse) ) ;
+		if(this.fire){
+			this.fire = false;
+			engine.emit("PlayerController:events", {FIRE : true});
+		}
 
 		
 	}

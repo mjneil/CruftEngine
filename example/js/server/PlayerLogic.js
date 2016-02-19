@@ -10,6 +10,7 @@ export default class PlayerLogic extends Component {
 		this.movingDown = false;
 		this.target = [1, 0];
 		this.speed = .7;
+		this.fire = false;
 	}
 
 	update(deltaMs) {
@@ -36,10 +37,17 @@ export default class PlayerLogic extends Component {
 		}
 
 		transform.position = position;
+
+		var world = this.actor.getComponent("transform").getWorldPosition();
 		var dif = vec2.create();
 
 		vec2.sub(dif, this.target, position);
 		transform.setDirection(dif); 
+
+
+		if(this.fire) {
+			this.fire = false;
+		}
 
 	}
 
@@ -48,9 +56,10 @@ export default class PlayerLogic extends Component {
 		if(events["SET_MOVING_DOWN"]!==undefined) this.movingDown = events["SET_MOVING_DOWN"];
 		if(events["SET_MOVING_LEFT"]!==undefined) this.movingLeft = events["SET_MOVING_LEFT"];
 		if(events["SET_MOVING_RIGHT"]!==undefined) this.movingRight = events["SET_MOVING_RIGHT"];
+		if(events["FIRE"]) this.fire = true;
 	}
 
 	handleMouse(mouse) {
-		//vec2.copy(this.target, mouse);
+		this.target = mouse;
 	}
 }

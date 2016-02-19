@@ -3,7 +3,7 @@ import ProgramManager from "./ProgramManager"
 
 
 
-export default class Renderer2D {
+export default class Renderer {//todo pass in options for what to enable/disable.
 	constructor(width, height) {
 		this.canvas = document.createElement("canvas" , {preserveDrawingBuffer:true});
 		this.canvas.width = width;
