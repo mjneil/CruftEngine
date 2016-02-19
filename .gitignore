@@ -3,8 +3,8 @@ node_modules/
 .sublime-workspace
 tmp/
 bower_components/
-dist/client.js
-dist/server.js
+dist/*.js
+dist/*.js
 build/
 
 
