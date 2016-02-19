@@ -1,0 +1,22 @@
+{
+  "name": "CruftEngine",
+  "homepage": "https://github.com/mjneil/CruftEngine",
+  "description": "cruft",
+  "main": "",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "traceur": "^0.0.95",
+    "peerjs": "^0.3.14"
+  }
+}

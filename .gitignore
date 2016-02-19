@@ -1,11 +1,10 @@
 node_modules/
-dist/*
 .DS_Store
 .sublime-workspace
-build.js
 tmp/
 bower_components/
-dist/
-
+dist/client.js
+dist/server.js
+build/
 
 
