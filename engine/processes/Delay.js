@@ -1,7 +1,7 @@
 import Process from "engine/core/Process"
 
 export default class Delay extends Process {
-	constructor(delay, cb) {
+	constructor(cb, delay) {
 		super();
 		this.cb = cb;
 		this.delay = delay;
@@ -13,7 +13,8 @@ export default class Delay extends Process {
 		var dif = now - this.reference;
 		if(dif > this.delay) {
 			this.reference += this.delay;
-			this.cb(); 
+			this.cb();
+			this.succeed();
 		}
 	}
 }

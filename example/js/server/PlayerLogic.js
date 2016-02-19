@@ -1,6 +1,8 @@
 import Component from "engine/core/Component";
 import {vec2} from "engine/lib/gl-matrix"
-
+import Actor from "engine/core/Actor"
+import Interval from "engine/processes/Interval";
+import {randomRange} from "engine/math/random"
 export default class PlayerLogic extends Component {
 	constructor() {
 		super("PlayerLogic");
@@ -11,6 +13,35 @@ export default class PlayerLogic extends Component {
 		this.target = [1, 0];
 		this.speed = .7;
 		this.fire = false;
+
+
+
+		this.processes = new Interval((now, deltaMs)=>{
+			var world = this.target;
+			for(var i = 0; i < 10;i++){
+				var actor = engine.factory.create(Actor, "Particle", {
+					Transform2D : {
+						position : world
+					},
+					Physics : {
+						velocity : [randomRange(-.5, .5), randomRange(-.5, .5)]
+					}
+				});
+				engine.scene.addChild( actor );
+			}
+			
+		}, 500)
+
+
+		engine.scheduler.addChild(this.processes);
+
+
+
+	}
+
+	destructor() {
+		super.destructor();
+		this.processes.succeed();
 	}
 
 	update(deltaMs) {

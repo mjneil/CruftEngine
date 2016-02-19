@@ -51,15 +51,15 @@ export default class ActorFactory { //def move this to core at some point
 			var component = new CC();
 
 			actor.addComponent(component);
+
 			var defaults = skeleton[componentType];
 			component.setFromJSON(defaults);	
-		}
 
-		if(config) {
-			for(var componentType in skeleton) {
+			if(config){
 				var settings = config[componentType];
 				component.setFromJSON(settings);
-			}			
+			}
+			
 		}
 
 		return actor;

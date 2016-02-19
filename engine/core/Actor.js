@@ -11,6 +11,10 @@ export default class Actor extends EventEmitter {
         this.children = {};
     }
 
+    destructor() {
+
+    }
+
     addComponent(component)  {
         this.components[component.type] = component;
         component.setActor(this);
@@ -50,6 +54,10 @@ export default class Actor extends EventEmitter {
         for(let id in this.children) {
             this.children[id].update(deltaMs);
         }
+    }
+
+    destroy() {//does destroy destroy children? Not sure
+        engine.emit("Actor:destroy", this);//maybe do this for all events?
     }
 
 }

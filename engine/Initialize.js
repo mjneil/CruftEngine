@@ -41,6 +41,10 @@ export default (config) => {
 		}
 	}
 
+	engine.on("Actor:destroy", (actor) => {
+		engine.scene.destroyActor(actor);
+	})
+
 	engine.running = Promise.all(promises).then(()=>{
 		if(config.scene){
 			var s = config.scene;

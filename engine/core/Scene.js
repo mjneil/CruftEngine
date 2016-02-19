@@ -18,12 +18,13 @@ export default class Scene extends Actor {
 		return actor;
 	}
 
-	removeActor(actor) {
-		var actor = this.actors[actor.id];
+	destroyActor(actor) { //todo make a better destroy method DEF talk to m'neil about this
 		delete this.actors[actor.id];
 
-		if(actor.parent){
+		if(actor.parent){//hmmmm. is this the place for that.
 			actor.parent.removeChild(actor);
 		}
+
+		actor.destructor();
 	}
 }
