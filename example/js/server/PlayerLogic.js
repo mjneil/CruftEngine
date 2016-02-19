@@ -14,8 +14,6 @@ export default class PlayerLogic extends Component {
 		this.speed = .7;
 		this.fire = false;
 
-
-
 		this.processes = new Interval((now, deltaMs)=>{
 			var world = this.target;
 			for(var i = 0; i < 10;i++){
