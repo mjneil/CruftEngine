@@ -5,16 +5,16 @@ import SpriteRenderer from "engine/graphics/plugins/SpriteRenderer";
 import Script from "engine/processes/Script"
 import Camera2D from "engine/graphics/Camera2D";
 import Actor from "engine/core/Actor"
-
+import vec2 from "engine/math/vec2";
 initialize();
-
-var renderer = new Renderer2D(GAME_WIDTH, GAME_HEIGHT);//maybe make a game view class?
+var gameWidth = window.innerWidth;
+var gameHeight = window.innerHeight;
+var renderer = new Renderer2D(gameWidth, gameHeight);//maybe make a game view class?
 	renderer.registerPlugin(new SpriteRenderer());
-var camera = new Camera2D(GAME_WIDTH, GAME_HEIGHT); //also todo make a real camera class.
+var camera = new Camera2D(gameWidth, gameHeight); //also todo make a real camera class.
 
 //@TODO create world01.json files etc that describe actors within a world. 
 //just add an actor 
-
 
 var main = () => {
 

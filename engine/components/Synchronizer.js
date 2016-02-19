@@ -1,6 +1,7 @@
 import Component from "engine/core/Component";
 import engine from "engine/Engine"
 
+//DO NOT USE THIS CLASS IS NOT USABLE. 
 export default class Synchronizer extends Component {
 	constructor() {
 		super("syncronizer");
