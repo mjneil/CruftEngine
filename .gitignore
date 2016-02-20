@@ -1,7 +1,7 @@
 node_modules/
 .DS_Store
-.sublime-workspace
 tmp/
+.sublime-workspace
 bower_components/
 build/
 
