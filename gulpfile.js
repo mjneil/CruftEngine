@@ -8,6 +8,7 @@ var gls = require('gulp-live-server');
 var runSequence = require('run-sequence');
 var cache = require('gulp-cached');
 var server = gls.new("server.js");
+var karma = require('karma').Server;
 
 var ENGINE_SRC = ["engine/**/*.js"];
 
@@ -88,6 +89,13 @@ gulp.task("server", function () {
     var server = gls.static('example/dist', 8888);
     server.start();
 })
+
+gulp.task('test:single', function (done) {
+  new karma({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
 
 //echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 gulp.task("default", function () {
