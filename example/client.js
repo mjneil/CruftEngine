@@ -15,6 +15,7 @@ var main = () => {
 	engine.camera = new Camera2D(window.innerWidth, window.innerHeight); //also todo make a real camera class.
 
 	var player = engine.factory.create(Actor, "Player");
+	engine.camera.target = player;
 
 	engine.scene.addChild(player);
 	engine.scene.addChild(engine.camera);

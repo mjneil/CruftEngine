@@ -1,6 +1,7 @@
 import Component from "engine/core/Component"
 import engine from "engine/Engine";
-
+import Interval from "engine/processes/Interval";
+import Actor from "engine/core/Actor";
 export default class GameLogic extends Component {
 	constructor() {
 		super("GameLogic");
@@ -16,5 +17,14 @@ export default class GameLogic extends Component {
 				this.player.getComponent("PlayerLogic").handleMouse(events);//todo make handle or set direction or idk.
 			}
 		})
+
+		engine.scheduler.addChild(new Interval(()=>{
+			var zombie = engine.factory.create(Actor, "Zombie", {
+				ZombieLogic : {
+					target : this.player
+				}
+			})
+			engine.scene.addChild(zombie);
+		}, 5000))
 	}
 }

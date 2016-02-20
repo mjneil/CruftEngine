@@ -6,6 +6,7 @@ import PlayerController from "./PlayerController";
 import GameLogic from "../shared/GameLogic"
 import Sprite from "engine/components/Sprite";
 import Physics from "./Physics";
+import ZombieLogic from "../shared/ZombieLogic";
 import Lifetime from "engine/components/Lifetime";
 //example
 import {PEERJS_API_KEY} from "../shared/constants";
@@ -27,6 +28,7 @@ export default () =>{
 				"assets/entities/client/scene.json" : "Scene"  ,
 				"assets/entities/client/particle.json" : "Particle"  ,
 				"assets/entities/client/boulder.json" : "Boulder"  ,
+				"assets/entities/client/zombie.json" : "Zombie"  
 			},
 			components : {
 				"Transform2D" : Transform2D,
@@ -35,7 +37,8 @@ export default () =>{
 				"GameLogic" : GameLogic,
 				"Sprite" : Sprite,
 				"Physics" : Physics,
-				"Lifetime" : Lifetime
+				"Lifetime" : Lifetime,
+				"ZombieLogic" : ZombieLogic
 			}
 		}
 	});
