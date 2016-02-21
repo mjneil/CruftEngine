@@ -2,7 +2,11 @@ import Component from "engine/core/Component";
 import {vec2} from "engine/lib/gl-matrix"
 import Actor from "engine/core/Actor"
 import Interval from "engine/processes/Interval";
+import Delay from "engine/processes/Delay"
 import {randomRange} from "engine/math/random"
+
+import engine, {scheduler, instantiate} from "engine/engine"
+
 export default class PlayerLogic extends Component {
 	constructor() {
 		super("PlayerLogic");
@@ -13,34 +17,41 @@ export default class PlayerLogic extends Component {
 		this.target = [1, 0];
 		this.speed = .7;
 		this.fire = false;
+		this.particles = [];
+
 
 		this.processes = new Interval((now, deltaMs)=>{
 			var world = this.target;
+			for(var i = 0; i < this.particles.length;i++){
+				this.particles[i].getComponent("transform").position = world;
+				this.particles[i].getComponent("Physics").velocity = [randomRange(-.5, .5), randomRange(-.5, .5)];
+			}
+		}, 2000)
+
+		scheduler.addChild(this.processes);
+	}
+
+	initialize() {
+		for(var i = 0; i < 10;i++){
+			var particle = instantiate("Particle", {
+				Transform2D : {
+					position : this.target
+				},
+				Physics : {
+					velocity : [randomRange(-.5, .5), randomRange(-.5, .5)]
+				}
+			})
+			this.particles.push(particle.get());
+		}
+
+		scheduler.addChild(new Delay(()=>{
 			for(var i = 0; i < 10;i++){
-				var actor = engine.factory.create(Actor, "Particle", {
-					Transform2D : {
-						position : world
-					},
-					Physics : {
-						velocity : [randomRange(-.5, .5), randomRange(-.5, .5)]
-					}
-				});
-				engine.scene.addChild( actor );
+				engine.scene.addChild(this.particles[i]);
 			}
 			
-		}, 500)
-
-
-		engine.scheduler.addChild(this.processes);
-
-
-
+		}, 1));
 	}
 
-	destructor() {
-		super.destructor();
-		this.processes.succeed();
-	}
 
 	update(deltaMs) {
 

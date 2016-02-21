@@ -54,7 +54,7 @@ gulp.task("js:engine", function () {
 
 gulp.task("js:tracuer", function () {
   return gulp.src(RAW_SRC, {base :"./example"})
-    .pipe(cache('source'))
+    .pipe(cache('engine'))
     .pipe(tracuer())
     .on("error", onerror)
     .pipe(gulp.dest("example/build/"))

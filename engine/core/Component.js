@@ -1,11 +1,10 @@
-import EventEmitter from "events"
-var nextComponentGuid = 0;
-export default class Component extends EventEmitter {
+import Referenceable from "./Referenceable";
+
+export default class Component extends Referenceable {
 	
-	constructor(type) {
-		super();
+	constructor(type,guid) {
+		super(guid);
 		this.type = type;
-		this.id = nextComponentGuid++;
 		this.actor = null;
 	}
 
@@ -17,8 +16,11 @@ export default class Component extends EventEmitter {
 		console.warn(`${this.type}:setFromJSON has not been implemented`);
 	}
 
-	//todo? :/
 	update(deltaMs) {
 
+	}
+
+	initialize() {
+		
 	}
 }

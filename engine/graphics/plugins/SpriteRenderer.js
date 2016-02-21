@@ -27,7 +27,7 @@ var fSrc = `
 
 `
 
-class GLSprite {
+class GLSprite {//TODO REMEMBER TRY STORING THIS GUY IN A WEAKMAP
 
 	constructor(gl, sprite) {
 		this.gl = gl;
@@ -39,6 +39,13 @@ class GLSprite {
 		this.buffers = [gl.createBuffer(), gl.createBuffer()];
 		
 		this.lastDirt = null;
+	}
+
+	destroy() {
+		var gl = this.gl;
+		gl.deleteBuffer(this.buffers[0]);
+		gl.deleteBuffer(this.buffers[1]);
+		gl.deleteTexture(this.texture);
 	}
 
 	update() {
@@ -127,11 +134,18 @@ export default class SpriteRenderer extends RendererPlugin {
 		if(!sprite.loaded) return;
 		var gl = this.gl;
 		renderer.programManager.use(this.program);
-		if(!this.data[sprite.id]) this.data[sprite.id] = new GLSprite(gl, sprite);
+		if(!this.data[sprite.guid]) { //temp for now. Look into making one big buffer. 
+			this.data[sprite.guid] = new GLSprite(gl, sprite);
+			//for now not sure how else to do this
+			sprite.on("destroy", () => {
+				this.data[sprite.guid].destroy();
+				delete this.data[sprite.guid];
+			})
+		}
 
-		var glSprite = this.data[sprite.id];
+		var glSprite = this.data[sprite.guid];
 
-		if(glSprite.lastDirt !== sprite.id) {
+		if(glSprite.lastDirt !== sprite.guid) {
 			glSprite.update(sprite);
 		}
 

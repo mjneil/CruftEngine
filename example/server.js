@@ -1,5 +1,5 @@
 import initialize from "./js/server/initialize";
-import engine from "engine/Engine"
+import engine from "engine/engine"
 
 initialize();
 

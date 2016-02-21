@@ -9,8 +9,6 @@ export default class ZombieLogic extends Component { //irl should make controlle
 		super("ZombieLogic");
 		this.speed = .6;
 		this.target = null;
-
-
 	}
 
 	destructor() {
@@ -21,11 +19,10 @@ export default class ZombieLogic extends Component { //irl should make controlle
 		var target = this.target;
 		if(!target) return;
 
-
 		var transform = this.actor.getComponent("transform");
 		var position = transform.position;
 
-		var targetTransform = target.getComponent("transform");
+		var targetTransform = target.get();
 		var targetPos = targetTransform.position;
 		var dif = vec2.create();
 

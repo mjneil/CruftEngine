@@ -1,5 +1,6 @@
 //engine
-import Initialize from "engine/Initialize";
+/*
+import Initialize from "engine/initialize";
 import Transform2D from "engine/components/Transform2D";
 import Synchronizer from "engine/components/Synchronizer";
 
@@ -34,4 +35,4 @@ export default () =>{
 			}
 		}
 	});
-}
+}*/

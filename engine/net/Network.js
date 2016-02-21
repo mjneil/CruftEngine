@@ -5,6 +5,12 @@ export default class Network extends EventEmitter {
 	constructor(name, key) {
 		super();
 		this.peerId = null;
+		this.peer = null;
+		this.sessions = null;
+	}
+
+	initialize() {
+		this.peerId = null;
 		this.peer = new Peer(name, { key });
 		this.sessions = {};
 		var builder = {};
@@ -39,8 +45,6 @@ export default class Network extends EventEmitter {
 				}
 			})
 		})
-
-
 	}
 
 	//change how many listeners we add here,. 

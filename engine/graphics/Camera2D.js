@@ -3,7 +3,7 @@ import Renderer from "engine/graphics/Renderer"
 import SpriteRenderer from "engine/graphics/plugins/SpriteRenderer";
 import Transform2D from "engine/components/Transform2D";
 import {vec2} from "engine/lib/gl-matrix";
-import engine from "engine/Engine";
+import engine, {scheduler} from "engine/engine";
 import Script from "engine/processes/Script";
 
 export default class Camera2D extends Actor {//todo set/get widht//height
@@ -16,6 +16,13 @@ export default class Camera2D extends Actor {//todo set/get widht//height
 		document.body.appendChild(this._renderer.canvas);//not sure how want to manage access to the dom right now. so tmp here. 
 		this.addComponent(new Transform2D()); //think about using a height variable or somthing? :/ Hmm idk. 
 		this.getComponent("transform").scale = [width/2, height/2] //might want to make variables to like set zoom and stuff idk. 
+
+		//todo track that script so we can delete it. 
+		//also its not in update because I want it to be the last thing that happens
+		////@matt neill plz help with this. Iddk how 2 do
+		scheduler.addChild(new Script(()=>{//tmp here for now
+			this.render();
+		}))
 
 		//just throw random stuff in here.
 		this.target = null;

@@ -1,5 +1,6 @@
 import Component from "engine/core/Component";
 import {vec2} from "engine/lib/gl-matrix";
+
 export default class Physics extends Component {
 	constructor() {
 		super("Physics");

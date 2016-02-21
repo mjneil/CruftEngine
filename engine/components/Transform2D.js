@@ -22,6 +22,12 @@ export default class Transform2D extends Component {
 		mat3.identity(this.inverse);
 	}
 
+	initialize() {
+		this.actor.on("setParent", () => {
+			this.updateMatrix();
+		})
+	}
+
 	get position () {
 		return vec2.clone(this._position);
 	}

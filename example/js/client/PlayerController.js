@@ -1,6 +1,6 @@
 import Component from "engine/core/Component";
 import {vec2} from "engine/lib/gl-matrix"
-import engine from "engine/Engine"
+import engine from "engine/engine"
 
 export default class PlayerController extends Component {//todo only send difs >_>
 

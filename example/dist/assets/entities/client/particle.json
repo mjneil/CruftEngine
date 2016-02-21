@@ -1,6 +1,5 @@
 {
 	"Transform2D" : null,
 	"Sprite" : { "width" : 10, "height" : 10, "url" : "assets/images/particle.png" },
-	"Physics" : null,
-	"Lifetime" : 500
+	"Physics" : null
 }
