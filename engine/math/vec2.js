@@ -1,8 +1,3 @@
-//basic flesh out of vector class
-//please please lets unit test / manually test these work
-//I always forget that bugs could be in da math. 
-
-
 export default class vec2 {
 	constructor(x, y) { //no default values cause these needs to be fast. 
 		this.x = x;
