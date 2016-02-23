@@ -32,7 +32,7 @@
         }, 
         {
             "location": "/engine/math/vec2/", 
-            "text": "This class defines a 2d vector.\n\n\nConstructors\n\n\nvec2( \nx\n, \ny\n )\n\n\nx\n - Initial x value of the vector.   \n\n\ny\n - Initial y value of the vector. \n\n\nlet a = new vec2(1, 2);\n\n\n\n\nProperties\n\n\n.\nx\n - Value of the x component.   \n\n.\ny\n - Value of the y component.\n\n\nStatic Methods\n\n\nzero()\n\n\nConstructs the zero vector.\n\n\nlet a = vec2.zero();\n\n\n\n\nMethods\n\n\nstatic add( a, b )\n\n\nAdds vector a and b, returning the result.\n\n\nlet a = new vec2(1, 2);\nlet b = new vec2(3, 4);\n\nlet c = vec2.add(a, b);", 
+            "text": "engine/math/vec2.js\n      \n\nThis class defines a 2d vector.     \n\n\nConstructors\n\n\nvec2( \nx\n, \ny\n )\n\n\nx\n - Initial x value of the vector.   \n\n\ny\n - Initial y value of the vector. \n\n\nlet a = new vec2(1, 2);\n\n\n\n\nProperties\n\n\n.\nx\n - Value of the x component.   \n\n.\ny\n - Value of the y component.\n\n\nStatic Methods\n\n\nzero()\n\n\nConstructs the zero vector.\n\n\nlet a = vec2.zero();\n\n\n\n\nMethods\n\n\nstatic add( a, b )\n\n\nAdds vector a and b, returning the result.\n\n\nlet a = new vec2(1, 2);\nlet b = new vec2(3, 4);\n\nlet c = vec2.add(a, b);", 
             "title": "vec2"
         }, 
         {
