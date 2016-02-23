@@ -3,7 +3,7 @@ This class defines a 2d vector.
 ## Constructors
 
 ### vec2( x, y )
-x - Float representing the x value of the vector.
+x - Float representing the x value of the vector.  
 y - Float representing the y value of the vector.
 
 ```javascript
