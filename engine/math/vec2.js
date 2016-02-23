@@ -18,37 +18,89 @@ export default class vec2 {
 		return this;
 	}
 
-	
-	/* all static methods return new vectors without modifying whats past in 
-	static add 
-	static sub
-	static scale (a, s) (by a scalar)
-	static dot
-	static cross
-	static length
-	static normalize
+	static sub(a, b) {
+		return new vec2(a.x - b.x, a.y - b.y);
+	}
 
-	//all member funcs modify self but nothing pas in. and also chaniable. 
-	add
-	sub
-	scale
-	dot
-	scale
-	length
-	normalize
+	sub(b) {
+		this.x -= b.x;
+		this.y -= b.y;
+		return this;
+	}
 
-	//example of static
-	var a = new vec2(10, 10);
-	var b = new vec2(10, 20);
-	var c = vec2.add(a, b); //c = (20, 30)
+	static scale (a, s) {
+		return new vec2(a.x * s, a.y * s);
+	}
 
+	scale(s) {
+		this.x *= s;
+		this.y *= s;
+		return this;
+	}
 
-	//example of non-static
-	var a = new vec2(10, 20);
-	var b = new vec2(30, 20);
-		a.add(b).add(b) //a = (70, 60) b is not modified. 
+	static dot(a, b) {
+		return a.x * b.x + a.y * b.y;
+	}
 
-	*/
+	dot(b) {
+		return this.x * b.x + this.y * b.y;	}
 
+	static cross(a, b) {
+		return a.x * b.y - a.y * b.x;
+	}
+
+	static crossScalar(a, s, left) {
+		if (left) {
+			return new vec2(-s * a.y, s * a.x);
+		} else {
+			return new vec2(s * a.y, -s * a.x);
+		}
+	}
+
+	cross(b) {
+		return this.x * b.y - a.y * b.x;
+	}
+
+	crossScalar(s, left) {
+		let x = this.x;
+		if (left) {
+			this.x = -s * this.y;
+			this.y = s * x;
+		} else {
+			this.x = s * this.y;
+			this.y = -s * x;
+		}
+		return this;
+	}
+
+	static length(a) {
+		return Math.sqrt(a.x * a.x + a.y * a.y);
+	}
+
+	length() {
+		return Math.sqrt(this.x * this.x + this.y * this.y);
+	}
+
+	static lengthSquared(a) {
+		return a.x * a.x + a.y * a.y;
+	}
+
+	lengthSquared() {
+		return this.x * this.x + this.y * this.y;
+	}
+
+	static normalize(a) {
+		let len = vec2.length(a);
+		len = 1 / len;
+		return new vec2(a.x * len, a.y * len);
+	}
+
+	normalize() {
+		let len = this.length();
+		len = 1 / len;
+		this.x *= len;
+		this.y *= len;
+		return this;
+	}
 
 }
