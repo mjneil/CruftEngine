@@ -2,6 +2,9 @@ site_name: 'CruftEngine'
 theme: 'material'
 repo_name: 'GitHub'
 repo_url: 'https://github.com/mjneil/CruftEngine'
+markdown_extensions:
+    - toc:
+        permalink: True
 pages:
 - Home : 'index.md'
 - Core :
