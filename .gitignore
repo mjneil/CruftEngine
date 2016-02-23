@@ -4,5 +4,4 @@ tmp/
 *.sublime-workspace
 bower_components/
 build/
-
-
+site/
