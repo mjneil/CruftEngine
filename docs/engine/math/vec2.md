@@ -1,4 +1,6 @@
-This class defines a 2d vector.
+[engine/math/vec2.js](https://github.com/mjneil/CruftEngine/blob/master/engine/math/vec2.js)		
+This class defines a 2d vector.		
+
 
 ## Constructors
 
