@@ -1,18 +1,12 @@
-import uuid from "engine/lib/uuid";
-import EventEmitter from "events";
+import Referenceable from "./Referenceable";
 
-export default class Actor extends EventEmitter {
+export default class Actor extends Referenceable  {
     
-    constructor(id) {
-        super();
-        this.id = id || uuid.create().toString();
+    constructor(guid) {
+        super(guid);
     	this.parent = null;
         this.components = {};
         this.children = {};
-    }
-
-    destructor() {
-
     }
 
     addComponent(component)  {
@@ -22,26 +16,43 @@ export default class Actor extends EventEmitter {
     }
 
     removeComponent(type) {
+        var component = this.components[type];
+        if(!component) return;
+        component.setActor(null);
         delete this.components[type];
         this.emit("removeComponent", component);
+    }
+
+    destroyComponent(type) {
+        var component = this.components[type];
+        if(!component) return;
+        component.destroy();
+        delete this.components[type];
+        this.emit("destroyComponent", com)
     }
 
     getComponent(type) {
         return this.components[type]
     }
 
+    setParent(parent) {
+        this.parent = parent;
+        this.emit("setParent", parent);
+    }
+
     addChild(child) {
         if(child.parent){
+            console.warn("Child already attached to parent.");
             child.parent.removeChild(child);
         }
-        child.parent = this;
-        this.children[child.id] = child;
+        child.setParent(this);
+        this.children[child.guid] = child;
         this.emit("addChild", child);
     }
 
     removeChild(child) {//TODO remove the listenr. RIP. 
-        child.parent = null;
-        delete this.children[child.id];
+        child.setParent(null);
+        delete this.children[child.guid];
         this.emit("removeChild", child);
     }
 
@@ -56,8 +67,26 @@ export default class Actor extends EventEmitter {
         }
     }
 
-    destroy() {//does destroy destroy children? Not sure
-        engine.emit("Actor:destroy", this);//maybe do this for all events?
-    }
+    destroy(recursive) {
+        super.destroy();
 
+        if(this.parent){
+            this.parent.removeChild(this);
+        }
+        
+        for(let key in this.components) {
+            this.components[key].destroy();
+        }
+
+        if(recursive){
+             for(let id in this.children) {
+                this.children[id].destroy(recursive);
+            }
+        }
+
+       
+
+        this.components = null;
+        this.children = null;
+    }
 }

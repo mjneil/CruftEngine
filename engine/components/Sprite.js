@@ -1,5 +1,5 @@
 import Component from "engine/core/Component";
-import engine from "engine/Engine";
+import cache from "engine/cache";
 
 export default class Sprite extends Component {
 
@@ -54,7 +54,7 @@ export default class Sprite extends Component {
 	set url(url) {
 		this._url = url;
 		this.loaded = false;
-		engine.cache.get(url).then((image) => {
+		cache.get(url).then((image) => {
 			this.image = image;
 			this.loaded = true;
 		})
