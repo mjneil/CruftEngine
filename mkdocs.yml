@@ -2,3 +2,17 @@ site_name: CruftEngine
 theme: 'material'
 repo_name: 'GitHub'
 repo_url: 'https://github.com/mjneil/CruftEngine'
+
+pages:
+- Home: 'index.md'
+- 'core': 'engine/core/core.md'
+- 'math': 'engine/math/math.md'
+- 'classes':
+    - 'Actor' : 'engine/core/Actor.md'
+    - 'Component' : 'engine/core/Component.md'
+    - 'ActorFactory' : 'engine/core/ActorFactory.md'
+    - 'Scheduler' : 'engine/core/Scheduler.md'
+    - 'vec2' : 'engine/math/vec2.md'
+    - 'vec3' : 'engine/math/vec3.md'
+    - 'mat3' : 'engine/math/mat3.md'
+    - 'mat4' : 'engine/math/mat4.md'
