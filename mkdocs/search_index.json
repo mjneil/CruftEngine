@@ -11,56 +11,6 @@
             "title": "Welcome to CruftEngine"
         }, 
         {
-            "location": "/engine/core/core/", 
-            "text": "Actor\n\n\nComponent\n\n\nActorFactory\n\n\nScheduler", 
-            "title": "core"
-        }, 
-        {
-            "location": "/engine/core/core/#actor", 
-            "text": "", 
-            "title": "Actor"
-        }, 
-        {
-            "location": "/engine/core/core/#component", 
-            "text": "", 
-            "title": "Component"
-        }, 
-        {
-            "location": "/engine/core/core/#actorfactory", 
-            "text": "", 
-            "title": "ActorFactory"
-        }, 
-        {
-            "location": "/engine/core/core/#scheduler", 
-            "text": "", 
-            "title": "Scheduler"
-        }, 
-        {
-            "location": "/engine/math/math/", 
-            "text": "vec2\n\n\nvec3\n\n\nmat3\n\n\nmat4", 
-            "title": "math"
-        }, 
-        {
-            "location": "/engine/math/math/#vec2", 
-            "text": "", 
-            "title": "vec2"
-        }, 
-        {
-            "location": "/engine/math/math/#vec3", 
-            "text": "", 
-            "title": "vec3"
-        }, 
-        {
-            "location": "/engine/math/math/#mat3", 
-            "text": "", 
-            "title": "mat3"
-        }, 
-        {
-            "location": "/engine/math/math/#mat4", 
-            "text": "", 
-            "title": "mat4"
-        }, 
-        {
             "location": "/engine/core/Actor/", 
             "text": "", 
             "title": "Actor"
@@ -82,8 +32,43 @@
         }, 
         {
             "location": "/engine/math/vec2/", 
-            "text": "", 
+            "text": "This class defines a 2d vector.\n\n\nConstructors\n\n\nvec2( \nx\n, \ny\n )\n\n\nx\n - Initial x value of the vector.   \n\n\ny\n - Initial y value of the vector. \n\n\nlet a = new vec2(1, 2);\n\n\n\n\nProperties\n\n\n.\nx\n - Value of the x component.   \n\n.\ny\n - Value of the y component.\n\n\nStatic Methods\n\n\nzero()\n\n\nConstructs the zero vector.\n\n\nlet a = vec2.zero();\n\n\n\n\nMethods\n\n\nstatic add( a, b )\n\n\nAdds vector a and b, returning the result.\n\n\nlet a = new vec2(1, 2);\nlet b = new vec2(3, 4);\n\nlet c = vec2.add(a, b);", 
             "title": "vec2"
+        }, 
+        {
+            "location": "/engine/math/vec2/#constructors", 
+            "text": "", 
+            "title": "Constructors"
+        }, 
+        {
+            "location": "/engine/math/vec2/#vec2-x-y", 
+            "text": "x  - Initial x value of the vector.     y  - Initial y value of the vector.   let a = new vec2(1, 2);", 
+            "title": "vec2( x, y )"
+        }, 
+        {
+            "location": "/engine/math/vec2/#properties", 
+            "text": ". x  - Value of the x component.    \n. y  - Value of the y component.", 
+            "title": "Properties"
+        }, 
+        {
+            "location": "/engine/math/vec2/#static-methods", 
+            "text": "", 
+            "title": "Static Methods"
+        }, 
+        {
+            "location": "/engine/math/vec2/#zero", 
+            "text": "Constructs the zero vector.  let a = vec2.zero();", 
+            "title": "zero()"
+        }, 
+        {
+            "location": "/engine/math/vec2/#methods", 
+            "text": "", 
+            "title": "Methods"
+        }, 
+        {
+            "location": "/engine/math/vec2/#static-add-a-b", 
+            "text": "Adds vector a and b, returning the result.  let a = new vec2(1, 2);\nlet b = new vec2(3, 4);\n\nlet c = vec2.add(a, b);", 
+            "title": "static add( a, b )"
         }, 
         {
             "location": "/engine/math/vec3/", 
@@ -99,6 +84,31 @@
             "location": "/engine/math/mat4/", 
             "text": "", 
             "title": "mat4"
+        }, 
+        {
+            "location": "/primitives/", 
+            "text": "Built in data types in Javascript.\n\n\nNumber\n\n\nlet a = 1;\nlet b = 1.23456;\nlet c = a + b; //c = 2.23456\n\n\n\n\nBoolean\n\n\nlet a = 1;\nlet b = 1.23456;\nlet c = a + b; //c = 2.23456\n\n\n\n\nString\n\n\nlet a = \nCruft\n;\nlet b = \nEngine\n;\nlet c = a + b; // c = \nCruftEngine\n\n\n\n\n\nObject\n\n\nlet a = { \n    Cruft : true, \n    Engine :false \n}", 
+            "title": "Primitives"
+        }, 
+        {
+            "location": "/primitives/#number", 
+            "text": "let a = 1;\nlet b = 1.23456;\nlet c = a + b; //c = 2.23456", 
+            "title": "Number"
+        }, 
+        {
+            "location": "/primitives/#boolean", 
+            "text": "let a = 1;\nlet b = 1.23456;\nlet c = a + b; //c = 2.23456", 
+            "title": "Boolean"
+        }, 
+        {
+            "location": "/primitives/#string", 
+            "text": "let a =  Cruft ;\nlet b =  Engine ;\nlet c = a + b; // c =  CruftEngine", 
+            "title": "String"
+        }, 
+        {
+            "location": "/primitives/#object", 
+            "text": "let a = { \n    Cruft : true, \n    Engine :false \n}", 
+            "title": "Object"
         }
     ]
 }

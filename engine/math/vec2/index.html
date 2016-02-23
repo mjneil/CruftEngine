@@ -87,7 +87,7 @@
           <span class="path">
             
               
-                classes <i class="icon icon-link"></i>
+                Math <i class="icon icon-link"></i>
               
             
           </span>
@@ -168,25 +168,7 @@
           
             
   <li>
-    <a class="" title="core" href="../../core/core/">
-      core
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
-    <a class="" title="math" href="../math/">
-      math
-    </a>
-    
-  </li>
-
-          
-            
-  <li>
-    <span class="section">classes</span>
+    <span class="section">Core</span>
     <ul>
       
         
@@ -225,6 +207,15 @@
   </li>
 
       
+    </ul>
+  </li>
+
+          
+            
+  <li>
+    <span class="section">Math</span>
+    <ul>
+      
         
   <li>
     <a class="current" title="vec2" href="./">
@@ -234,6 +225,30 @@
       
       
         <ul>
+          
+            <li class="anchor">
+              <a title="Constructors" href="#constructors">
+                Constructors
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Properties" href="#properties">
+                Properties
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Static Methods" href="#static-methods">
+                Static Methods
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Methods" href="#methods">
+                Methods
+              </a>
+            </li>
           
         </ul>
       
@@ -272,6 +287,15 @@
   </li>
 
           
+            
+  <li>
+    <a class="" title="Primitives" href="../../../primitives/">
+      Primitives
+    </a>
+    
+  </li>
+
+          
         </ul>
         
       </div>
@@ -286,7 +310,31 @@
               <h1>vec2</h1>
             
           
-          
+          <p>This class defines a 2d vector.</p>
+<h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">&para;</a></h2>
+<h3 id="vec2-x-y">vec2( <a href="../../../primitives/#Number">x</a>, <a href="../../../primitives/#Number">y</a> )<a class="headerlink" href="#vec2-x-y" title="Permanent link">&para;</a></h3>
+<p><a href="../../../primitives/#Number">x</a> - Initial x value of the vector.   <br />
+<a href="../../../primitives/#Number">y</a> - Initial y value of the vector. </p>
+<pre><code class="javascript">let a = new vec2(1, 2);
+</code></pre>
+
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
+<p>.<a href="../../../primitives/#Number">x</a> - Value of the x component.   <br />
+.<a href="../../../primitives/#Number">y</a> - Value of the y component.</p>
+<h2 id="static-methods">Static Methods<a class="headerlink" href="#static-methods" title="Permanent link">&para;</a></h2>
+<h3 id="zero">zero()<a class="headerlink" href="#zero" title="Permanent link">&para;</a></h3>
+<p>Constructs the zero vector.</p>
+<pre><code class="javascript">let a = vec2.zero();
+</code></pre>
+
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="static-add-a-b">static add( a, b )<a class="headerlink" href="#static-add-a-b" title="Permanent link">&para;</a></h3>
+<p>Adds vector a and b, returning the result.</p>
+<pre><code class="javascript">let a = new vec2(1, 2);
+let b = new vec2(3, 4);
+
+let c = vec2.add(a, b);
+</code></pre>
           <aside class="copyright" role="note">
             
             Documentation built with
