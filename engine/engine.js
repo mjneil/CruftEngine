@@ -68,7 +68,7 @@ var instantiate = (type, config) => {
 	for(var key in actor.components){
 		memory.add(actor.components[key]);
 	}
-	return memory.createPointer(actor);
+	return actor.toPointer();
 }
 
 var instantiateBase = (base, type, config) => {
@@ -77,7 +77,7 @@ var instantiateBase = (base, type, config) => {
 	for(var key in actor.components){
 		memory.add(actor.components[key]);
 	}
-	return memory.createPointer(actor);
+	return actor.toPointer();
 }
 
 export default engine;//for now export raw factory. prob wont do that always. 

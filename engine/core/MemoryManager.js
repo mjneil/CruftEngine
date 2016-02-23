@@ -13,11 +13,6 @@ export default class MemoryManager {
 		})
 	}
 
-	createPointer(referenceable) {
-		if(!this.references[referenceable.guid]) return null//cant make a reference to somthing that doesn't exist
-		return new Pointer(referenceable, this);
-	}
-
 	get(guid) {
 		return this.references[guid] || null;
 	}

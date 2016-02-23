@@ -89,5 +89,4 @@ export default class Actor extends Referenceable  {
         this.components = null;
         this.children = null;
     }
-
 }
