@@ -17,3 +17,4 @@ pages:
     - vec3 : 'engine/math/vec3.md'
     - mat3 : 'engine/math/mat3.md'
     - mat4 : 'engine/math/mat4.md'
+- Primitives : 'primitives.md'
