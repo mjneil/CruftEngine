@@ -32,3 +32,69 @@ let b = new vec2(3, 4);
 
 let c = vec2.add(a, b);
 ```
+
+### add( b )
+Adds vector b to this, returning this.
+
+```javascript
+let a = new vec2(1, 2);
+let b = new vec2(3, 4);
+
+a.add(b);
+```
+
+### static addScalar( a, s)
+Adds scalar value s to a, returning the result.
+
+```javascript
+let a = new vec2(1, 2);
+
+let c = vec2.addScalar(a, 3);
+```
+
+### addScalar( s )
+Adds scalar value s to this, returning this.
+
+```javascript
+let a = new vec(1, 2);
+
+a.addScalar(3);
+```
+
+### static clone( a )
+Returns clone of vector a.
+
+```javascript
+let a = new vec2(1, 2);
+
+let c = vec2.clone(a);
+```
+
+### clone()
+Returns clone of this.
+
+```javascript
+let a = new vec2(1, 2);
+
+let c = a.clone();
+```
+
+### static cross( a, b )
+Calculates a cross b, returning the result.
+
+```javascript
+let a = new vec2(1, 2);
+let b = new vec2(3, 4);
+
+let c = vec2.cross(a, b);
+```
+
+### cross( b )
+Calculates this cross b, returning the this.
+
+```javascript
+let a = new vec2(1, 2);
+let b = new vec2(3, 4);
+
+a.cross(b);
+```

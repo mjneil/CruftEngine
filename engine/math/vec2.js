@@ -1,106 +1,138 @@
 export default class vec2 {
-	constructor(x, y) { //no default values cause these needs to be fast. 
-		this.x = x;
-		this.y = y;
-	}
+    constructor(x, y) { //no default values cause these needs to be fast. 
+        this.x = x;
+        this.y = y;
+    }
 
-	static zero() { //static constructor for making empty vectors. 
-		return new vec2(0, 0);
-	}
+    static zero() { //static constructor for making empty vectors. 
+        return new vec2(0, 0);
+    }
 
-	static add(a, b) { //adds new vecs and stores them in a new vector.
-		return new vec2(a.x + b.x, a.y + b.y);
-	}
+    static add(a, b) { //adds new vecs and stores them in a new vector.
+        return new vec2(a.x + b.x, a.y + b.y);
+    }
 
-	add(b) { //modifies self so like a.add(b) changes the vector a. (mem effecient)
-		this.x += b.x;
-		this.y += b.y;
-		return this;
-	}
+    add(b) { //modifies self so like a.add(b) changes the vector a. (mem effecient)
+        this.x += b.x;
+        this.y += b.y;
+        return this;
+    }
 
-	static sub(a, b) {
-		return new vec2(a.x - b.x, a.y - b.y);
-	}
+    static addScalar(a, s) {
+        return new vec2(a.x + s, a.y + s);
+    }
 
-	sub(b) {
-		this.x -= b.x;
-		this.y -= b.y;
-		return this;
-	}
+    addScalar(s) {
+        this.x += s;
+        this.y += s;
+        return this;
+    }
 
-	static scale (a, s) {
-		return new vec2(a.x * s, a.y * s);
-	}
+    static clone(a) {
+        return new vec2(a.x, a.y);
+    }
 
-	scale(s) {
-		this.x *= s;
-		this.y *= s;
-		return this;
-	}
+    clone() {
+        return new vec2(this.x, this.y);
+    }
 
-	static dot(a, b) {
-		return a.x * b.x + a.y * b.y;
-	}
+    static cross(a, b) {
+        return a.x * b.y - a.y * b.x;
+    }
 
-	dot(b) {
-		return this.x * b.x + this.y * b.y;	}
+    cross(b) {
+        return this.x * b.y - a.y * b.x;
+    }
 
-	static cross(a, b) {
-		return a.x * b.y - a.y * b.x;
-	}
+    static crossScalar(a, s, left) {
+        if (left) {
+            return new vec2(-s * a.y, s * a.x);
+        } else {
+            return new vec2(s * a.y, -s * a.x);
+        }
+    }
 
-	static crossScalar(a, s, left) {
-		if (left) {
-			return new vec2(-s * a.y, s * a.x);
-		} else {
-			return new vec2(s * a.y, -s * a.x);
-		}
-	}
+    crossScalar(s, left) {
+        let x = this.x;
+        if (left) {
+            this.x = -s * this.y;
+            this.y = s * x;
+        } else {
+            this.x = s * this.y;
+            this.y = -s * x;
+        }
+        return this;
+    }
 
-	cross(b) {
-		return this.x * b.y - a.y * b.x;
-	}
+    static dot(a, b) {
+        return a.x * b.x + a.y * b.y;
+    }
 
-	crossScalar(s, left) {
-		let x = this.x;
-		if (left) {
-			this.x = -s * this.y;
-			this.y = s * x;
-		} else {
-			this.x = s * this.y;
-			this.y = -s * x;
-		}
-		return this;
-	}
+    dot(b) {
+        return this.x * b.x + this.y * b.y; 
+    }
 
-	static length(a) {
-		return Math.sqrt(a.x * a.x + a.y * a.y);
-	}
+    equals(b) {
+        return a.x === b.x && a.y === b.y;
+    }
 
-	length() {
-		return Math.sqrt(this.x * this.x + this.y * this.y);
-	}
+    static length(a) {
+        return Math.sqrt(a.x * a.x + a.y * a.y);
+    }
 
-	static lengthSquared(a) {
-		return a.x * a.x + a.y * a.y;
-	}
+    length() {
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
 
-	lengthSquared() {
-		return this.x * this.x + this.y * this.y;
-	}
+    static lengthSquared(a) {
+        return a.x * a.x + a.y * a.y;
+    }
 
-	static normalize(a) {
-		let len = vec2.length(a);
-		len = 1 / len;
-		return new vec2(a.x * len, a.y * len);
-	}
+    lengthSquared() {
+        return this.x * this.x + this.y * this.y;
+    }
 
-	normalize() {
-		let len = this.length();
-		len = 1 / len;
-		this.x *= len;
-		this.y *= len;
-		return this;
-	}
+    static negate(a) {
+        return new vec2(-a.x, -a.y);
+    }
 
+    negate() {
+        this.x *= -1;
+        this.y *= -1;
+        return this;
+    }
+
+    static normalize(a) {
+        let len = vec2.length(a);
+        len = 1 / len;
+        return new vec2(a.x * len, a.y * len);
+    }
+
+    normalize() {
+        let len = this.length();
+        len = 1 / len;
+        this.x *= len;
+        this.y *= len;
+        return this;
+    }
+
+    static scale (a, s) {
+        return new vec2(a.x * s, a.y * s);
+    }
+
+    scale(s) {
+        this.x *= s;
+        this.y *= s;
+        return this;
+    }
+
+    static sub(a, b) {
+        return new vec2(a.x - b.x, a.y - b.y);
+    }
+
+    sub(b) {
+        this.x -= b.x;
+        this.y -= b.y;
+        return this;
+    }
 }
