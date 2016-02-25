@@ -1,9 +1,10 @@
-import Referenceable from "./Referenceable";
+import EventEmitter from "events";
 
-export default class Actor extends Referenceable  {
+export default class Actor   {
     
     constructor(guid) {
-        super(guid);
+        super();
+        this.guid = guid || uuid.create().toString();
     	this.parent = null;
         this.components = {};
         this.children = {};
@@ -21,14 +22,6 @@ export default class Actor extends Referenceable  {
         component.setActor(null);
         delete this.components[type];
         this.emit("removeComponent", component);
-    }
-
-    destroyComponent(type) {
-        var component = this.components[type];
-        if(!component) return;
-        component.destroy();
-        delete this.components[type];
-        this.emit("destroyComponent", com)
     }
 
     getComponent(type) {
@@ -56,19 +49,18 @@ export default class Actor extends Referenceable  {
         this.emit("removeChild", child);
     }
 
-    update(deltaMs) {
+    update(now, deltaMs) {
 
         for(let key in this.components) {
-            this.components[key].update(deltaMs);
+            this.components[key].update(now, deltaMs);
         }
 
         for(let id in this.children) {
-            this.children[id].update(deltaMs);
+            this.children[id].update(now, deltaMs);
         }
     }
 
-    destroy(recursive) {
-        super.destroy();
+    destroy() {
 
         if(this.parent){
             this.parent.removeChild(this);
@@ -78,15 +70,9 @@ export default class Actor extends Referenceable  {
             this.components[key].destroy();
         }
 
-        if(recursive){
-             for(let id in this.children) {
-                this.children[id].destroy(recursive);
-            }
-        }
-
-       
-
         this.components = null;
-        this.children = null;
+
     }
 }
+
+//memory.delete(recursive)

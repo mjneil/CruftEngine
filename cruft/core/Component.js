@@ -1,8 +1,6 @@
-import Referenceable from "./Referenceable";
-
-export default class Component extends Referenceable {
+export default class Component  {
 	
-	constructor(type,guid) {
+	constructor(type, guid) {
 		super(guid);
 		this.type = type;
 		this.actor = null;
@@ -16,7 +14,7 @@ export default class Component extends Referenceable {
 		console.warn(`${this.type}:setFromJSON has not been implemented`);
 	}
 
-	update(deltaMs) {
+	update(now, deltaMs) {
 
 	}
 

@@ -21,6 +21,7 @@ let a = new vec2(1, 2);
 
 
 ## Static Methods
+
 ### zero()
 Constructs the zero vector.
 
@@ -28,12 +29,8 @@ Constructs the zero vector.
 let a = vec2.zero();
 ```
 
-
-
-##Methods
-
-### static add( a, b )
-Adds vector a and b, returning the result.
+### add( [a](/engine/math/vec2.md), [b](/engine/math/vec2.md) )
+Adds a and b, returning the result.
 
 ```javascript
 let a = new vec2(1, 2);
@@ -41,3 +38,8 @@ let b = new vec2(3, 4);
 
 let c = vec2.add(a, b);
 ```
+
+
+
+##Methods
+
