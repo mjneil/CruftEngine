@@ -29,7 +29,7 @@ Constructs the zero vector.
 let a = vec2.zero();
 ```
 
-### add( [a](/engine/math/vec2.md), [b](/engine/math/vec2.md) )
+### add( [a](vec2.md), [b](vec2.md) )
 Adds a and b, returning the result.
 
 ```javascript
