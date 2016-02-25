@@ -1,4 +1,4 @@
-import vec2 from 'engine/math/vec2.js';
+import vec2 from 'cruft/math/vec2.js';
 
 describe('vec2', () => {
     let vec;

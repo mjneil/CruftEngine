@@ -1,7 +1,9 @@
+import uuid from "../lib/uuid";
+
 export default class Component  {
 	
 	constructor(type, guid) {
-		super(guid);
+		this.guid = guid || uuid();
 		this.type = type;
 		this.actor = null;
 	}

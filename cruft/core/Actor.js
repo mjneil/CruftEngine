@@ -1,10 +1,11 @@
-import EventEmitter from "events";
+import Emitter from "./Emitter";
+import uuid from "./../util/uuid";
 
-export default class Actor   {
+export default class Actor extends Emitter {
     
     constructor(guid) {
         super();
-        this.guid = guid || uuid.create().toString();
+        this.guid = guid || uuid();
     	this.parent = null;
         this.components = {};
         this.children = {};

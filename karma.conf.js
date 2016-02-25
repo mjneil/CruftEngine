@@ -15,7 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      { pattern: 'engine/**/*.js', included: false },
+      { pattern: 'cruft/**/*.js', included: false },
       { pattern: 'tests/**/*.test.js', included: false },
       'tests/main-test.js'
     ],
@@ -29,7 +29,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'engine/**/*.js': ['traceur'],
+        'cruft/**/*.js': ['traceur'],
         'tests/**/*.test.js': ['traceur']
     },
 

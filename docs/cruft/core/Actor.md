@@ -1,11 +1,11 @@
-#Actor extends [Referenceable](Referenceable.js)
+#Actor
 [engine/core/Actor.js](https://github.com/mjneil/CruftEngine/blob/master/engine/core/Actor.js)		
 This class defines an Actor. 
 
 ## Constructors
 
 ### Actor( [ [guid](/primitives.md#number) ] )
-[guid](/primitives.md#number) - guid of super class [Referenceable](Referenceable.js)
+[guid](/primitives.md#number) - guid of actor. 
 
 ```javascript
 let actor = new Actor(); 
