@@ -11,83 +11,148 @@
             "title": "Welcome to CruftEngine"
         }, 
         {
-            "location": "/engine/core/Actor/", 
-            "text": "", 
+            "location": "/cruft/core/Actor/", 
+            "text": "Actor\n\n\nengine/core/Actor.js\n    \n\nThis class defines an Actor. \n\n\nConstructors\n\n\nActor( [ \nguid\n ] )\n\n\nguid\n - guid of actor. \n\n\nlet actor = new Actor(); \n//or\nlet actor2 = new Actor(12);\n\n\n\n\nProperties\n\n\n.\nparent\n - Strong reference to parent actor.       \n\n.\ncomponents\n - Object containing strong references to the actor's components.     \n\n.\nchildren\n - Object containing strong references to the actor's children. \n\n\nMethods\n\n\naddComponent(  )\n\n\nDESC\n\n\n//example\n\n\n\n\nremoveComponent(  )\n\n\nDESC\n\n\n//example\n\n\n\n\ngetComponent(  )\n\n\nDESC\n\n\n//example\n\n\n\n\naddChild(  )\n\n\nDESC\n\n\n//example\n\n\n\n\nremoveChild(  )\n\n\nDESC\n\n\n//example\n\n\n\n\nsetParent(  )\n\n\nDESC\n\n\n//example\n\n\n\n\nupdate(  )\n\n\nDESC\n\n\n//example\n\n\n\n\ndestroy(  )\n\n\nDESC\n\n\n//example", 
             "title": "Actor"
         }, 
         {
-            "location": "/engine/core/Component/", 
-            "text": "", 
-            "title": "Component"
+            "location": "/cruft/core/Actor/#actor", 
+            "text": "engine/core/Actor.js      \nThis class defines an Actor.", 
+            "title": "Actor"
         }, 
         {
-            "location": "/engine/core/ActorFactory/", 
-            "text": "", 
-            "title": "ActorFactory"
-        }, 
-        {
-            "location": "/engine/core/Scheduler/", 
-            "text": "", 
-            "title": "Scheduler"
-        }, 
-        {
-            "location": "/engine/math/vec2/", 
-            "text": "engine/math/vec2.js\n      \n\nThis class defines a 2d vector.     \n\n\nConstructors\n\n\nvec2( \nx\n, \ny\n )\n\n\nx\n - Initial x value of the vector.   \n\n\ny\n - Initial y value of the vector. \n\n\nlet a = new vec2(1, 2);\n\n\n\n\nProperties\n\n\n.\nx\n - Value of the x component.   \n\n.\ny\n - Value of the y component.\n\n\nStatic Methods\n\n\nzero()\n\n\nConstructs the zero vector.\n\n\nlet a = vec2.zero();\n\n\n\n\nMethods\n\n\nstatic add( a, b )\n\n\nAdds vector a and b, returning the result.\n\n\nlet a = new vec2(1, 2);\nlet b = new vec2(3, 4);\n\nlet c = vec2.add(a, b);", 
-            "title": "vec2"
-        }, 
-        {
-            "location": "/engine/math/vec2/#constructors", 
+            "location": "/cruft/core/Actor/#constructors", 
             "text": "", 
             "title": "Constructors"
         }, 
         {
-            "location": "/engine/math/vec2/#vec2-x-y", 
-            "text": "x  - Initial x value of the vector.     y  - Initial y value of the vector.   let a = new vec2(1, 2);", 
-            "title": "vec2( x, y )"
+            "location": "/cruft/core/Actor/#actor-guid", 
+            "text": "guid  - guid of actor.   let actor = new Actor(); \n//or\nlet actor2 = new Actor(12);", 
+            "title": "Actor( [ guid ] )"
         }, 
         {
-            "location": "/engine/math/vec2/#properties", 
-            "text": ". x  - Value of the x component.    \n. y  - Value of the y component.", 
+            "location": "/cruft/core/Actor/#properties", 
+            "text": ". parent  - Strong reference to parent actor.        \n. components  - Object containing strong references to the actor's components.      \n. children  - Object containing strong references to the actor's children.", 
             "title": "Properties"
         }, 
         {
-            "location": "/engine/math/vec2/#static-methods", 
-            "text": "", 
-            "title": "Static Methods"
-        }, 
-        {
-            "location": "/engine/math/vec2/#zero", 
-            "text": "Constructs the zero vector.  let a = vec2.zero();", 
-            "title": "zero()"
-        }, 
-        {
-            "location": "/engine/math/vec2/#methods", 
+            "location": "/cruft/core/Actor/#methods", 
             "text": "", 
             "title": "Methods"
         }, 
         {
-            "location": "/engine/math/vec2/#static-add-a-b", 
-            "text": "Adds vector a and b, returning the result.  let a = new vec2(1, 2);\nlet b = new vec2(3, 4);\n\nlet c = vec2.add(a, b);", 
-            "title": "static add( a, b )"
+            "location": "/cruft/core/Actor/#addcomponent", 
+            "text": "DESC  //example", 
+            "title": "addComponent(  )"
         }, 
         {
-            "location": "/engine/math/vec3/", 
+            "location": "/cruft/core/Actor/#removecomponent", 
+            "text": "DESC  //example", 
+            "title": "removeComponent(  )"
+        }, 
+        {
+            "location": "/cruft/core/Actor/#getcomponent", 
+            "text": "DESC  //example", 
+            "title": "getComponent(  )"
+        }, 
+        {
+            "location": "/cruft/core/Actor/#addchild", 
+            "text": "DESC  //example", 
+            "title": "addChild(  )"
+        }, 
+        {
+            "location": "/cruft/core/Actor/#removechild", 
+            "text": "DESC  //example", 
+            "title": "removeChild(  )"
+        }, 
+        {
+            "location": "/cruft/core/Actor/#setparent", 
+            "text": "DESC  //example", 
+            "title": "setParent(  )"
+        }, 
+        {
+            "location": "/cruft/core/Actor/#update", 
+            "text": "DESC  //example", 
+            "title": "update(  )"
+        }, 
+        {
+            "location": "/cruft/core/Actor/#destroy", 
+            "text": "DESC  //example", 
+            "title": "destroy(  )"
+        }, 
+        {
+            "location": "/cruft/core/Component/", 
+            "text": "", 
+            "title": "Component"
+        }, 
+        {
+            "location": "/cruft/core/ActorFactory/", 
+            "text": "", 
+            "title": "ActorFactory"
+        }, 
+        {
+            "location": "/cruft/core/Scheduler/", 
+            "text": "", 
+            "title": "Scheduler"
+        }, 
+        {
+            "location": "/cruft/math/vec2/", 
+            "text": "engine/math/vec2.js\n      \n\nThis class defines a 2d vector.     \n\n\nConstructors\n\n\nvec2( \nx\n, \ny\n )\n\n\nx\n - Initial x value of the vector.   \n\n\ny\n - Initial y value of the vector. \n\n\nlet a = new vec2(1, 2);\n\n\n\n\nProperties\n\n\n.\nx\n - Value of the x component.   \n\n.\ny\n - Value of the y component.\n\n\nStatic Methods\n\n\nzero()\n\n\nConstructs the zero vector.\n\n\nlet a = vec2.zero();\n\n\n\n\nadd( \na\n, \nb\n )\n\n\nAdds a and b, returning the result.\n\n\nlet a = new vec2(1, 2);\nlet b = new vec2(3, 4);\n\nlet c = vec2.add(a, b);\n\n\n\n\nMethods", 
+            "title": "vec2"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#constructors", 
+            "text": "", 
+            "title": "Constructors"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#vec2-x-y", 
+            "text": "x  - Initial x value of the vector.     y  - Initial y value of the vector.   let a = new vec2(1, 2);", 
+            "title": "vec2( x, y )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#properties", 
+            "text": ". x  - Value of the x component.    \n. y  - Value of the y component.", 
+            "title": "Properties"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#static-methods", 
+            "text": "", 
+            "title": "Static Methods"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#zero", 
+            "text": "Constructs the zero vector.  let a = vec2.zero();", 
+            "title": "zero()"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#add-a-b", 
+            "text": "Adds a and b, returning the result.  let a = new vec2(1, 2);\nlet b = new vec2(3, 4);\n\nlet c = vec2.add(a, b);", 
+            "title": "add( a, b )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#methods", 
+            "text": "", 
+            "title": "Methods"
+        }, 
+        {
+            "location": "/cruft/math/vec3/", 
             "text": "", 
             "title": "vec3"
         }, 
         {
-            "location": "/engine/math/mat3/", 
+            "location": "/cruft/math/mat3/", 
             "text": "", 
             "title": "mat3"
         }, 
         {
-            "location": "/engine/math/mat4/", 
+            "location": "/cruft/math/mat4/", 
             "text": "", 
             "title": "mat4"
         }, 
         {
             "location": "/primitives/", 
-            "text": "Built in data types in Javascript.\n\n\nNumber\n\n\nlet a = 1;\nlet b = 1.23456;\nlet c = a + b; //c = 2.23456\n\n\n\n\nBoolean\n\n\nlet a = 1;\nlet b = 1.23456;\nlet c = a + b; //c = 2.23456\n\n\n\n\nString\n\n\nlet a = \nCruft\n;\nlet b = \nEngine\n;\nlet c = a + b; // c = \nCruftEngine\n\n\n\n\n\nObject\n\n\nlet a = { \n    Cruft : true, \n    Engine :false \n}", 
+            "text": "Built in data types in Javascript.\n\n\nNumber\n\n\nlet a = 1;\nlet b = 1.23456;\nlet c = a + b; //c = 2.23456\n\n\n\n\nBoolean\n\n\nlet a = true;\nlet b = false;\nlet c = !b \n a; //c = true\n\n\n\n\nString\n\n\nlet a = \nCruft\n;\nlet b = \nEngine\n;\nlet c = a + b; // c = \nCruftEngine\n\n\n\n\n\nObject\n\n\nlet a = { \n    Cruft : true, \n    Engine :false \n}", 
             "title": "Primitives"
         }, 
         {
@@ -97,7 +162,7 @@
         }, 
         {
             "location": "/primitives/#boolean", 
-            "text": "let a = 1;\nlet b = 1.23456;\nlet c = a + b; //c = 2.23456", 
+            "text": "let a = true;\nlet b = false;\nlet c = !b   a; //c = true", 
             "title": "Boolean"
         }, 
         {

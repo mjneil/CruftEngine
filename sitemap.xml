@@ -4,7 +4,7 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2016-02-23</lastmod>
+     <lastmod>2016-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,26 +12,26 @@
     
         
     <url>
-     <loc>None/engine/core/Actor/</loc>
-     <lastmod>2016-02-23</lastmod>
+     <loc>None/cruft/core/Actor/</loc>
+     <lastmod>2016-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/engine/core/Component/</loc>
-     <lastmod>2016-02-23</lastmod>
+     <loc>None/cruft/core/Component/</loc>
+     <lastmod>2016-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/engine/core/ActorFactory/</loc>
-     <lastmod>2016-02-23</lastmod>
+     <loc>None/cruft/core/ActorFactory/</loc>
+     <lastmod>2016-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/engine/core/Scheduler/</loc>
-     <lastmod>2016-02-23</lastmod>
+     <loc>None/cruft/core/Scheduler/</loc>
+     <lastmod>2016-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -40,26 +40,26 @@
     
         
     <url>
-     <loc>None/engine/math/vec2/</loc>
-     <lastmod>2016-02-23</lastmod>
+     <loc>None/cruft/math/vec2/</loc>
+     <lastmod>2016-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/engine/math/vec3/</loc>
-     <lastmod>2016-02-23</lastmod>
+     <loc>None/cruft/math/vec3/</loc>
+     <lastmod>2016-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/engine/math/mat3/</loc>
-     <lastmod>2016-02-23</lastmod>
+     <loc>None/cruft/math/mat3/</loc>
+     <lastmod>2016-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>None/engine/math/mat4/</loc>
-     <lastmod>2016-02-23</lastmod>
+     <loc>None/cruft/math/mat4/</loc>
+     <lastmod>2016-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -68,7 +68,7 @@
     
     <url>
      <loc>None/primitives/</loc>
-     <lastmod>2016-02-23</lastmod>
+     <lastmod>2016-02-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>vec2 - CruftEngine</title>
+        <title>Actor - CruftEngine</title>
       
       
       
@@ -87,13 +87,13 @@
           <span class="path">
             
               
-                Math <i class="icon icon-link"></i>
+                Core <i class="icon icon-link"></i>
               
             
           </span>
         
         
-          vec2
+          Actor
         
       </div>
     </div>
@@ -173,55 +173,13 @@
       
         
   <li>
-    <a class="" title="Actor" href="../../core/Actor/">
+    <a class="current" title="Actor" href="./">
       Actor
     </a>
     
-  </li>
-
       
         
-  <li>
-    <a class="" title="Component" href="../../core/Component/">
-      Component
-    </a>
-    
-  </li>
-
-      
         
-  <li>
-    <a class="" title="ActorFactory" href="../../core/ActorFactory/">
-      ActorFactory
-    </a>
-    
-  </li>
-
-      
-        
-  <li>
-    <a class="" title="Scheduler" href="../../core/Scheduler/">
-      Scheduler
-    </a>
-    
-  </li>
-
-      
-    </ul>
-  </li>
-
-          
-            
-  <li>
-    <span class="section">Math</span>
-    <ul>
-      
-        
-  <li>
-    <a class="current" title="vec2" href="./">
-      vec2
-    </a>
-    
       
       
         <ul>
@@ -239,12 +197,6 @@
             </li>
           
             <li class="anchor">
-              <a title="Static Methods" href="#static-methods">
-                Static Methods
-              </a>
-            </li>
-          
-            <li class="anchor">
               <a title="Methods" href="#methods">
                 Methods
               </a>
@@ -258,7 +210,52 @@
       
         
   <li>
-    <a class="" title="vec3" href="../vec3/">
+    <a class="" title="Component" href="../Component/">
+      Component
+    </a>
+    
+  </li>
+
+      
+        
+  <li>
+    <a class="" title="ActorFactory" href="../ActorFactory/">
+      ActorFactory
+    </a>
+    
+  </li>
+
+      
+        
+  <li>
+    <a class="" title="Scheduler" href="../Scheduler/">
+      Scheduler
+    </a>
+    
+  </li>
+
+      
+    </ul>
+  </li>
+
+          
+            
+  <li>
+    <span class="section">Math</span>
+    <ul>
+      
+        
+  <li>
+    <a class="" title="vec2" href="../../math/vec2/">
+      vec2
+    </a>
+    
+  </li>
+
+      
+        
+  <li>
+    <a class="" title="vec3" href="../../math/vec3/">
       vec3
     </a>
     
@@ -267,7 +264,7 @@
       
         
   <li>
-    <a class="" title="mat3" href="../mat3/">
+    <a class="" title="mat3" href="../../math/mat3/">
       mat3
     </a>
     
@@ -276,7 +273,7 @@
       
         
   <li>
-    <a class="" title="mat4" href="../mat4/">
+    <a class="" title="mat4" href="../../math/mat4/">
       mat4
     </a>
     
@@ -306,35 +303,60 @@
       <article class="article">
         <div class="wrapper">
           
-            
-              <h1>vec2</h1>
-            
-          
-          <p><a href="https://github.com/mjneil/CruftEngine/blob/master/engine/math/vec2.js">engine/math/vec2.js</a>      <br />
-This class defines a 2d vector.     </p>
+          <h1 id="actor">Actor<a class="headerlink" href="#actor" title="Permanent link">&para;</a></h1>
+<p><a href="https://github.com/mjneil/CruftEngine/blob/master/engine/core/Actor.js">engine/core/Actor.js</a>    <br />
+This class defines an Actor. </p>
 <h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">&para;</a></h2>
-<h3 id="vec2-x-y">vec2( <a href="../../../primitives/#Number">x</a>, <a href="../../../primitives/#Number">y</a> )<a class="headerlink" href="#vec2-x-y" title="Permanent link">&para;</a></h3>
-<p><a href="../../../primitives/#Number">x</a> - Initial x value of the vector.   <br />
-<a href="../../../primitives/#Number">y</a> - Initial y value of the vector. </p>
-<pre><code class="javascript">let a = new vec2(1, 2);
+<h3 id="actor-guid">Actor( [ <a href="../../../primitives/#number">guid</a> ] )<a class="headerlink" href="#actor-guid" title="Permanent link">&para;</a></h3>
+<p><a href="../../../primitives/#number">guid</a> - guid of actor. </p>
+<pre><code class="javascript">let actor = new Actor(); 
+//or
+let actor2 = new Actor(12);
 </code></pre>
 
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
-<p>.<a href="../../../primitives/#Number">x</a> - Value of the x component.   <br />
-.<a href="../../../primitives/#Number">y</a> - Value of the y component.</p>
-<h2 id="static-methods">Static Methods<a class="headerlink" href="#static-methods" title="Permanent link">&para;</a></h2>
-<h3 id="zero">zero()<a class="headerlink" href="#zero" title="Permanent link">&para;</a></h3>
-<p>Constructs the zero vector.</p>
-<pre><code class="javascript">let a = vec2.zero();
+<p>.<a href="./">parent</a> - Strong reference to parent actor.       <br />
+.<a href="../../../primitives/#object">components</a> - Object containing strong references to the actor's components.     <br />
+.<a href="../../../primitives/#object">children</a> - Object containing strong references to the actor's children. </p>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="addcomponent">addComponent(  )<a class="headerlink" href="#addcomponent" title="Permanent link">&para;</a></h3>
+<p>DESC</p>
+<pre><code class="javascript">//example
 </code></pre>
 
-<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
-<h3 id="static-add-a-b">static add( a, b )<a class="headerlink" href="#static-add-a-b" title="Permanent link">&para;</a></h3>
-<p>Adds vector a and b, returning the result.</p>
-<pre><code class="javascript">let a = new vec2(1, 2);
-let b = new vec2(3, 4);
+<h3 id="removecomponent">removeComponent(  )<a class="headerlink" href="#removecomponent" title="Permanent link">&para;</a></h3>
+<p>DESC</p>
+<pre><code class="javascript">//example
+</code></pre>
 
-let c = vec2.add(a, b);
+<h3 id="getcomponent">getComponent(  )<a class="headerlink" href="#getcomponent" title="Permanent link">&para;</a></h3>
+<p>DESC</p>
+<pre><code class="javascript">//example
+</code></pre>
+
+<h3 id="addchild">addChild(  )<a class="headerlink" href="#addchild" title="Permanent link">&para;</a></h3>
+<p>DESC</p>
+<pre><code class="javascript">//example
+</code></pre>
+
+<h3 id="removechild">removeChild(  )<a class="headerlink" href="#removechild" title="Permanent link">&para;</a></h3>
+<p>DESC</p>
+<pre><code class="javascript">//example
+</code></pre>
+
+<h3 id="setparent">setParent(  )<a class="headerlink" href="#setparent" title="Permanent link">&para;</a></h3>
+<p>DESC</p>
+<pre><code class="javascript">//example
+</code></pre>
+
+<h3 id="update">update(  )<a class="headerlink" href="#update" title="Permanent link">&para;</a></h3>
+<p>DESC</p>
+<pre><code class="javascript">//example
+</code></pre>
+
+<h3 id="destroy">destroy(  )<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
+<p>DESC</p>
+<pre><code class="javascript">//example
 </code></pre>
           <aside class="copyright" role="note">
             
@@ -352,7 +374,7 @@ let c = vec2.add(a, b);
   <nav class="pagination" aria-label="Footer">
     <div class="previous">
       
-        <a href="../../core/Scheduler/" title="Scheduler">
+        <a href="../../.." title="Home">
           <span class="direction">Previous</span>
           <div class="page">
             <div class="button button-previous" role="button" aria-label="Previous">
@@ -360,7 +382,7 @@ let c = vec2.add(a, b);
             </div>
             <div class="stretch">
               <div class="title">
-                Scheduler
+                Home
               </div>
             </div>
           </div>
@@ -369,12 +391,12 @@ let c = vec2.add(a, b);
     </div>
     <div class="next">
       
-        <a href="../vec3/" title="vec3">
+        <a href="../Component/" title="Component">
           <span class="direction">Next</span>
           <div class="page">
             <div class="stretch">
               <div class="title">
-                vec3
+                Component
               </div>
             </div>
             <div class="button button-next" role="button" aria-label="Next">

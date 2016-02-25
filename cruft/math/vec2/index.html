@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>Actor - CruftEngine</title>
+        <title>vec2 - CruftEngine</title>
       
       
       
@@ -87,13 +87,13 @@
           <span class="path">
             
               
-                Core <i class="icon icon-link"></i>
+                Math <i class="icon icon-link"></i>
               
             
           </span>
         
         
-          Actor
+          vec2
         
       </div>
     </div>
@@ -173,23 +173,16 @@
       
         
   <li>
-    <a class="current" title="Actor" href="./">
+    <a class="" title="Actor" href="../../core/Actor/">
       Actor
     </a>
-    
-      
-      
-        <ul>
-          
-        </ul>
-      
     
   </li>
 
       
         
   <li>
-    <a class="" title="Component" href="../Component/">
+    <a class="" title="Component" href="../../core/Component/">
       Component
     </a>
     
@@ -198,7 +191,7 @@
       
         
   <li>
-    <a class="" title="ActorFactory" href="../ActorFactory/">
+    <a class="" title="ActorFactory" href="../../core/ActorFactory/">
       ActorFactory
     </a>
     
@@ -207,7 +200,7 @@
       
         
   <li>
-    <a class="" title="Scheduler" href="../Scheduler/">
+    <a class="" title="Scheduler" href="../../core/Scheduler/">
       Scheduler
     </a>
     
@@ -225,16 +218,47 @@
       
         
   <li>
-    <a class="" title="vec2" href="../../math/vec2/">
+    <a class="current" title="vec2" href="./">
       vec2
     </a>
+    
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Constructors" href="#constructors">
+                Constructors
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Properties" href="#properties">
+                Properties
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Static Methods" href="#static-methods">
+                Static Methods
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Methods" href="#methods">
+                Methods
+              </a>
+            </li>
+          
+        </ul>
+      
     
   </li>
 
       
         
   <li>
-    <a class="" title="vec3" href="../../math/vec3/">
+    <a class="" title="vec3" href="../vec3/">
       vec3
     </a>
     
@@ -243,7 +267,7 @@
       
         
   <li>
-    <a class="" title="mat3" href="../../math/mat3/">
+    <a class="" title="mat3" href="../mat3/">
       mat3
     </a>
     
@@ -252,7 +276,7 @@
       
         
   <li>
-    <a class="" title="mat4" href="../../math/mat4/">
+    <a class="" title="mat4" href="../mat4/">
       mat4
     </a>
     
@@ -283,10 +307,36 @@
         <div class="wrapper">
           
             
-              <h1>Actor</h1>
+              <h1>vec2</h1>
             
           
-          
+          <p><a href="https://github.com/mjneil/CruftEngine/blob/master/engine/math/vec2.js">engine/math/vec2.js</a>      <br />
+This class defines a 2d vector.     </p>
+<h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">&para;</a></h2>
+<h3 id="vec2-x-y">vec2( <a href="../../../primitives/#Number">x</a>, <a href="../../../primitives/#Number">y</a> )<a class="headerlink" href="#vec2-x-y" title="Permanent link">&para;</a></h3>
+<p><a href="../../../primitives/#Number">x</a> - Initial x value of the vector.   <br />
+<a href="../../../primitives/#Number">y</a> - Initial y value of the vector. </p>
+<pre><code class="javascript">let a = new vec2(1, 2);
+</code></pre>
+
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
+<p>.<a href="../../../primitives/#Number">x</a> - Value of the x component.   <br />
+.<a href="../../../primitives/#Number">y</a> - Value of the y component.</p>
+<h2 id="static-methods">Static Methods<a class="headerlink" href="#static-methods" title="Permanent link">&para;</a></h2>
+<h3 id="zero">zero()<a class="headerlink" href="#zero" title="Permanent link">&para;</a></h3>
+<p>Constructs the zero vector.</p>
+<pre><code class="javascript">let a = vec2.zero();
+</code></pre>
+
+<h3 id="add-a-b">add( <a href="./">a</a>, <a href="./">b</a> )<a class="headerlink" href="#add-a-b" title="Permanent link">&para;</a></h3>
+<p>Adds a and b, returning the result.</p>
+<pre><code class="javascript">let a = new vec2(1, 2);
+let b = new vec2(3, 4);
+
+let c = vec2.add(a, b);
+</code></pre>
+
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -303,7 +353,7 @@
   <nav class="pagination" aria-label="Footer">
     <div class="previous">
       
-        <a href="../../.." title="Home">
+        <a href="../../core/Scheduler/" title="Scheduler">
           <span class="direction">Previous</span>
           <div class="page">
             <div class="button button-previous" role="button" aria-label="Previous">
@@ -311,7 +361,7 @@
             </div>
             <div class="stretch">
               <div class="title">
-                Home
+                Scheduler
               </div>
             </div>
           </div>
@@ -320,12 +370,12 @@
     </div>
     <div class="next">
       
-        <a href="../Component/" title="Component">
+        <a href="../vec3/" title="vec3">
           <span class="direction">Next</span>
           <div class="page">
             <div class="stretch">
               <div class="title">
-                Component
+                vec3
               </div>
             </div>
             <div class="button button-next" role="button" aria-label="Next">
