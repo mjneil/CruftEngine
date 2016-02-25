@@ -1,4 +1,4 @@
-[engine/math/vec2.js](https://github.com/mjneil/CruftEngine/blob/master/cruft/math/vec2.js)		
+[cruft/math/vec2.js](https://github.com/mjneil/CruftEngine/blob/master/cruft/math/vec2.js)		
 This class defines a 2d vector.		
 
 
