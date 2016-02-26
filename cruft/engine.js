@@ -1,6 +1,6 @@
-import EventEmitter from "events";
-import Script from "engine/processes/Script";
-import Actor from "engine/core/Actor";
+import Emitter from "./core/Emitter";
+import Script from "./processes/Script";
+import Actor from "./core/Actor";
 import Cache from "./core/Cache";
 import Factory from "./core/Factory";
 import Network from "./core/Network";
@@ -8,8 +8,7 @@ import Scheduler from "./core/Scheduler";
 import MemoryManager from "./core/MemoryManager"
 
 
-export class Engine extends EventEmitter {
-
+export class Engine extends Emitter {
 	constructor() {
 		super()
 		this.scene = null;
