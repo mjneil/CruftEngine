@@ -185,6 +185,12 @@
         <ul>
           
             <li class="anchor">
+              <a title="Importing" href="#importing">
+                Importing
+              </a>
+            </li>
+          
+            <li class="anchor">
               <a title="Constructors" href="#constructors">
                 Constructors
               </a>
@@ -303,15 +309,19 @@
       <article class="article">
         <div class="wrapper">
           
-          <h1 id="actor">Actor<a class="headerlink" href="#actor" title="Permanent link">&para;</a></h1>
-<p><a href="https://github.com/mjneil/CruftEngine/blob/master/engine/core/Actor.js">engine/core/Actor.js</a>    <br />
+          <h1 id="actor-extends-emitter">Actor extends <a href="Emitter.md">Emitter</a><a class="headerlink" href="#actor-extends-emitter" title="Permanent link">&para;</a></h1>
+<p><a href="https://github.com/mjneil/CruftEngine/blob/master/cruft/core/Actor.js">cruft/core/Actor.js</a>      <br />
 This class defines an Actor. </p>
+<h2 id="importing">Importing<a class="headerlink" href="#importing" title="Permanent link">&para;</a></h2>
+<pre><code class="javascript">import Actor from &quot;cruft/core/Actor&quot;
+</code></pre>
+
 <h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">&para;</a></h2>
 <h3 id="actor-guid">Actor( [ <a href="../../../primitives/#number">guid</a> ] )<a class="headerlink" href="#actor-guid" title="Permanent link">&para;</a></h3>
 <p><a href="../../../primitives/#number">guid</a> - guid of actor. </p>
 <pre><code class="javascript">let actor = new Actor(); 
 //or
-let actor2 = new Actor(12);
+let actor2 = new Actor(12); //actor2.guid === 12;
 </code></pre>
 
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
@@ -319,39 +329,40 @@ let actor2 = new Actor(12);
 .<a href="../../../primitives/#object">components</a> - Object containing strong references to the actor's components.     <br />
 .<a href="../../../primitives/#object">children</a> - Object containing strong references to the actor's children. </p>
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
-<h3 id="addcomponent">addComponent(  )<a class="headerlink" href="#addcomponent" title="Permanent link">&para;</a></h3>
-<p>DESC</p>
-<pre><code class="javascript">//example
+<h3 id="addcomponent-component">addComponent( <a href="../Component/">component</a> )<a class="headerlink" href="#addcomponent-component" title="Permanent link">&para;</a></h3>
+<p>Add a component to an actor. </p>
+<pre><code class="javascript">actor.addComponent(component);
 </code></pre>
 
-<h3 id="removecomponent">removeComponent(  )<a class="headerlink" href="#removecomponent" title="Permanent link">&para;</a></h3>
-<p>DESC</p>
-<pre><code class="javascript">//example
+<h3 id="getcomponent-type">getComponent( <a href="../../../primitives/#string">type</a> )<a class="headerlink" href="#getcomponent-type" title="Permanent link">&para;</a></h3>
+<p>Get a component of the specified type. </p>
+<pre><code class="javascript">var transform = actor.getComponent(&quot;transform&quot;);
 </code></pre>
 
-<h3 id="getcomponent">getComponent(  )<a class="headerlink" href="#getcomponent" title="Permanent link">&para;</a></h3>
-<p>DESC</p>
-<pre><code class="javascript">//example
+<h3 id="removecomponent-type">removeComponent( <a href="../../../primitives/#string">type</a> )<a class="headerlink" href="#removecomponent-type" title="Permanent link">&para;</a></h3>
+<p>Remove a component of the specified type. </p>
+<pre><code class="javascript">actor.removeComponent(&quot;transform&quot;); 
 </code></pre>
 
-<h3 id="addchild">addChild(  )<a class="headerlink" href="#addchild" title="Permanent link">&para;</a></h3>
-<p>DESC</p>
-<pre><code class="javascript">//example
+<h3 id="addchild-child">addChild( <a href="./">child</a> )<a class="headerlink" href="#addchild-child" title="Permanent link">&para;</a></h3>
+<p>Add a child to an actor. </p>
+<pre><code class="javascript">actor1.addChild(actor2)
 </code></pre>
 
-<h3 id="removechild">removeChild(  )<a class="headerlink" href="#removechild" title="Permanent link">&para;</a></h3>
-<p>DESC</p>
-<pre><code class="javascript">//example
+<h3 id="removechild-child">removeChild( <a href="./">child</a> )<a class="headerlink" href="#removechild-child" title="Permanent link">&para;</a></h3>
+<p>Remove a child from an actor. </p>
+<pre><code class="javascript">actor1.removeChild(actor2)
 </code></pre>
 
-<h3 id="setparent">setParent(  )<a class="headerlink" href="#setparent" title="Permanent link">&para;</a></h3>
-<p>DESC</p>
-<pre><code class="javascript">//example
+<h3 id="setparent-parent">setParent( <a href="./">parent</a> )<a class="headerlink" href="#setparent-parent" title="Permanent link">&para;</a></h3>
+<p>Method used to set actor's parent reference.      <br />
+<strong>AddChild already takes care of setting a child's parent. </strong></p>
+<pre><code class="javascript">actor1.setParent(actor2).
 </code></pre>
 
-<h3 id="update">update(  )<a class="headerlink" href="#update" title="Permanent link">&para;</a></h3>
-<p>DESC</p>
-<pre><code class="javascript">//example
+<h3 id="update-now-deltams">update( <a href="../../../primitives/#number">now</a> ,  <a href="../../../primitives/#number">deltaMs</a> )<a class="headerlink" href="#update-now-deltams" title="Permanent link">&para;</a></h3>
+<p>Recursive function to update all children Actor/Component 's of an actor.       </p>
+<pre><code class="javascript">actor.update(now, deltaMs)
 </code></pre>
 
 <h3 id="destroy">destroy(  )<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>

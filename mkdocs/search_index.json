@@ -12,13 +12,18 @@
         }, 
         {
             "location": "/cruft/core/Actor/", 
-            "text": "Actor\n\n\nengine/core/Actor.js\n    \n\nThis class defines an Actor. \n\n\nConstructors\n\n\nActor( [ \nguid\n ] )\n\n\nguid\n - guid of actor. \n\n\nlet actor = new Actor(); \n//or\nlet actor2 = new Actor(12);\n\n\n\n\nProperties\n\n\n.\nparent\n - Strong reference to parent actor.       \n\n.\ncomponents\n - Object containing strong references to the actor's components.     \n\n.\nchildren\n - Object containing strong references to the actor's children. \n\n\nMethods\n\n\naddComponent(  )\n\n\nDESC\n\n\n//example\n\n\n\n\nremoveComponent(  )\n\n\nDESC\n\n\n//example\n\n\n\n\ngetComponent(  )\n\n\nDESC\n\n\n//example\n\n\n\n\naddChild(  )\n\n\nDESC\n\n\n//example\n\n\n\n\nremoveChild(  )\n\n\nDESC\n\n\n//example\n\n\n\n\nsetParent(  )\n\n\nDESC\n\n\n//example\n\n\n\n\nupdate(  )\n\n\nDESC\n\n\n//example\n\n\n\n\ndestroy(  )\n\n\nDESC\n\n\n//example", 
+            "text": "Actor extends \nEmitter\n\n\ncruft/core/Actor.js\n      \n\nThis class defines an Actor. \n\n\nImporting\n\n\nimport Actor from \ncruft/core/Actor\n\n\n\n\n\nConstructors\n\n\nActor( [ \nguid\n ] )\n\n\nguid\n - guid of actor. \n\n\nlet actor = new Actor(); \n//or\nlet actor2 = new Actor(12); //actor2.guid === 12;\n\n\n\n\nProperties\n\n\n.\nparent\n - Strong reference to parent actor.       \n\n.\ncomponents\n - Object containing strong references to the actor's components.     \n\n.\nchildren\n - Object containing strong references to the actor's children. \n\n\nMethods\n\n\naddComponent( \ncomponent\n )\n\n\nAdd a component to an actor. \n\n\nactor.addComponent(component);\n\n\n\n\ngetComponent( \ntype\n )\n\n\nGet a component of the specified type. \n\n\nvar transform = actor.getComponent(\ntransform\n);\n\n\n\n\nremoveComponent( \ntype\n )\n\n\nRemove a component of the specified type. \n\n\nactor.removeComponent(\ntransform\n); \n\n\n\n\naddChild( \nchild\n )\n\n\nAdd a child to an actor. \n\n\nactor1.addChild(actor2)\n\n\n\n\nremoveChild( \nchild\n )\n\n\nRemove a child from an actor. \n\n\nactor1.removeChild(actor2)\n\n\n\n\nsetParent( \nparent\n )\n\n\nMethod used to set actor's parent reference.      \n\n\nAddChild already takes care of setting a child's parent. \n\n\nactor1.setParent(actor2).\n\n\n\n\nupdate( \nnow\n ,  \ndeltaMs\n )\n\n\nRecursive function to update all children Actor/Component 's of an actor.       \n\n\nactor.update(now, deltaMs)\n\n\n\n\ndestroy(  )\n\n\nDESC\n\n\n//example", 
             "title": "Actor"
         }, 
         {
-            "location": "/cruft/core/Actor/#actor", 
-            "text": "engine/core/Actor.js      \nThis class defines an Actor.", 
-            "title": "Actor"
+            "location": "/cruft/core/Actor/#actor-extends-emitter", 
+            "text": "cruft/core/Actor.js        \nThis class defines an Actor.", 
+            "title": "Actor extends Emitter"
+        }, 
+        {
+            "location": "/cruft/core/Actor/#importing", 
+            "text": "import Actor from  cruft/core/Actor", 
+            "title": "Importing"
         }, 
         {
             "location": "/cruft/core/Actor/#constructors", 
@@ -27,7 +32,7 @@
         }, 
         {
             "location": "/cruft/core/Actor/#actor-guid", 
-            "text": "guid  - guid of actor.   let actor = new Actor(); \n//or\nlet actor2 = new Actor(12);", 
+            "text": "guid  - guid of actor.   let actor = new Actor(); \n//or\nlet actor2 = new Actor(12); //actor2.guid === 12;", 
             "title": "Actor( [ guid ] )"
         }, 
         {
@@ -41,39 +46,39 @@
             "title": "Methods"
         }, 
         {
-            "location": "/cruft/core/Actor/#addcomponent", 
-            "text": "DESC  //example", 
-            "title": "addComponent(  )"
+            "location": "/cruft/core/Actor/#addcomponent-component", 
+            "text": "Add a component to an actor.   actor.addComponent(component);", 
+            "title": "addComponent( component )"
         }, 
         {
-            "location": "/cruft/core/Actor/#removecomponent", 
-            "text": "DESC  //example", 
-            "title": "removeComponent(  )"
+            "location": "/cruft/core/Actor/#getcomponent-type", 
+            "text": "Get a component of the specified type.   var transform = actor.getComponent( transform );", 
+            "title": "getComponent( type )"
         }, 
         {
-            "location": "/cruft/core/Actor/#getcomponent", 
-            "text": "DESC  //example", 
-            "title": "getComponent(  )"
+            "location": "/cruft/core/Actor/#removecomponent-type", 
+            "text": "Remove a component of the specified type.   actor.removeComponent( transform );", 
+            "title": "removeComponent( type )"
         }, 
         {
-            "location": "/cruft/core/Actor/#addchild", 
-            "text": "DESC  //example", 
-            "title": "addChild(  )"
+            "location": "/cruft/core/Actor/#addchild-child", 
+            "text": "Add a child to an actor.   actor1.addChild(actor2)", 
+            "title": "addChild( child )"
         }, 
         {
-            "location": "/cruft/core/Actor/#removechild", 
-            "text": "DESC  //example", 
-            "title": "removeChild(  )"
+            "location": "/cruft/core/Actor/#removechild-child", 
+            "text": "Remove a child from an actor.   actor1.removeChild(actor2)", 
+            "title": "removeChild( child )"
         }, 
         {
-            "location": "/cruft/core/Actor/#setparent", 
-            "text": "DESC  //example", 
-            "title": "setParent(  )"
+            "location": "/cruft/core/Actor/#setparent-parent", 
+            "text": "Method used to set actor's parent reference.        AddChild already takes care of setting a child's parent.   actor1.setParent(actor2).", 
+            "title": "setParent( parent )"
         }, 
         {
-            "location": "/cruft/core/Actor/#update", 
-            "text": "DESC  //example", 
-            "title": "update(  )"
+            "location": "/cruft/core/Actor/#update-now-deltams", 
+            "text": "Recursive function to update all children Actor/Component 's of an actor.         actor.update(now, deltaMs)", 
+            "title": "update( now ,  deltaMs )"
         }, 
         {
             "location": "/cruft/core/Actor/#destroy", 
