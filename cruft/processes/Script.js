@@ -1,4 +1,4 @@
-import Process from "engine/core/Process";
+import Process from "../core/Process";
 
 export default class Script extends Process {//could also make a more structured GameLoopProc thingy
 	constructor(cb) {

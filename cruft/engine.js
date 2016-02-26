@@ -2,8 +2,8 @@ import Emitter from "./core/Emitter";
 import Script from "./processes/Script";
 import Actor from "./core/Actor";
 import Cache from "./core/Cache";
-import Factory from "./core/Factory";
-import Network from "./core/Network";
+import Factory from "./core/ActorFactory";
+import Network from "./net/Network";
 import Scheduler from "./core/Scheduler";
 import MemoryManager from "./core/MemoryManager"
 
@@ -61,14 +61,14 @@ var initialized = new Promise((resolve, reject) => {
 var instantiate = (type, config) => {
 	var actor = factory.create(Actor, type, config);
 	memory.add(actor);
-	return actor.toPointer();
+	return memory.ptr(actor);
 }
 
 var destroy = (actor, recursive = false) => {
 	memory.destroy(actor, recursive);
 }
 
-var cruft = new Engine();
+var engine = new Engine();
 var cache = new Cache();
 var factory = new Factory();
 var network = new Network();

@@ -1,4 +1,4 @@
-import setIntervalMs from "engine/util/setIntervalMs";
+import setIntervalMs from "../util/setIntervalMs";
 import Process from "./Process";
 import {UNINITIALIZED, RUNNING, FAILED, SUCCEEDED} from "./Process";//can you import default and named at same time?
 

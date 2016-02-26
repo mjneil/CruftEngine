@@ -1,7 +1,6 @@
-import EventEmitter from "events";
+import Emitter from "../core/Emitter";
 
-
-export default class Connection extends EventEmitter { //wrapper for peer connection. 
+export default class Connection extends Emitter { //wrapper for peer connection. 
 	constructor(connection) {
 		super();
 

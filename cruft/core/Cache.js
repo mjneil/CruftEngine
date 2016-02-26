@@ -1,4 +1,4 @@
-import *  as http from "engine/net/http";
+import *  as http from "../net/http";
 
 var imageLoader = (url) => {
 	return new Promise( (resolve, reject) => {
