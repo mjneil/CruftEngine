@@ -27,7 +27,7 @@ export default class Actor extends Emitter {
     }
 
     getComponent(name) {
-        return this.components[name]
+        return this.components[name] || null;
     }
 
     addChild(child) {
