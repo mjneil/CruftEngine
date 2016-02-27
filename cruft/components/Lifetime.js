@@ -1,8 +1,9 @@
-import Component from "engine/core/Component";
+import Component from "../core/Component";
 
 export default class Lifetime extends Component {
+
 	constructor() {
-		super("Lifetime")
+		super()
 		this.lifetime = 0;
 	}
 	update(deltaMs) {
@@ -10,10 +11,5 @@ export default class Lifetime extends Component {
 		if(this.lifetime<0){
 			this.actor.destroy();
 		}
-	}
-
-	setFromJSON(lifetime) {
-		if(!lifetime) return;
-		this.lifetime = lifetime;
 	}
 }

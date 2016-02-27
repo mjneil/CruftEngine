@@ -9,45 +9,59 @@ export default class Actor extends Emitter {
     	this.parent = null;
         this.components = {};
         this.children = {};
+        this.initialized = false;
     }
 
     addComponent(component)  {
-        this.components[component.type] = component;
-        component.setActor(this);
+        this.components[component.constructor.name] = component;
+        component.actor = this;
         this.emit("addComponent", component);
     }
 
-    removeComponent(type) {
-        var component = this.components[type];
+    removeComponent(name) {
+        var component = this.components[name];
         if(!component) return;
-        component.setActor(null);
-        delete this.components[type];
+        component.actor = null;
+        delete this.components[name];
         this.emit("removeComponent", component);
     }
 
-    getComponent(type) {
-        return this.components[type]
-    }
-
-    setParent(parent) {
-        this.parent = parent;
-        this.emit("setParent", parent);
+    getComponent(name) {
+        return this.components[name]
     }
 
     addChild(child) {
+
         if(child.parent){
             console.warn("Child already attached to parent.");
             child.parent.removeChild(child);
         }
-        child.setParent(this);
+
+        child.parent = this;
         this.children[child.guid] = child;
+
+        if(this.initialized) {
+            child.initialize();
+        }
+
         this.emit("addChild", child);
     }
 
     removeChild(child) {//TODO remove the listenr. RIP. 
-        child.setParent(null);
+        child.parent = null;
         delete this.children[child.guid];
         this.emit("removeChild", child);
+    }
+
+    initialize() {
+
+        for(let name in this.components) {
+            this.components[name].initialize();
+        }
+
+        for(let id in this.children) {
+            this.children[id].initialize();
+        }
     }
 
     update(now, deltaMs) {
@@ -61,7 +75,7 @@ export default class Actor extends Emitter {
         }
     }
 
-    destroy() {
+    destroy(recursive=true) {
 
         if(this.parent){
             this.parent.removeChild(this);
@@ -73,7 +87,13 @@ export default class Actor extends Emitter {
 
         this.components = null;
 
+        if(recursive){
+            for(let id in this.children) {
+                this.children[id].destroy();
+            }
+            this.children = null;
+        }
+     
+        this.emit("destroy", this);
     }
 }
-
-//memory.delete(recursive)

@@ -1,26 +1,25 @@
-import uuid from "../lib/uuid";
+import uuid from "./../util/uuid";
+import Emitter from "./Emitter";
 
-export default class Component  {
+export default class Component extends Emitter {
 	
-	constructor(type, guid) {
+	constructor(guid) {
+		super();
 		this.guid = guid || uuid();
-		this.type = type;
 		this.actor = null;
 	}
 
-	setActor(actor) {
-		this.actor = actor;
-	}
-
-	setFromJSON() {
-		console.warn(`${this.type}:setFromJSON has not been implemented`);
+	initialize() {
+		
 	}
 
 	update(now, deltaMs) {
 
 	}
 
-	initialize() {
-		
+	destroy() {
+		this.emit("destroy", this);
 	}
+
+	
 }

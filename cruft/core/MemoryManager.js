@@ -6,15 +6,9 @@ export default class MemoryManager {
 
 	add(actor) {
 		this.references[actor.guid] = actor;
-	}
-
-	destroy(actor, recursive = false) {
-		if(!actor) return;
-		delete this.references[actor.guid]
-		actor.destroy();
-		for(var id in actor.children) {
-			destroy(actor.children[id], recursive);
-		}
+		actor.on("destroy", () => {
+			delete this.references[actor.guid];
+		})
 	}
 
 	get(guid) {
@@ -41,8 +35,5 @@ class Ptr {
 	get() {
 		return this.manager.get(this.guid);
 	}
-
-	destroy(recursive = false) {
-		this.manager.destroy(this.get(), recursive);
-	}
+	
 }

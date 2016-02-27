@@ -1,12 +1,12 @@
-import Component from "engine/core/Component"
-import {mat3, vec2} from "engine/lib/gl-matrix";
+import Component from "../core/Component"
+import {mat3, vec2} from "../lib/gl-matrix";
 
 var IDENTITY_MATRIX = mat3.create();
 	mat3.identity(IDENTITY_MATRIX)//DO NOT CHANGE THIS.
 
 export default class Transform2D extends Component {
 	constructor() {
-		super("transform");
+		super();
 
 		this._position = vec2.create();
 		this._scale = vec2.create();
@@ -23,9 +23,7 @@ export default class Transform2D extends Component {
 	}
 
 	initialize() {
-		this.actor.on("setParent", () => {
-			this.updateMatrix();
-		})
+		this.updateMatrix();
 	}
 
 	get position () {
@@ -65,8 +63,6 @@ export default class Transform2D extends Component {
 			if(vec[1] < 0) theta *= -1;
 			this.rotation = theta;
 		}
-		
-
 	}
 
 	get scale() {
@@ -97,7 +93,7 @@ export default class Transform2D extends Component {
 		//TODO z-index? What are we doing with that exactly. 
 
 		if(parent) {
-			mat4.mul(toWorld, parent.getComponent("transform").toWorld, matrix);
+			mat4.mul(toWorld, parent.getComponent("Transform2D").toWorld, matrix);
 		}else{
 			mat3.copy(toWorld, matrix);
 		}
@@ -110,27 +106,4 @@ export default class Transform2D extends Component {
 		}
 	}
 
-	setFromJSON(json) { //lazy. update this to not call updateMatrix 3 times. 
-		if(!json) return;
-		var needsUpdate = false;
-		
-		if(json.position){
-			vec2.copy(this._position, json.position);
-			needsUpdate = true;
-		}
-
-		if(json.rotation !== undefined){
-			this._rotation= json.rotation;
-			needsUpdate = true;
-		}
-
-		if(json.scale){
-			vec2.copy(this._scale, json.scale);
-			needsUpdate = true;
-		}
-
-		if(needsUpdate) {
-			this.updateMatrix();
-		}
-	}
 }

@@ -25,47 +25,30 @@ var initialized = new Promise((resolve, reject) => {
 			engine.scene.update(deltaMs);
 		}));
 
-		if(config.factory){
-			var f = config.factory;
-			promises.push(cache.getAll( Object.keys( f.skeletons ) ).then((assets) => {
-				for(var url in assets) {
-					factory.registerSkeleton(f.skeletons[url], assets[url]);
-				}
-			}))
-			factory.registerComponents(f.components);
-		}
-
-		if(config.network) {
-			network.initialize(config.network.name, config.network.key);
-			if(config.network.session) {
-				promises.push(network.createSession(config.network.session));
+		if(config.factory) {
+			let creators = config.factory;
+			for(let name in creators){
+				factory.register(name, creators[name]);
 			}
 		}
 
+		engine.scene = instantiate(config.scene || null);
+
+		
 		Promise.all(promises).then(()=>{
-			if(config.scene){
-				var s = config.scene;
-				engine.scene = instantiate(s.type, s).get();//factory.create(Scene, s.type, s);
-			}else{
-				engine.scene = instantiate().get();
-			}
-		}).then(()=>{ 
-			scheduler.start(config.scheduler.deltaMs || 17);
-		}).then(()=>{
+			engine.scene.initialize();
+			scheduler.start(config.scheduler || 17);
 			resolve();
-		})
+		});
+
 	}
 });
 
 
 var instantiate = (type, config) => {
-	var actor = factory.create(Actor, type, config);
+	var actor = factory.create(type, config);
 	memory.add(actor);
-	return memory.ptr(actor);
-}
-
-var destroy = (actor, recursive = false) => {
-	memory.destroy(actor, recursive);
+	return actor;
 }
 
 var engine = new Engine();
@@ -77,9 +60,15 @@ var memory = new MemoryManager();
 
 
 export default engine;//for now export raw factory. prob wont do that always. 
-export {cache, factory, network, scheduler, memory,  initialize, initialized, instantiate, destroy };
+export {cache, factory, network, scheduler, memory,  initialize, initialized, instantiate };
 
 //****DEBUG****//
 window.engine = engine;
 window.kill = function () { scheduler.kill(); }
 window.onbeforeonload = function () { network.peer.destroy(); }
+
+
+/*
+
+
+*/
