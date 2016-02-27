@@ -30,3 +30,12 @@ let a = {
 	Engine :false 
 }
 ```
+
+### Function
+```javascript
+let add = (a, b) => {
+	return a + b;
+}
+let c = add(6, 6);
+```
+
