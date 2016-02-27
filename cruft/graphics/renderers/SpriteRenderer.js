@@ -1,5 +1,62 @@
-import Program from "engine/graphics/Program"
-import RendererPlugin from "engine/graphics/RendererPlugin";
+import Program from "../Program"
+import SubRenderer from "../SubRenderer";
+import Sprite from "../renderables/Sprite";
+
+export default class SpriteRenderer extends SubRenderer {
+
+	constructor() {
+		super(Sprite);
+		this.gl = null;
+		this.program = null;
+	}
+
+	initialize(gl) {
+		this.gl = gl;
+		this.program = new Program(gl, vSrc, fSrc, {
+			attributes : ["aPosition", "aTexCoord"],
+			uniforms : ["vMatrix", "mMatrix", "pMatix"]
+		});
+	}
+
+	render(renderer, render, camera) {
+		var sprite = render.renderable;
+		var actor = render.actor;
+		
+		if(!sprite.loaded) return;
+
+		var gl = this.gl;
+		renderer.programManager.use(this.program);
+
+		var glSprite = sprite.data[this.guid];
+		if(!glSprite) glSprite = sprite.data[this.guid] = new GLSprite(gl);
+		if(glSprite.lastDirt !== sprite.lastDirt) glSprite.update(sprite);
+
+
+		var buffers = glSprite.buffers;
+		var texture = glSprite.texture;
+		var program = renderer.programManager.program;
+
+		var transform = actor.getComponent("Transform2D");
+		var cameraTransform = camera.getComponent("Transform2D");
+
+
+		gl.bindBuffer(gl.ARRAY_BUFFER, buffers[0]);
+		gl.vertexAttribPointer(program.attributes.aPosition, 2, gl.FLOAT, false, 0, 0);
+
+		gl.bindBuffer(gl.ARRAY_BUFFER, buffers[1]);
+		gl.vertexAttribPointer(program.attributes.aTexCoord, 2, gl.FLOAT, false, 0, 0); 
+
+		gl.uniformMatrix3fv(program.uniforms.vMatrix, gl.FALSE, cameraTransform.inverse);
+		gl.uniformMatrix3fv(program.uniforms.mMatrix, gl.FALSE, transform.toWorld);
+
+		gl.activeTexture(gl.TEXTURE0);
+		gl.bindTexture(gl.TEXTURE_2D, texture);
+
+		gl.drawArrays(gl.TRIANGLES, 0, 6);
+	}
+
+
+}
 
 var vSrc = `
 	attribute vec2 aPosition;
@@ -27,15 +84,14 @@ var fSrc = `
 
 `
 
-class GLSprite {//TODO REMEMBER TRY STORING THIS GUY IN A WEAKMAP
 
-	constructor(gl, sprite) {
+class GLSprite {
+
+	constructor(gl) {
 		this.gl = gl;
-		this.sprite = sprite;
 		this.vertices = new Float32Array(12);
 		this.texCoords = new Float32Array(12);
 		this.texture = gl.createTexture();
-
 		this.buffers = [gl.createBuffer(), gl.createBuffer()];
 		
 		this.lastDirt = null;
@@ -48,10 +104,8 @@ class GLSprite {//TODO REMEMBER TRY STORING THIS GUY IN A WEAKMAP
 		gl.deleteTexture(this.texture);
 	}
 
-	update() {
+	update(sprite) {
 		var gl = this.gl;
-		var sprite = this.sprite;
-
 		var vertices = this.vertices;
 		var texCoords = this.texCoords;
 		var buffers = this.buffers;
@@ -108,70 +162,5 @@ class GLSprite {//TODO REMEMBER TRY STORING THIS GUY IN A WEAKMAP
 
 		this.lastDirt = sprite.dirt;
 	}
-
-
-
-}
-export default class SpriteRenderer extends RendererPlugin {
-
-	constructor() {
-		super("Sprite")//for now just hijack component typppppeeeeee
-		this.data = {};
-		this.gl = null;
-		this.program = null;
-	}
-
-	initialize(gl) {
-		this.gl = gl;
-		this.program = new Program(gl, vSrc, fSrc, {
-			attributes : ["aPosition", "aTexCoord"],
-			uniforms : ["vMatrix", "mMatrix", "pMatix"]
-		});
-	}
-
-	render(renderer, sprite, camera) {
-
-		if(!sprite.loaded) return;
-		var gl = this.gl;
-		renderer.programManager.use(this.program);
-		if(!this.data[sprite.guid]) { //temp for now. Look into making one big buffer. 
-			this.data[sprite.guid] = new GLSprite(gl, sprite);
-			//for now not sure how else to do this
-			sprite.on("destroy", () => {
-				this.data[sprite.guid].destroy();
-				delete this.data[sprite.guid];
-			})
-		}
-
-		var glSprite = this.data[sprite.guid];
-
-		if(glSprite.lastDirt !== sprite.guid) {
-			glSprite.update(sprite);
-		}
-
-		var buffers = glSprite.buffers;
-		var texture = glSprite.texture;
-		var program = renderer.programManager.program;
-
-		var actor = sprite.actor;
-		var transform = actor.getComponent("transform");
-		var cameraTransform = camera.getComponent("transform");
-
-
-		gl.bindBuffer(gl.ARRAY_BUFFER, buffers[0]);
-		gl.vertexAttribPointer(program.attributes.aPosition, 2, gl.FLOAT, false, 0, 0);
-
-		gl.bindBuffer(gl.ARRAY_BUFFER, buffers[1]);
-		gl.vertexAttribPointer(program.attributes.aTexCoord, 2, gl.FLOAT, false, 0, 0); 
-
-		gl.uniformMatrix3fv(program.uniforms.vMatrix, gl.FALSE, cameraTransform.inverse);
-		gl.uniformMatrix3fv(program.uniforms.mMatrix, gl.FALSE, transform.toWorld);
-
-		gl.activeTexture(gl.TEXTURE0);
-		gl.bindTexture(gl.TEXTURE_2D, texture);
-
-		gl.drawArrays(gl.TRIANGLES, 0, 6);
-	}
-
 
 }

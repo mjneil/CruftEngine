@@ -21,7 +21,7 @@ export default class Renderer {//todo pass in options for what to enable/disable
 		this.programManager = new ProgramManager(gl);
 	}
 
-	registerPlugin(plugin) {
+	register(plugin) {
 		plugin.initialize(this.gl);
 		this.plugins[plugin.type] = plugin;
 	}
@@ -36,10 +36,10 @@ export default class Renderer {//todo pass in options for what to enable/disable
 	_render(actor, camera) {
 	
 
-		var render = actor.getComponent("render");
+		var render = actor.getComponent("Render");
 
 		if(render){
-			var plugin = this.plugins[render.renderType];//TODO renderType on anything you call render on :/ RIP.
+			var plugin = this.plugins[render.renderable.constructor];//TODO renderType on anything you call render on :/ RIP.
 			if(!plugin) {
 				console.log("FATAL : ATTEMPING TO RENDER AN UNSUPPORTED RENDER COMPONENT")
 				return;

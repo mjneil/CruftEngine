@@ -2,10 +2,11 @@ import Component from "../core/Component";
 
 export default class Lifetime extends Component {
 
-	constructor() {
+	constructor(lifetime) {
 		super()
-		this.lifetime = 0;
+		this.lifetime = lifetime;
 	}
+	
 	update(deltaMs) {
 		this.lifetime-=deltaMs;
 		if(this.lifetime<0){

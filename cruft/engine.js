@@ -22,7 +22,7 @@ var initialized = new Promise((resolve, reject) => {
 		var promises = [];
 		
 		scheduler.addChild(new Script((now, deltaMs) => {
-			engine.scene.update(deltaMs);
+			engine.scene.update(now, deltaMs);
 		}));
 
 		if(config.factory) {
@@ -47,7 +47,6 @@ var initialized = new Promise((resolve, reject) => {
 
 var instantiate = (type, config) => {
 	var actor = factory.create(type, config);
-	memory.add(actor);
 	return actor;
 }
 

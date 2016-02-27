@@ -16,6 +16,9 @@ export default class MemoryManager {
 	}
 
 	ptr(actor) {
+		
+		if(!this.get(actor.guid)) this.add(actor);
+
 		return new Ptr(actor.guid, this);
 	}
 	
