@@ -9,15 +9,15 @@ export default class Process {
 		this.children = [];
 	}
 
-	initialize(){
+	initialize(now){
 		this.state = RUNNING;
 	}
 
-	succeed(){
+	succeed(now){
 		this.state = SUCCEEDED;
 	}
 
-	fail(){
+	fail(now){
 		this.state = FAILED;
 	}
 

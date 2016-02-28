@@ -1,10 +1,12 @@
 import Emitter from "./core/Emitter";
-import Script from "./processes/Script";
+
 import Actor from "./core/Actor";
-import Cache from "./core/Cache";
+import Cache from "./net/Cache";
+import {ImageLoader, TextLoader, JsonLoader } from "./net/loaders/loaders.js"
 import Factory from "./core/ActorFactory";
 import Network from "./net/Network";
 import Scheduler from "./core/Scheduler";
+import Script from "./core/processes/Script";
 import MemoryManager from "./core/MemoryManager"
 
 
@@ -32,6 +34,11 @@ var initialize = (config) => {
 		engine.scene.update(now, deltaMs);
 	}));
 
+	cache.register("image", new ImageLoader() );
+	cache.register("text", new TextLoader() );
+	cache.register("json", new JsonLoader() );
+	cache.register("default", cache.loaders.text );//I dont like making TextLoader Twice
+
 	if(config.factory) {
 		let creators = config.factory;
 		for(let name in creators){
@@ -47,6 +54,7 @@ var initialize = (config) => {
 	}
 
 	engine.scene = instantiate(config.scene || null);
+	memory.add(engine.scene);
 
 	return Promise.all(promises).then(()=>{
 		engine.scene.initialize();
@@ -57,6 +65,7 @@ var initialize = (config) => {
 
 var instantiate = (type, config) => {
 	var actor = factory.create(type, config);
+	memory.add(actor);
 	return actor;
 }
 

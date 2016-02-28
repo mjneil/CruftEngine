@@ -1,5 +1,5 @@
-import Component from "../core/Component"
-import {mat3, vec2} from "../lib/gl-matrix";
+import Component from "../Component"
+import {mat3, vec2} from "../../lib/gl-matrix";
 
 var IDENTITY_MATRIX = mat3.create();
 	mat3.identity(IDENTITY_MATRIX)//DO NOT CHANGE THIS.

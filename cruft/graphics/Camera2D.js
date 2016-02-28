@@ -1,10 +1,10 @@
 import Actor from "../core/Actor";
 import Renderer from "./Renderer"
 import SpriteRenderer from "./renderers/SpriteRenderer";
-import Transform2D from "../components/Transform2D";
+import Transform2D from "../core/components/Transform2D";
 import {vec2} from "../lib/gl-matrix";
 import engine, {scheduler} from "../engine";
-import Script from "../processes/Script";
+import Script from "../core/processes/Script";
 
 export default class Camera2D extends Actor {//todo set/get widht//height
 	constructor(width, height) {

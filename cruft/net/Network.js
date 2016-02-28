@@ -101,12 +101,19 @@ export default class Network extends Emitter {
 		})
 	}
 
-	emit(event, data) {
+	broadcast(type, event, data) {
 		var sessions = this.sessions;
 
-		for(var peer in sessions){
-			sessions[peer].emit(event, data);
+		if(type === "reliable"){
+			for(var peer in sessions){
+				sessions[peer].reliable.emit(event, data);
+			}
+		}else{
+			for(var peer in sessions){
+				sessions[peer].unreliable.emit(event, data);
+			}
 		}
+	
 	}
 
 
