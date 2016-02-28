@@ -57,16 +57,16 @@ export default class mat3 {
         return out;
     }
 
-    copy(a) {
-        this.data[0] = a.data[0];
-        this.data[1] = a.data[1];
-        this.data[2] = a.data[2];
-        this.data[3] = a.data[3];
-        this.data[4] = a.data[4];
-        this.data[5] = a.data[5];
-        this.data[6] = a.data[6];
-        this.data[7] = a.data[7];
-        this.data[8] = a.data[8];
+    copy(b) {
+        this.data[0] = b.data[0];
+        this.data[1] = b.data[1];
+        this.data[2] = b.data[2];
+        this.data[3] = b.data[3];
+        this.data[4] = b.data[4];
+        this.data[5] = b.data[5];
+        this.data[6] = b.data[6];
+        this.data[7] = b.data[7];
+        this.data[8] = b.data[8];
 
         return this;
     }

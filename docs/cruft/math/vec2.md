@@ -13,6 +13,12 @@ let a = new vec2(1, 2);
 let b = new vec2(3, 4);
 ```
 
+### static zero()
+Constructs the zero vector.
+
+```javascript
+let c = vec2.zero();
+```
 
 
 ## Properties
@@ -20,15 +26,7 @@ let b = new vec2(3, 4);
 .[y](/primitives.md#number) - Value of the y component.
 
 
-
 ## Static Methods
-
-### static zero()
-Constructs the zero vector.
-
-```javascript
-let c = vec2.zero();
-```
 
 ### static add( [a](vec2.md), [b](vec2.md) )
 Adds a and b, returning the result.
@@ -114,6 +112,7 @@ Calculates a - b.
 ```javascript
 let c = vec2.subtract(a, b);
 ```
+
 
 ##Methods
 
