@@ -1,24 +1,20 @@
-import EventEmitter from "events";
+import Emitter from "./core/Emitter";
+import Script from "./processes/Script";
+import Actor from "./core/Actor";
+import Cache from "./core/Cache";
+import Factory from "./core/ActorFactory";
+import Network from "./net/Network";
+import Scheduler from "./core/Scheduler";
+import MemoryManager from "./core/MemoryManager"
 
-import cache from "./cache";
-import factory from "./factory";
-import network from "./network";
-import scheduler from "./scheduler";
-import memory from "./memory"
 
-import Script from "engine/processes/Script";
-import Actor from "engine/core/Actor";
-
-export class Engine extends EventEmitter {
-
+export class Engine extends Emitter {
 	constructor() {
 		super()
 		this.scene = null;
 		this.camera = null;
 	}
 }
-
-var engine = new Engine();
 
 var initialize;
 var initialized = new Promise((resolve, reject) => {
@@ -65,23 +61,23 @@ var initialized = new Promise((resolve, reject) => {
 var instantiate = (type, config) => {
 	var actor = factory.create(Actor, type, config);
 	memory.add(actor);
-	for(var key in actor.components){
-		memory.add(actor.components[key]);
-	}
-	return actor.toPointer();
+	return memory.ptr(actor);
 }
 
-var instantiateBase = (base, type, config) => {
-	var actor = factory.create(base, type, config);
-	memory.add(actor);
-	for(var key in actor.components){
-		memory.add(actor.components[key]);
-	}
-	return actor.toPointer();
+var destroy = (actor, recursive = false) => {
+	memory.destroy(actor, recursive);
 }
+
+var engine = new Engine();
+var cache = new Cache();
+var factory = new Factory();
+var network = new Network();
+var scheduler = new Scheduler();
+var memory = new MemoryManager();
+
 
 export default engine;//for now export raw factory. prob wont do that always. 
-export {cache, factory, network, scheduler, initialize, initialized, instantiate , instantiateBase };
+export {cache, factory, network, scheduler, memory,  initialize, initialized, instantiate, destroy };
 
 //****DEBUG****//
 window.engine = engine;

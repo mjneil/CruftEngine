@@ -1,7 +1,7 @@
-import EventEmitter from "events"
+import Emitter from "../core/Emitter"
 import Session from "./Session"
 
-export default class Network extends EventEmitter {
+export default class Network extends Emitter {
 	constructor(name, key) {
 		super();
 		this.peerId = null;

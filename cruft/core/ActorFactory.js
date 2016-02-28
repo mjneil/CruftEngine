@@ -1,4 +1,4 @@
-import cache from "engine/cache";
+import Actor from "./Actor";
 
 export default class ActorFactory { //def move this to core at some point 
 
@@ -27,18 +27,9 @@ export default class ActorFactory { //def move this to core at some point
 		}
 	}
 
-	loadSkeletons(skeletons) {
-		return cache.getAll(Object.keys(skeletons)).then((assets)=>{
-			for(var url in skeletons) {
-				this.skeletons[skeletons[url]] = assets[url];
-			}
-			return assets;
-		})
-	}
-
-	create(base, type, config) {//right now can only have config code for things in a skeleton 
+	create(type, config) {//right now can only have config code for things in a skeleton 
 		var guid = (config)? config.guid : null;
-		var actor = new base(guid);
+		var actor = new Actor(guid);
 
 		var skeleton = this.skeletons[type];
 		var components = this.components;

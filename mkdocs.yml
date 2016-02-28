@@ -8,12 +8,13 @@ markdown_extensions:
 pages:
 - Home : 'index.md'
 - Core :
-    - Actor : 'engine/core/Actor.md'
-    - Component : 'engine/core/Component.md'
-    - ActorFactory : 'engine/core/ActorFactory.md'
-    - Scheduler : 'engine/core/Scheduler.md'
+    - Actor : 'cruft/core/Actor.md'
+    - Component : 'cruft/core/Component.md'
+    - ActorFactory : 'cruft/core/ActorFactory.md'
+    - Scheduler : 'cruft/core/Scheduler.md'
 - Math :
-    - vec2 : 'engine/math/vec2.md'
-    - vec3 : 'engine/math/vec3.md'
-    - mat3 : 'engine/math/mat3.md'
-    - mat4 : 'engine/math/mat4.md'
+    - vec2 : 'cruft/math/vec2.md'
+    - vec3 : 'cruft/math/vec3.md'
+    - mat3 : 'cruft/math/mat3.md'
+    - mat4 : 'cruft/math/mat4.md'
+- Primitives : 'primitives.md'

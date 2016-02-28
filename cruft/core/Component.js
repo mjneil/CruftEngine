@@ -1,9 +1,9 @@
-import Referenceable from "./Referenceable";
+import uuid from "../lib/uuid";
 
-export default class Component extends Referenceable {
+export default class Component  {
 	
-	constructor(type,guid) {
-		super(guid);
+	constructor(type, guid) {
+		this.guid = guid || uuid();
 		this.type = type;
 		this.actor = null;
 	}
@@ -16,7 +16,7 @@ export default class Component extends Referenceable {
 		console.warn(`${this.type}:setFromJSON has not been implemented`);
 	}
 
-	update(deltaMs) {
+	update(now, deltaMs) {
 
 	}
 
