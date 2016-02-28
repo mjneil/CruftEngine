@@ -1,27 +1,30 @@
 import Emitter from "../core/Emitter";
 
 export default class Session extends Emitter {
-	constructor(key, reliable, unreliable) {
+
+	constructor(peer, reliable, unreliable) {
 		super();
-		this.key = key;
+
+		this.peer = peer;
+
 		this.reliable = reliable;
 		this.unreliable = unreliable;
 
-		this.reliable.on("data", (data) => {
-			this.emit("data", data);
-		})
+		this.reliable.on("data", (e) => {
+			this.emit(e.event, e.data);
+		});
 
-		this.unreliable.on("data", (data) => {
-			this.emit("data", data);
-		})
+		this.unreliable.on("data", (e) => {
+			this.emit(e.event, e.data);
+		});
 	}
 
-	emitReliable(event, data) {
-		var packet = {
-			event : event,
-			timestamp : Date.now(),
-			data : data
-		}
-		this.reliable.send(packet);
+	destroy() {
+		this.reliable.destroy();
+		this.unreliable.destroy();
+		this.reliable = null;
+		this.unreliable = null;
 	}
+
 }
+

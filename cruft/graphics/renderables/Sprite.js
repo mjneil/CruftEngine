@@ -4,7 +4,7 @@ import Renderable from "../Renderable";
 
 export default class Sprite extends Renderable {
 
-	constructor() {
+	constructor(url, width, height) {
 		super();
 		this.dirt = 0;
 		this._width = null;
@@ -12,6 +12,11 @@ export default class Sprite extends Renderable {
 		this._url = null;
 		this._image = null;
 		this.loaded = false;
+
+		if(url) this.url = url;
+		if(width !== undefined) this.width = width;
+		if(height !== undefined) this.height = height;
+		
 	}
 
 	dirty () {

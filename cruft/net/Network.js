@@ -1,87 +1,68 @@
-import Emitter from "../core/Emitter"
-import Session from "./Session"
+import Emitter from "../core/Emitter";
+import Session from "./Session";
+import Connection from "./Connection";
 
 export default class Network extends Emitter {
+
 	constructor(name, key) {
 		super();
-		this.peerId = null;
+		this.id = null;
 		this.peer = null;
 		this.sessions = null;
 	}
 
-	initialize() {
-		this.peerId = null;
-		this.peer = new Peer(name, { key });
+	initialize(id, options) {//@TODO someway to detect if it failed. 
+		this.id = null;
+		this.peer = new Peer(id, options);
 		this.sessions = {};
-		var builder = {};
-		
-		this.peer.on("open", (id) => {
-			console.info("Peerjs ID : " + id );
-			this.peerId = id;
-			this.emit("open", id);
-		})
 
-		//try to build sessions 
+		this.peer.on("open", (id) => {
+			this.id = id;
+			console.info(`PeerJS id : ${id}`)
+		});
+
+		var builder = {};
+
 		this.peer.on("connection", (conn) => {
-			var peer = conn.peer;
-			if(!builder[peer]) builder[peer] = {};
-			var built = builder[peer];
-			conn.once("data", (data) => {
-				built[data.connectionType] = conn;
+
+			var peerId = conn.peer;
+			if(!builder[peerId]) builder[peerId] = {};
+			var built = builder[peerId];
+
+			conn.once("data", (type) => {
+				built[type] = conn; //maybe not alow them to do that cause they can prob do spooky setter/getter mod
 				if(built.reliable && built.unreliable){
-					var session = new Session( peer, built.reliable, built.unreliable );
+					var session = new Session( peerId, new Connection(built.reliable), new Connection(built.unreliable) );
+					delete builder[peerId];
 					this.addSession(session);
 					this.emit("connection", session);
 				}
+
 			})
 
 			conn.on("close", () => {
-				var session = this.sessions[peer];
-				delete this.sessions[peer];
-				if(session) {
-					session.reliable.close();
-					session.unreliable.close();
-					this.emit("close", session);
-				}
+				if(builder[peerId]){
+					if(built.reliable) built.reliable.destroy();
+					if(built.unreliable) built.unreliable.destroy();
+				}else{
+					this.removeSession(this.sessions[peerId]);
+				}	
 			})
+		})
+
+		return new Promise((resolve, reject) => {
+			this.peer.on("open", resolve);//@TODO reject
 		})
 	}
 
-	//change how many listeners we add here,. 
+
 	addSession(session) {
-		this.sessions[session.key] = session;
-		session.on("data", (data) => {
-			this.emit(data.event, {
-				session : session,
-				packet : data
-			});
-		});
+		this.sessions[session.peer] = session;
 	}
 
-	//temp util functions @TODO figure out how to do binary stuff.
-	emitReliable(event, data) {
-
-		var packet = {
-			event : event,
-			timestamp : Date.now(),
-			data : data
-		}
-
-		for(var key in this.sessions){
-			this.sessions[key].reliable.send(packet);
-		}
-	}
-
-	emitUnreliable(event, data) {
-		var packet = {
-			event : event,
-			timestamp : Date.now(),
-			data : data
-		}
-
-		for(var key in this.sessions){
-			this.sessions[key].unreliable.send(packet);
-		}
+	removeSession(session) {
+		session.destroy();
+		delete this.sessions[session.peer];
 	}
 
 	createSession(name) { //we need some kind of timeout for this stuff. It will just hang forever if it fails. TODO failing
@@ -95,7 +76,7 @@ export default class Network extends Emitter {
 			var tryResolve = () => {
 				loaded++;
 				if(loaded == 2){
-					var session = new Session( peer, reliable, unreliable )
+					var session = new Session( name, reliable, unreliable )
 					this.addSession(session);
 					resolve(session)
 				}
@@ -106,12 +87,12 @@ export default class Network extends Emitter {
 			}
 
 			reliable.once("open", () => {
-				reliable.send({connectionType:"reliable"});
+				reliable.send("reliable");
 				tryResolve();
 			});
 
 			unreliable.once("open", () => {
-				unreliable.send({connectionType:"unreliable"});
+				unreliable.send("unreliable");
 				tryResolve();
 			});
 
@@ -120,7 +101,13 @@ export default class Network extends Emitter {
 		})
 	}
 
+	emit(event, data) {
+		var sessions = this.sessions;
+
+		for(var peer in sessions){
+			sessions[peer].emit(event, data);
+		}
+	}
+
 
 }
-
-//NetworkManager 
