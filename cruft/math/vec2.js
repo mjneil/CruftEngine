@@ -126,11 +126,11 @@ export default class vec2 {
         return this;
     }
 
-    static sub(a, b) {
+    static subtract(a, b) {
         return new vec2(a.x - b.x, a.y - b.y);
     }
 
-    sub(b) {
+    subtract(b) {
         this.x -= b.x;
         this.y -= b.y;
         return this;
