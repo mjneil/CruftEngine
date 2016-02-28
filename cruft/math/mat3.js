@@ -129,6 +129,31 @@ export default class mat3 {
         return det;
     }
 
+    static multiply(A, B) {
+        let out = new mat3(), d = A.data, b = B.data,
+            d00 = d[0], d01 = d[1], d02 = d[2],
+            d10 = d[3], d11 = d[4], d12 = d[5],
+            d20 = d[6], d21 = d[7], d22 = d[8],
+
+            b00 = b[0], b01 = b[1], b02 = b[2],
+            b10 = b[3], b11 = b[4], b12 = b[5],
+            b20 = b[6], b21 = b[7], b22 = b[8];
+
+        out.data[0] = d00 * b00 + d10 * b01 + d20 * b02;
+        out.data[1] = d01 * b00 + d11 * b01 + d21 * b02;
+        out.data[2] = d02 * b00 + d12 * b01 + d22 * b02;
+
+        out.data[3] = d00 * b10 + d10 * b11 + d20 * b12;
+        out.data[4] = d01 * b10 + d11 * b11 + d21 * b12;
+        out.data[5] = d02 * b10 + d12 * b11 + d22 * b12;
+
+        out.data[6] = d00 * b20 + d10 * b21 + d20 * b22;
+        out.data[7] = d01 * b20 + d11 * b21 + d21 * b22;
+        out.data[8] = d02 * b20 + d12 * b21 + d22 * b22;
+
+        return out;
+    }
+
     multiply(B) {
         let d = this.data, b = B.data,
             d00 = d[0], d01 = d[1], d02 = d[2],

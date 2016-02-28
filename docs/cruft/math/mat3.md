@@ -26,6 +26,12 @@ Creates a copy of matrix a.
 let c = mat3.clone(a);
 ```
 
+### static multiply( [A](mat3.md), [B](mat3.md) )
+Calculates A * B.
+
+```javascript
+let c = mat3.multiply(A, B);
+
 ## Methods
 
 ### add( [B](mat3.md) )

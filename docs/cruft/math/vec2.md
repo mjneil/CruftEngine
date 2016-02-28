@@ -137,6 +137,13 @@ Returns clone of this.
 let c = a.clone();
 ```
 
+### copy( [b](vec2.md) )
+Copies vec2 b into this.
+
+```javascript
+a.copy(b);
+```
+
 ### cross( [b](vec2.md) )
 Calculates this cross b, returning this.
 

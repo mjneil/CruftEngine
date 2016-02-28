@@ -36,6 +36,12 @@ export default class vec2 {
         return new vec2(this.x, this.y);
     }
 
+    copy(b) {
+        this.x = b.x;
+        this.y = b.y;
+        return this;
+    }
+
     static cross(a, b) {
         return a.x * b.y - a.y * b.x;
     }
