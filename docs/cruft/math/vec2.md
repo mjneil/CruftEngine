@@ -106,11 +106,11 @@ Scales vector a by s.
 let c = vec2.scale(a, 10);
 ```
 
-### static subtract( [a](vec2.md), [b](vec2.md) )
+### static sub( [a](vec2.md), [b](vec2.md) )
 Calculates a - b.
 
 ```javascript
-let c = vec2.subtract(a, b);
+let c = vec2.subt(a, b);
 ```
 
 
@@ -208,9 +208,9 @@ Scales this by s.
 a.scale(10);
 ```
 
-### subtract( [b](vec2.md) )
+### sub( [b](vec2.md) )
 Subtracts this by vector b.
 
 ```javascript
-a.subtract(b);
+a.sub(b);
 ```

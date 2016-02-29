@@ -18,12 +18,12 @@ export default class Emitter {
         let e = EVENTS.get(this);
         let topics = topic.split(" ");
 
-        for (item of topics) {
+        for (let item of topics) {
             if (!e[item]) {
                 e[item] = [];
             }
 
-            for (cb of callback) {
+            for (let cb of callback) {
                 e[item].push(cb);
             }
         }
@@ -41,7 +41,7 @@ export default class Emitter {
         let e = EVENTS.get(this);
         let topics = topic.split(" ");
 
-        for (item of topics) {
+        for (let item of topics) {
             if (!e[item]) {
                 continue;
             }
@@ -67,7 +67,7 @@ export default class Emitter {
             return this;
         }
 
-        for (cb of e[topic]) {
+        for (let cb of e[topic]) {
             cb(...args);
         }
 

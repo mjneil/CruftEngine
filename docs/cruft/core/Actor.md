@@ -4,7 +4,7 @@ This class defines an Actor.
 
 ## Importing
 ```javascript
-import Actor from "cruft/core/Actor"
+import Actor from "cruft/core/Actor";
 ```
 
 ## Constructors
@@ -21,10 +21,11 @@ let actor2 = new Actor(12); //actor2.guid === 12;
 
 
 ## Properties
+.[guid](/primitives.md#number) - guid of the actor. 	
 .[parent](Actor.md) - Strong reference to parent actor. 		
 .[components](/primitives.md#object) - Object containing strong references to the actor's components. 		
-.[children](/primitives.md#object) - Object containing strong references to the actor's children. 
-
+.[children](/primitives.md#object) - Object containing strong references to the actor's children. 			
+.[initialized](/primitives.md#boolean) - Whether the actor has been initialized. 
 
 ##Methods
 
@@ -39,7 +40,7 @@ actor.addComponent(component);
 Get a component of the specified type. 
 
 ```javascript
-var transform = actor.getComponent("transform");
+let transform = actor.getComponent("transform");
 ```
 
 
@@ -55,7 +56,10 @@ actor.removeComponent("transform");
 Add a child to an actor. 
 
 ```javascript
-actor1.addChild(actor2)
+let actor1 = new Actor();
+let actor2 = new Actor();
+
+	actor1.addChild(actor2);
 ```
 
 ### removeChild( [child](Actor.md) )
@@ -71,7 +75,7 @@ Method used to set actor's parent reference.
 **AddChild already takes care of setting a child's parent. **
 
 ```javascript
-actor1.setParent(actor2).
+actor1.setParent(actor2);
 ```
 
 
@@ -79,7 +83,7 @@ actor1.setParent(actor2).
 Recursive function to update all children Actor/Component 's of an actor.		
 
 ```javascript
-actor.update(now, deltaMs)
+actor.update(now, deltaMs);
 ```
 
 

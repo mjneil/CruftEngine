@@ -31,6 +31,20 @@ let a = {
 }
 ```
 
+### Array
+```javascript
+let a = [ 1, 2, 3];
+	a[0] = 2; //0th element of a is now 2
+```
+
+### Function
+```javascript
+let add = (a, b) => {
+	return a + b;
+}
+let c = add(6, 6);
+```
+
 ### Float32Array
 ```javascript
 let a = new Float32Array(9);

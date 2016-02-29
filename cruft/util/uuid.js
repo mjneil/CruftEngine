@@ -1,3 +1,3 @@
 export default () => {
-	return "" + Date.now();
+	return "" + Date.now() + "-" + Math.random();
 }

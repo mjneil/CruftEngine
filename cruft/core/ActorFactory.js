@@ -3,61 +3,25 @@ import Actor from "./Actor";
 export default class ActorFactory { //def move this to core at some point 
 
 	constructor() {
-		this.skeletons = {};
-		this.components = {};
+		this.creators = {};
 	}
 
-	registerComponent(type, constructor) {
-		this.components[type] = constructor;
-	}
-
-	registerComponents(components){
-		for(var name in components){
-			this.registerComponent(name, components[name]);
-		}
-	}
-
-	registerSkeleton(type, skeleton) {
-		this.skeletons[type] = skeleton;
-	}
-
-	registerSkeletons(skeletons) {
-		for(var type in skeletons){
-			this.registerSkeleton(type, skeletons[type]);
-		}
+	register(type, creator) {
+		this.creators[type] = creator;
 	}
 
 	create(type, config) {//right now can only have config code for things in a skeleton 
-		var guid = (config)? config.guid : null;
-		var actor = new Actor(guid);
 
-		var skeleton = this.skeletons[type];
-		var components = this.components;
+		if(type === null) return new Actor();
 
-		if(skeleton) {
-			for(var componentType in skeleton) {
-				var CC = this.components[componentType];
-				if(!CC) console.error(`Component ${componentType} Does Not Exist`);
-				var component = new CC();
 
-				actor.addComponent(component);
-
-				var defaults = skeleton[componentType];
-				component.setFromJSON(defaults);	
-
-				if(config){
-					var settings = config[componentType];
-					component.setFromJSON(settings);
-				}
-
-				component.initialize();
-				
-			}
+		var creator = this.creators[type];
+		if(!creator){
+			console.error(`Creator ${type} not found.`);
+			return null;
 		}
-		
 
-		return actor;
-
+		return creator(config);
 	}
 
 }

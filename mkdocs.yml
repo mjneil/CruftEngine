@@ -12,6 +12,10 @@ pages:
     - Component : 'cruft/core/Component.md'
     - ActorFactory : 'cruft/core/ActorFactory.md'
     - Scheduler : 'cruft/core/Scheduler.md'
+    - Emitter : 'cruft/core/Emitter.md'
+- Net :
+    - Cache : 'cruft/net/Cache.md'
+    - Loader : 'cruft/net/Loader.md'
 - Math :
     - vec2 : 'cruft/math/vec2.md'
     - vec3 : 'cruft/math/vec3.md'

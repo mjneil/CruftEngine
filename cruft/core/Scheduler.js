@@ -32,7 +32,7 @@ export default class Scheduler {
 
 		for(let proc of this.processes) {
 			if(proc.state === UNINITIALIZED){
-				proc.initialize();
+				proc.initialize(now);
 			}
 
 			if(proc.state === RUNNING){

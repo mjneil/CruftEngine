@@ -1,12 +1,13 @@
-import Component from "../core/Component"
-import {vec2, mat3} from "../math/math";
+import Component from "../Component"
+import {vec2, mat3} from "../../math/math";
+
 
 var IDENTITY_MATRIX = new mat3();
 	//mat3.identity(IDENTITY_MATRIX)//DO NOT CHANGE THIS.
 
 export default class Transform2D extends Component {
 	constructor() {
-		super("transform");
+		super();
 
 		this._position = vec2.zero();
 		this._scale = new vec2(1,1);
@@ -18,9 +19,7 @@ export default class Transform2D extends Component {
 	}
 
 	initialize() {
-		this.actor.on("setParent", () => {
-			this.updateMatrix();
-		})
+		this.updateMatrix();
 	}
 
 	get position () {
@@ -43,12 +42,12 @@ export default class Transform2D extends Component {
 	}
 
 	getWorldPosition() {
-		return new vec2(this.toWorld[6], this.toWorld[7]);
+		return new vec2(this.toWorld.data[6], this.toWorld.data[7]);
 	}
 
 	setDirection(vec) {
 		var tmp = vec.clone();
-		var len = tmp.length;
+		var len = tmp.length();
 		if (len == 0) {
 			this.rotation = 0;
 		} else {
@@ -59,8 +58,6 @@ export default class Transform2D extends Component {
 			}
 			this.rotation = theta;
 		}
-		
-
 	}
 
 	get scale() {
@@ -75,14 +72,13 @@ export default class Transform2D extends Component {
 	updateMatrix() { //possibly also keep track of inverse matrix? of both toWorld and local ? Useful for camera class.
 		//also setting matrix then adding to actor = not live toWorld matrix. :^)
 		var actor = this.actor;
-		var parent = this.parent;
+		var parent = actor.parent;
 		var toWorld = this.toWorld;
 		var matrix = this.matrix;
 		var _position = this._position;
 		var _rotation = this._rotation;
 
-		//optimize this later
-		matrix.indentity()
+		matrix.identity()
 			  .scale(this._scale)
 			  .rotate(this._rotation);
 
@@ -91,9 +87,8 @@ export default class Transform2D extends Component {
 
 		this.inverse.copy(matrix).invert();
 		//TODO z-index? What are we doing with that exactly. 
-
 		if (parent) {
-			toWorld.copy(mat3.multiply(parent.getComponent("transform").toWorld, matrix));
+			toWorld.copy(mat3.multiply(parent.getComponent("Transform2D").toWorld, matrix));
 		} else {
 			toWorld.copy(matrix);
 		}
@@ -106,30 +101,4 @@ export default class Transform2D extends Component {
 		}
 	}
 
-	setFromJSON(json) { //lazy. update this to not call updateMatrix 3 times. 
-		if (!json) {
-			return;
-		}
-
-		var needsUpdate = false;
-		
-		if (json.position) {
-			this._position.copy(json.position);
-			needsUpdate = true;
-		}
-
-		if (json.rotation !== undefined) {
-			this._rotation= json.rotation;
-			needsUpdate = true;
-		}
-
-		if (json.scale) {
-			this._scale.copy(json.scale);
-			needsUpdate = true;
-		}
-
-		if (needsUpdate) {
-			this.updateMatrix();
-		}
-	}
 }

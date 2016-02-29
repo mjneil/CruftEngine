@@ -1,4 +1,4 @@
-import Process from "engine/core/Process"
+import Process from "../Process"
 
 export default class Interval extends Process {
 	constructor(cb, interval) {
