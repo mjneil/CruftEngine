@@ -110,7 +110,7 @@ let c = vec2.scale(a, 10);
 Calculates a - b.
 
 ```javascript
-let c = vec2.subt(a, b);
+let c = vec2.sub(a, b);
 ```
 
 
