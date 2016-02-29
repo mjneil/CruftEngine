@@ -207,6 +207,42 @@
   </li>
 
       
+        
+  <li>
+    <a class="" title="Emitter" href="../../core/Emitter/">
+      Emitter
+    </a>
+    
+  </li>
+
+      
+    </ul>
+  </li>
+
+          
+            
+  <li>
+    <span class="section">Net</span>
+    <ul>
+      
+        
+  <li>
+    <a class="" title="Cache" href="../../net/Cache/">
+      Cache
+    </a>
+    
+  </li>
+
+      
+        
+  <li>
+    <a class="" title="Loader" href="../../net/Loader/">
+      Loader
+    </a>
+    
+  </li>
+
+      
     </ul>
   </li>
 
@@ -312,31 +348,155 @@
           
           <p><a href="https://github.com/mjneil/CruftEngine/blob/master/cruft/math/vec2.js">cruft/math/vec2.js</a>    <br />
 This class defines a 2d vector.     </p>
-<h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">&para;</a></h2>
-<h3 id="vec2-x-y">vec2( <a href="../../../primitives/#Number">x</a>, <a href="../../../primitives/#Number">y</a> )<a class="headerlink" href="#vec2-x-y" title="Permanent link">&para;</a></h3>
-<p><a href="../../../primitives/#Number">x</a> - Initial x value of the vector.   <br />
-<a href="../../../primitives/#Number">y</a> - Initial y value of the vector. </p>
-<pre><code class="javascript">let a = new vec2(1, 2);
-</code></pre>
-
-<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
-<p>.<a href="../../../primitives/#Number">x</a> - Value of the x component.   <br />
-.<a href="../../../primitives/#Number">y</a> - Value of the y component.</p>
-<h2 id="static-methods">Static Methods<a class="headerlink" href="#static-methods" title="Permanent link">&para;</a></h2>
-<h3 id="zero">zero()<a class="headerlink" href="#zero" title="Permanent link">&para;</a></h3>
-<p>Constructs the zero vector.</p>
-<pre><code class="javascript">let a = vec2.zero();
-</code></pre>
-
-<h3 id="add-a-b">add( <a href="./">a</a>, <a href="./">b</a> )<a class="headerlink" href="#add-a-b" title="Permanent link">&para;</a></h3>
-<p>Adds a and b, returning the result.</p>
+<h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">#</a></h2>
+<h3 id="vec2-x-y">vec2( <a href="../../../primitives/#number">x</a>, <a href="../../../primitives/#number">y</a> )<a class="headerlink" href="#vec2-x-y" title="Permanent link">#</a></h3>
+<p><a href="../../../primitives/#number">x</a> - Initial x value of the vector.   <br />
+<a href="../../../primitives/#number">y</a> - Initial y value of the vector. </p>
 <pre><code class="javascript">let a = new vec2(1, 2);
 let b = new vec2(3, 4);
-
-let c = vec2.add(a, b);
 </code></pre>
 
-<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="static-zero">static zero()<a class="headerlink" href="#static-zero" title="Permanent link">#</a></h3>
+<p>Constructs the zero vector.</p>
+<pre><code class="javascript">let c = vec2.zero();
+</code></pre>
+
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">#</a></h2>
+<p>.<a href="../../../primitives/#number">x</a> - Value of the x component.   <br />
+.<a href="../../../primitives/#number">y</a> - Value of the y component.</p>
+<h2 id="static-methods">Static Methods<a class="headerlink" href="#static-methods" title="Permanent link">#</a></h2>
+<h3 id="static-add-a-b">static add( <a href="./">a</a>, <a href="./">b</a> )<a class="headerlink" href="#static-add-a-b" title="Permanent link">#</a></h3>
+<p>Adds a and b, returning the result.</p>
+<pre><code class="javascript">let c = vec2.add(a, b);
+</code></pre>
+
+<h3 id="static-addscalar-a-s">static addScalar( <a href="./">a</a>, <a href="../../../primitives/#number">s</a> )<a class="headerlink" href="#static-addscalar-a-s" title="Permanent link">#</a></h3>
+<p>Adds scalar value s to a, returning the result.</p>
+<pre><code class="javascript">let c = vec2.addScalar(a, 3);
+</code></pre>
+
+<h3 id="static-clone-a">static clone( <a href="./">a</a> )<a class="headerlink" href="#static-clone-a" title="Permanent link">#</a></h3>
+<p>Returns clone of vector a.</p>
+<pre><code class="javascript">let c = vec2.clone(a);
+</code></pre>
+
+<h3 id="static-cross-a-b">static cross( <a href="./">a</a>, <a href="./">b</a> )<a class="headerlink" href="#static-cross-a-b" title="Permanent link">#</a></h3>
+<p>Calculates a cross b, returning the result.</p>
+<pre><code class="javascript">let c = vec2.cross(a, b);
+</code></pre>
+
+<h3 id="static-crossscalar-a-s-left">static crossScalar( <a href="./">a</a>, <a href="../../../primitives/#number">s</a>, <a href="../../../primitives/#boolean">left</a> )<a class="headerlink" href="#static-crossscalar-a-s-left" title="Permanent link">#</a></h3>
+<p>Calculates the cross product on a vector and a scalar. If left, then calculates s cross a, otherwise a cross s.</p>
+<pre><code class="javascript">let c = vec2.crossScalar(a, 5);
+let d = vec2.crossScalar(b, 3, true);
+</code></pre>
+
+<h3 id="static-dot-a-b">static dot( <a href="./">a</a>, <a href="./">b</a> )<a class="headerlink" href="#static-dot-a-b" title="Permanent link">#</a></h3>
+<p>Calculates a dot b, returning the result.</p>
+<pre><code class="javascript">let c = vec2.dot(a, b);
+</code></pre>
+
+<h3 id="static-length-a">static length( <a href="./">a</a> )<a class="headerlink" href="#static-length-a" title="Permanent link">#</a></h3>
+<p>Calculates the length of vector a.</p>
+<pre><code class="javascript">let len = vec2.length(a);
+</code></pre>
+
+<h3 id="static-lengthsquared-a">static lengthSquared( <a href="./">a</a> )<a class="headerlink" href="#static-lengthsquared-a" title="Permanent link">#</a></h3>
+<p>Calculates the length squared of vector a.</p>
+<pre><code class="javascript">let lensq = vec.lengthSquared(a);
+</code></pre>
+
+<h3 id="static-negate-a">static negate( <a href="./">a</a> )<a class="headerlink" href="#static-negate-a" title="Permanent link">#</a></h3>
+<p>Returns the inverse of vector a.</p>
+<pre><code class="javascript">let inv = vec2.negate(a);
+</code></pre>
+
+<h3 id="static-normalize-a">static normalize( <a href="./">a</a> )<a class="headerlink" href="#static-normalize-a" title="Permanent link">#</a></h3>
+<p>Calclates the normalized vector of a.</p>
+<pre><code class="javascript">let norm = vec2.normalize(a);
+</code></pre>
+
+<h3 id="static-scale-a-s">static scale( <a href="./">a</a>, <a href="../../../primitives/#number">s</a> )<a class="headerlink" href="#static-scale-a-s" title="Permanent link">#</a></h3>
+<p>Scales vector a by s.</p>
+<pre><code class="javascript">let c = vec2.scale(a, 10);
+</code></pre>
+
+<h3 id="static-sub-a-b">static sub( <a href="./">a</a>, <a href="./">b</a> )<a class="headerlink" href="#static-sub-a-b" title="Permanent link">#</a></h3>
+<p>Calculates a - b.</p>
+<pre><code class="javascript">let c = vec2.subt(a, b);
+</code></pre>
+
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">#</a></h2>
+<h3 id="add-b">add( <a href="./">b</a> )<a class="headerlink" href="#add-b" title="Permanent link">#</a></h3>
+<p>Adds vector b to this, returning this.</p>
+<pre><code class="javascript">a.add(b);
+</code></pre>
+
+<h3 id="addscalar-s">addScalar( <a href="../../../primitives/#number">s</a> )<a class="headerlink" href="#addscalar-s" title="Permanent link">#</a></h3>
+<p>Adds scalar value s to this, returning this.</p>
+<pre><code class="javascript">a.addScalar(3);
+</code></pre>
+
+<h3 id="clone">clone()<a class="headerlink" href="#clone" title="Permanent link">#</a></h3>
+<p>Returns clone of this.</p>
+<pre><code class="javascript">let c = a.clone();
+</code></pre>
+
+<h3 id="copy-b">copy( <a href="./">b</a> )<a class="headerlink" href="#copy-b" title="Permanent link">#</a></h3>
+<p>Copies vec2 b into this.</p>
+<pre><code class="javascript">a.copy(b);
+</code></pre>
+
+<h3 id="cross-b">cross( <a href="./">b</a> )<a class="headerlink" href="#cross-b" title="Permanent link">#</a></h3>
+<p>Calculates this cross b, returning this.</p>
+<pre><code class="javascript">a.cross(b);
+</code></pre>
+
+<h3 id="crossscalar-s-left">crossScalar( <a href="../../../primitives/#number">s</a>, <a href="../../../primitives/#boolean">left</a> )<a class="headerlink" href="#crossscalar-s-left" title="Permanent link">#</a></h3>
+<p>Calculates the cross product on this and a scalar. If left, then calculates s cross this, otherwise this cross s.</p>
+<pre><code class="javascript">a.crossScalar(5);
+b.crossScalar(3, true);
+</code></pre>
+
+<h3 id="dot-b">dot( <a href="./">b</a> )<a class="headerlink" href="#dot-b" title="Permanent link">#</a></h3>
+<p>Calculates this dot b, returning this.</p>
+<pre><code class="javascript">a.dot(b);
+</code></pre>
+
+<h3 id="equals-b">equals( <a href="./">b</a> )<a class="headerlink" href="#equals-b" title="Permanent link">#</a></h3>
+<p>Checks for strict equality of this and b.</p>
+<pre><code class="javascript">let eq = a.equals(b);
+</code></pre>
+
+<h3 id="length">length()<a class="headerlink" href="#length" title="Permanent link">#</a></h3>
+<p>Calculates the length of this.</p>
+<pre><code class="javascript">let len = a.length();
+</code></pre>
+
+<h3 id="lengthsquared">lengthSquared()<a class="headerlink" href="#lengthsquared" title="Permanent link">#</a></h3>
+<p>Calculates the length squared of this.</p>
+<pre><code class="javascript">let lensq = a.lengthSquared();
+</code></pre>
+
+<h3 id="negate">negate()<a class="headerlink" href="#negate" title="Permanent link">#</a></h3>
+<p>Inverts this vector.</p>
+<pre><code class="javascript">a.negate();
+</code></pre>
+
+<h3 id="normalize">normalize()<a class="headerlink" href="#normalize" title="Permanent link">#</a></h3>
+<p>Normalizes this vector.</p>
+<pre><code class="javascript">a.normalize();
+</code></pre>
+
+<h3 id="scale-s">scale( <a href="../../../primitives/#number">s</a> )<a class="headerlink" href="#scale-s" title="Permanent link">#</a></h3>
+<p>Scales this by s.</p>
+<pre><code class="javascript">a.scale(10);
+</code></pre>
+
+<h3 id="sub-b">sub( <a href="./">b</a> )<a class="headerlink" href="#sub-b" title="Permanent link">#</a></h3>
+<p>Subtracts this by vector b.</p>
+<pre><code class="javascript">a.sub(b);
+</code></pre>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -353,7 +513,7 @@ let c = vec2.add(a, b);
   <nav class="pagination" aria-label="Footer">
     <div class="previous">
       
-        <a href="../../core/Scheduler/" title="Scheduler">
+        <a href="../../net/Loader/" title="Loader">
           <span class="direction">Previous</span>
           <div class="page">
             <div class="button button-previous" role="button" aria-label="Previous">
@@ -361,7 +521,7 @@ let c = vec2.add(a, b);
             </div>
             <div class="stretch">
               <div class="title">
-                Scheduler
+                Loader
               </div>
             </div>
           </div>

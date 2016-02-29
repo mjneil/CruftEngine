@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>ActorFactory - CruftEngine</title>
+        <title>Loader - CruftEngine</title>
       
       
       
@@ -87,13 +87,13 @@
           <span class="path">
             
               
-                Core <i class="icon icon-link"></i>
+                Net <i class="icon icon-link"></i>
               
             
           </span>
         
         
-          ActorFactory
+          Loader
         
       </div>
     </div>
@@ -173,7 +173,7 @@
       
         
   <li>
-    <a class="" title="Actor" href="../Actor/">
+    <a class="" title="Actor" href="../../core/Actor/">
       Actor
     </a>
     
@@ -182,7 +182,7 @@
       
         
   <li>
-    <a class="" title="Component" href="../Component/">
+    <a class="" title="Component" href="../../core/Component/">
       Component
     </a>
     
@@ -191,41 +191,16 @@
       
         
   <li>
-    <a class="current" title="ActorFactory" href="./">
+    <a class="" title="ActorFactory" href="../../core/ActorFactory/">
       ActorFactory
     </a>
-    
-      
-      
-        <ul>
-          
-            <li class="anchor">
-              <a title="Importing" href="#importing">
-                Importing
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Constructors" href="#constructors">
-                Constructors
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Methods" href="#methods">
-                Methods
-              </a>
-            </li>
-          
-        </ul>
-      
     
   </li>
 
       
         
   <li>
-    <a class="" title="Scheduler" href="../Scheduler/">
+    <a class="" title="Scheduler" href="../../core/Scheduler/">
       Scheduler
     </a>
     
@@ -234,7 +209,7 @@
       
         
   <li>
-    <a class="" title="Emitter" href="../Emitter/">
+    <a class="" title="Emitter" href="../../core/Emitter/">
       Emitter
     </a>
     
@@ -252,7 +227,7 @@
       
         
   <li>
-    <a class="" title="Cache" href="../../net/Cache/">
+    <a class="" title="Cache" href="../Cache/">
       Cache
     </a>
     
@@ -261,9 +236,16 @@
       
         
   <li>
-    <a class="" title="Loader" href="../../net/Loader/">
+    <a class="current" title="Loader" href="./">
       Loader
     </a>
+    
+      
+      
+        <ul>
+          
+        </ul>
+      
     
   </li>
 
@@ -337,40 +319,10 @@
         <div class="wrapper">
           
             
-              <h1>ActorFactory</h1>
+              <h1>Loader</h1>
             
           
-          <p><a href="https://github.com/mjneil/CruftEngine/blob/master/cruft/core/ActorFactory.js">cruft/core/ActorFactory.js</a>    <br />
-This class defines an ActorFactory. </p>
-<h2 id="importing">Importing<a class="headerlink" href="#importing" title="Permanent link">#</a></h2>
-<pre><code class="javascript">import ActorFactory from &quot;cruft/core/ActorFactory&quot;;
-</code></pre>
-
-<h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">#</a></h2>
-<h3 id="actorfactory">ActorFactory( )<a class="headerlink" href="#actorfactory" title="Permanent link">#</a></h3>
-<pre><code class="javascript">let factory = new ActorFactory();
-</code></pre>
-
-<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">#</a></h2>
-<h3 id="register-name-creator">register( <a href="../../../primitives/#string">name</a>, <a href="../../../primitives/#function">creator</a> )<a class="headerlink" href="#register-name-creator" title="Permanent link">#</a></h3>
-<p><a href="../../../primitives/#string">name</a> - name to associate with the given creator function.    <br />
-<a href="../../../primitives/#function">creator</a> - a function that returns an actor. </p>
-<pre><code class="javascript">let EmptyCreator = () =&gt; {
-    return new Actor();
-}
-factory.register(&quot;Empty&quot;, EmptyCreator)
-</code></pre>
-
-<h3 id="create-name-config">create(  <a href="../../../primitives/#string">name</a>, <a href="../../../primitives/#object">config</a> )<a class="headerlink" href="#create-name-config" title="Permanent link">#</a></h3>
-<p>creates an actor of the given type.  </p>
-<pre><code class="javascript">
-let MyCreator = (config) =&gt; {
-    return new Actor(config.guid);
-}
-
-factory.register(&quot;MyCreator&quot;, MyCreator)
-let actor = factory.create(&quot;MyCreator&quot;, {guid : 12});
-</code></pre>
+          
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -387,7 +339,7 @@ let actor = factory.create(&quot;MyCreator&quot;, {guid : 12});
   <nav class="pagination" aria-label="Footer">
     <div class="previous">
       
-        <a href="../Component/" title="Component">
+        <a href="../Cache/" title="Cache">
           <span class="direction">Previous</span>
           <div class="page">
             <div class="button button-previous" role="button" aria-label="Previous">
@@ -395,7 +347,7 @@ let actor = factory.create(&quot;MyCreator&quot;, {guid : 12});
             </div>
             <div class="stretch">
               <div class="title">
-                Component
+                Cache
               </div>
             </div>
           </div>
@@ -404,12 +356,12 @@ let actor = factory.create(&quot;MyCreator&quot;, {guid : 12});
     </div>
     <div class="next">
       
-        <a href="../Scheduler/" title="Scheduler">
+        <a href="../../math/vec2/" title="vec2">
           <span class="direction">Next</span>
           <div class="page">
             <div class="stretch">
               <div class="title">
-                Scheduler
+                vec2
               </div>
             </div>
             <div class="button button-next" role="button" aria-label="Next">

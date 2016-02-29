@@ -207,6 +207,42 @@
   </li>
 
       
+        
+  <li>
+    <a class="" title="Emitter" href="../../core/Emitter/">
+      Emitter
+    </a>
+    
+  </li>
+
+      
+    </ul>
+  </li>
+
+          
+            
+  <li>
+    <span class="section">Net</span>
+    <ul>
+      
+        
+  <li>
+    <a class="" title="Cache" href="../../net/Cache/">
+      Cache
+    </a>
+    
+  </li>
+
+      
+        
+  <li>
+    <a class="" title="Loader" href="../../net/Loader/">
+      Loader
+    </a>
+    
+  </li>
+
+      
     </ul>
   </li>
 
@@ -243,6 +279,24 @@
       
       
         <ul>
+          
+            <li class="anchor">
+              <a title="Constructors" href="#constructors">
+                Constructors
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Properties" href="#properties">
+                Properties
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Static Methods" href="#static-methods">
+                Static Methods
+              </a>
+            </li>
           
         </ul>
       
@@ -286,7 +340,102 @@
               <h1>mat3</h1>
             
           
-          
+          <p><a href="https://github.com/mjneil/CruftEngine/blob/master/cruft/math/mat3.js">cruft/math/mat3.js</a>    <br />
+This class defines a 3x3 matrix.</p>
+<h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">#</a></h2>
+<h3 id="mat3">mat3()<a class="headerlink" href="#mat3" title="Permanent link">#</a></h3>
+<p>Creats a 3x3 matrix and initializes it to the indentity matrix.</p>
+<pre><code class="javascript">let a = new mat3();
+let b = new mat3();
+</code></pre>
+
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">#</a></h2>
+<p><a href="../../../primitives/#float32array">data</a> - Column-major array representation of the 3x3 matrix.</p>
+<h2 id="static-methods">Static Methods<a class="headerlink" href="#static-methods" title="Permanent link">#</a></h2>
+<h3 id="static-clone-a">static clone( <a href="./">a</a> )<a class="headerlink" href="#static-clone-a" title="Permanent link">#</a></h3>
+<p>Creates a copy of matrix a.</p>
+<pre><code class="javascript">let c = mat3.clone(a);
+</code></pre>
+
+<h3 id="static-multiply-a-b">static multiply( <a href="./">A</a>, <a href="./">B</a> )<a class="headerlink" href="#static-multiply-a-b" title="Permanent link">#</a></h3>
+<p>Calculates A * B.</p>
+<pre><code class="javascript">let c = mat3.multiply(A, B);
+
+## Methods
+
+### add( [B](mat3.md) )
+Calculates this + B.
+
+```javascript
+a.add(b);
+</code></pre>
+
+<h3 id="clone">clone()<a class="headerlink" href="#clone" title="Permanent link">#</a></h3>
+<p>Creates a copy of this matrix.</p>
+<pre><code class="javascript">let c = a.clone();
+</code></pre>
+
+<h3 id="copy-b">copy( <a href="./">b</a> )<a class="headerlink" href="#copy-b" title="Permanent link">#</a></h3>
+<p>Copies matrix b into this.</p>
+<pre><code class="javascript">a.copy(b);
+</code></pre>
+
+<h3 id="determinant">determinant()<a class="headerlink" href="#determinant" title="Permanent link">#</a></h3>
+<p>Calculates the determinant of this matrix.</p>
+<pre><code class="javascript">a.determinant();
+</code></pre>
+
+<h3 id="equals-b">equals( <a href="./">B</a> )<a class="headerlink" href="#equals-b" title="Permanent link">#</a></h3>
+<p>Checks for strict equality of this and B.</p>
+<pre><code class="javascript">let eq = a.equals(b);
+</code></pre>
+
+<h3 id="identity">identity()<a class="headerlink" href="#identity" title="Permanent link">#</a></h3>
+<p>Sets this matrix to the identity matrix.</p>
+<pre><code class="javascript">a.identity();
+</code></pre>
+
+<h3 id="invert">invert()<a class="headerlink" href="#invert" title="Permanent link">#</a></h3>
+<p>Inverts this matrix in place. Returns null if not invertible.</p>
+<pre><code class="javascript">a.invert();
+</code></pre>
+
+<h3 id="multiply-b">multiply( <a href="./">B</a> )<a class="headerlink" href="#multiply-b" title="Permanent link">#</a></h3>
+<p>Multiplies this matrix by B in place.</p>
+<pre><code class="javascript">a.multiply(b);
+</code></pre>
+
+<h3 id="multiplyscalar-s">multiplyScalar( <a href="../../../primitives/#number">s</a> )<a class="headerlink" href="#multiplyscalar-s" title="Permanent link">#</a></h3>
+<p>Multiplies this matrix by scalar s.</p>
+<pre><code class="javascript">a.multiplyScalar(4);
+</code></pre>
+
+<h3 id="rotate-rad">rotate( <a href="../../../primitives/#number">rad</a> )<a class="headerlink" href="#rotate-rad" title="Permanent link">#</a></h3>
+<p>Rotates this matrix by angle rad.</p>
+<pre><code class="javascript">a.rotate(Math.PI / 2);
+</code></pre>
+
+<h3 id="scalev">scale(<a href="../vec2/">v</a> )<a class="headerlink" href="#scalev" title="Permanent link">#</a></h3>
+<p>Scales this matrix by vec2 v.</p>
+<pre><code class="javascript">let v = new vec2(5, 10);
+a.scale(v);
+</code></pre>
+
+<h3 id="subtract-b">subtract( <a href="./">B</a> )<a class="headerlink" href="#subtract-b" title="Permanent link">#</a></h3>
+<p>Calculates this - B.</p>
+<pre><code class="javascript">a.subtract(b);
+</code></pre>
+
+<h3 id="translate-v">translate( <a href="../vec2/">v</a> )<a class="headerlink" href="#translate-v" title="Permanent link">#</a></h3>
+<p>Translates this matrix by vec2 v.</p>
+<pre><code class="javascript">let v = new vec2(1, 2);
+a.translate(v);
+</code></pre>
+
+<h3 id="transpose">transpose()<a class="headerlink" href="#transpose" title="Permanent link">#</a></h3>
+<p>Transposes this matrix in place.</p>
+<pre><code class="javascript">a.transpose();
+</code></pre>
           <aside class="copyright" role="note">
             
             Documentation built with

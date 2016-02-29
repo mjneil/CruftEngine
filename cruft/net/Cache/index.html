@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     
       
-        <title>ActorFactory - CruftEngine</title>
+        <title>Cache - CruftEngine</title>
       
       
       
@@ -87,13 +87,13 @@
           <span class="path">
             
               
-                Core <i class="icon icon-link"></i>
+                Net <i class="icon icon-link"></i>
               
             
           </span>
         
         
-          ActorFactory
+          Cache
         
       </div>
     </div>
@@ -173,7 +173,7 @@
       
         
   <li>
-    <a class="" title="Actor" href="../Actor/">
+    <a class="" title="Actor" href="../../core/Actor/">
       Actor
     </a>
     
@@ -182,7 +182,7 @@
       
         
   <li>
-    <a class="" title="Component" href="../Component/">
+    <a class="" title="Component" href="../../core/Component/">
       Component
     </a>
     
@@ -191,41 +191,16 @@
       
         
   <li>
-    <a class="current" title="ActorFactory" href="./">
+    <a class="" title="ActorFactory" href="../../core/ActorFactory/">
       ActorFactory
     </a>
-    
-      
-      
-        <ul>
-          
-            <li class="anchor">
-              <a title="Importing" href="#importing">
-                Importing
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Constructors" href="#constructors">
-                Constructors
-              </a>
-            </li>
-          
-            <li class="anchor">
-              <a title="Methods" href="#methods">
-                Methods
-              </a>
-            </li>
-          
-        </ul>
-      
     
   </li>
 
       
         
   <li>
-    <a class="" title="Scheduler" href="../Scheduler/">
+    <a class="" title="Scheduler" href="../../core/Scheduler/">
       Scheduler
     </a>
     
@@ -234,7 +209,7 @@
       
         
   <li>
-    <a class="" title="Emitter" href="../Emitter/">
+    <a class="" title="Emitter" href="../../core/Emitter/">
       Emitter
     </a>
     
@@ -252,16 +227,35 @@
       
         
   <li>
-    <a class="" title="Cache" href="../../net/Cache/">
+    <a class="current" title="Cache" href="./">
       Cache
     </a>
+    
+      
+      
+        <ul>
+          
+            <li class="anchor">
+              <a title="Importing" href="#importing">
+                Importing
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Methods" href="#methods">
+                Methods
+              </a>
+            </li>
+          
+        </ul>
+      
     
   </li>
 
       
         
   <li>
-    <a class="" title="Loader" href="../../net/Loader/">
+    <a class="" title="Loader" href="../Loader/">
       Loader
     </a>
     
@@ -337,39 +331,37 @@
         <div class="wrapper">
           
             
-              <h1>ActorFactory</h1>
+              <h1>Cache</h1>
             
           
-          <p><a href="https://github.com/mjneil/CruftEngine/blob/master/cruft/core/ActorFactory.js">cruft/core/ActorFactory.js</a>    <br />
-This class defines an ActorFactory. </p>
+          <p><a href="https://github.com/mjneil/CruftEngine/blob/master/cruft/net/Cache.js">cruft/net/Cache.js</a>    <br />
+This class defines a Cache. </p>
 <h2 id="importing">Importing<a class="headerlink" href="#importing" title="Permanent link">#</a></h2>
-<pre><code class="javascript">import ActorFactory from &quot;cruft/core/ActorFactory&quot;;
-</code></pre>
-
-<h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">#</a></h2>
-<h3 id="actorfactory">ActorFactory( )<a class="headerlink" href="#actorfactory" title="Permanent link">#</a></h3>
-<pre><code class="javascript">let factory = new ActorFactory();
+<pre><code class="javascript">import Cache from &quot;cruft/net/Cache&quot;;
 </code></pre>
 
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">#</a></h2>
-<h3 id="register-name-creator">register( <a href="../../../primitives/#string">name</a>, <a href="../../../primitives/#function">creator</a> )<a class="headerlink" href="#register-name-creator" title="Permanent link">#</a></h3>
-<p><a href="../../../primitives/#string">name</a> - name to associate with the given creator function.    <br />
-<a href="../../../primitives/#function">creator</a> - a function that returns an actor. </p>
-<pre><code class="javascript">let EmptyCreator = () =&gt; {
-    return new Actor();
-}
-factory.register(&quot;Empty&quot;, EmptyCreator)
+<h3 id="register-name-loader">register( <a href="../../../primitives#string">name</a>, <a href="../Loader/">Loader</a> )<a class="headerlink" href="#register-name-loader" title="Permanent link">#</a></h3>
+<p>Register Cache loader to the given name. </p>
+<pre><code class="javascript">import ObjLoader from &quot;cruft/net/loaders/ObjLoader&quot;;
+cache.register(&quot;obj&quot;, new ObjLoader());
+cache.get(&quot;obj!assets/models/CruftModel.obj&quot;).then((asset) =&gt; {
+    //asset is the parsed obj model
+});
 </code></pre>
 
-<h3 id="create-name-config">create(  <a href="../../../primitives/#string">name</a>, <a href="../../../primitives/#object">config</a> )<a class="headerlink" href="#create-name-config" title="Permanent link">#</a></h3>
-<p>creates an actor of the given type.  </p>
-<pre><code class="javascript">
-let MyCreator = (config) =&gt; {
-    return new Actor(config.guid);
-}
+<h3 id="get-path">get( <a href="../../../primitives/#string">path</a> )<a class="headerlink" href="#get-path" title="Permanent link">#</a></h3>
+<p>Path to the asset to load. Optionaly prefixed with pluginname! to specify which loader to use.</p>
+<pre><code class="javascript">cache.get(&quot;json!assets/data/data.json&quot;).then((data) =&gt; {
+    console.log(data.pasword)//data is an obect. 
+});
+</code></pre>
 
-factory.register(&quot;MyCreator&quot;, MyCreator)
-let actor = factory.create(&quot;MyCreator&quot;, {guid : 12});
+<h3 id="load-paths">load( ...<a href="../../../primitives/#string">paths</a> )<a class="headerlink" href="#load-paths" title="Permanent link">#</a></h3>
+<p>load all of the specified paths. </p>
+<pre><code class="javascript">cache.load(&quot;json!assets/data/data.json&quot;, &quot;json!assets/data/data2.json&quot;).then((paths) =&gt; {
+    console.log(paths[&quot;json!assets/data.txt&quot;]); // contents of data.json
+})
 </code></pre>
           <aside class="copyright" role="note">
             
@@ -387,7 +379,7 @@ let actor = factory.create(&quot;MyCreator&quot;, {guid : 12});
   <nav class="pagination" aria-label="Footer">
     <div class="previous">
       
-        <a href="../Component/" title="Component">
+        <a href="../../core/Emitter/" title="Emitter">
           <span class="direction">Previous</span>
           <div class="page">
             <div class="button button-previous" role="button" aria-label="Previous">
@@ -395,7 +387,7 @@ let actor = factory.create(&quot;MyCreator&quot;, {guid : 12});
             </div>
             <div class="stretch">
               <div class="title">
-                Component
+                Emitter
               </div>
             </div>
           </div>
@@ -404,12 +396,12 @@ let actor = factory.create(&quot;MyCreator&quot;, {guid : 12});
     </div>
     <div class="next">
       
-        <a href="../Scheduler/" title="Scheduler">
+        <a href="../Loader/" title="Loader">
           <span class="direction">Next</span>
           <div class="page">
             <div class="stretch">
               <div class="title">
-                Scheduler
+                Loader
               </div>
             </div>
             <div class="button button-next" role="button" aria-label="Next">

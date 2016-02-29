@@ -187,8 +187,35 @@
     </a>
     
       
+        
+        
+      
       
         <ul>
+          
+            <li class="anchor">
+              <a title="Importing" href="#importing">
+                Importing
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Constructors" href="#constructors">
+                Constructors
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Properties" href="#properties">
+                Properties
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Methods" href="#methods">
+                Methods
+              </a>
+            </li>
           
         </ul>
       
@@ -209,6 +236,42 @@
   <li>
     <a class="" title="Scheduler" href="../Scheduler/">
       Scheduler
+    </a>
+    
+  </li>
+
+      
+        
+  <li>
+    <a class="" title="Emitter" href="../Emitter/">
+      Emitter
+    </a>
+    
+  </li>
+
+      
+    </ul>
+  </li>
+
+          
+            
+  <li>
+    <span class="section">Net</span>
+    <ul>
+      
+        
+  <li>
+    <a class="" title="Cache" href="../../net/Cache/">
+      Cache
+    </a>
+    
+  </li>
+
+      
+        
+  <li>
+    <a class="" title="Loader" href="../../net/Loader/">
+      Loader
     </a>
     
   </li>
@@ -282,11 +345,38 @@
       <article class="article">
         <div class="wrapper">
           
-            
-              <h1>Component</h1>
-            
-          
-          
+          <h1 id="component-extends-emitter">Component extends <a href="../Emitter/">Emitter</a><a class="headerlink" href="#component-extends-emitter" title="Permanent link">#</a></h1>
+<p><a href="https://github.com/mjneil/CruftEngine/blob/master/cruft/core/Component.js">cruft/core/Component.js</a>      <br />
+This class defines a Component. </p>
+<h2 id="importing">Importing<a class="headerlink" href="#importing" title="Permanent link">#</a></h2>
+<pre><code class="javascript">import Component from &quot;cruft/core/Component&quot;;
+</code></pre>
+
+<h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">#</a></h2>
+<h3 id="component-guid">Component( [ <a href="../../../primitives/#number">guid</a> ] )<a class="headerlink" href="#component-guid" title="Permanent link">#</a></h3>
+<p><a href="../../../primitives/#number">guid</a> - guid of the component. </p>
+<pre><code class="javascript">let component = new Component();
+</code></pre>
+
+<h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">#</a></h2>
+<p>.<a href="../../../primitives/#number">guid</a> - guid of the component.       <br />
+.<a href="../Actor/">actor</a> - Strong reference to the parent Actor.  </p>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">#</a></h2>
+<h3 id="initialize">initialize( )<a class="headerlink" href="#initialize" title="Permanent link">#</a></h3>
+<p>Initializes the component.    <br />
+<strong>initialize is already called once the component has been added to an active actor in the scene.  </strong></p>
+<pre><code class="javascript">component.initialize();
+</code></pre>
+
+<h3 id="update-now-deltams">update( <a href="../../../primitives/#number">now</a>, <a href="../../../primitives/#number">deltaMs</a> )<a class="headerlink" href="#update-now-deltams" title="Permanent link">#</a></h3>
+<p>Update the component every game loop.       </p>
+<pre><code class="javascript">component.update(now, deltaMs);
+</code></pre>
+
+<h3 id="destroy">destroy(  )<a class="headerlink" href="#destroy" title="Permanent link">#</a></h3>
+<p>//DESC</p>
+<pre><code class="javascript">//EXAMPLE
+</code></pre>
           <aside class="copyright" role="note">
             
             Documentation built with

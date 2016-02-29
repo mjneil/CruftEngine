@@ -208,8 +208,62 @@
       
         <ul>
           
+            <li class="anchor">
+              <a title="Importing" href="#importing">
+                Importing
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Constructors" href="#constructors">
+                Constructors
+              </a>
+            </li>
+          
+            <li class="anchor">
+              <a title="Methods" href="#methods">
+                Methods
+              </a>
+            </li>
+          
         </ul>
       
+    
+  </li>
+
+      
+        
+  <li>
+    <a class="" title="Emitter" href="../Emitter/">
+      Emitter
+    </a>
+    
+  </li>
+
+      
+    </ul>
+  </li>
+
+          
+            
+  <li>
+    <span class="section">Net</span>
+    <ul>
+      
+        
+  <li>
+    <a class="" title="Cache" href="../../net/Cache/">
+      Cache
+    </a>
+    
+  </li>
+
+      
+        
+  <li>
+    <a class="" title="Loader" href="../../net/Loader/">
+      Loader
+    </a>
     
   </li>
 
@@ -286,7 +340,27 @@
               <h1>Scheduler</h1>
             
           
-          
+          <p><a href="https://github.com/mjneil/CruftEngine/blob/master/cruft/core/Scheduler.js">cruft/core/Scheduler.js</a>      <br />
+This class defines a Scheduler. </p>
+<h2 id="importing">Importing<a class="headerlink" href="#importing" title="Permanent link">#</a></h2>
+<pre><code class="javascript">import Scheduler from &quot;cruft/core/Scheduler&quot;;
+</code></pre>
+
+<h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">#</a></h2>
+<h3 id="scheduler">Scheduler( )<a class="headerlink" href="#scheduler" title="Permanent link">#</a></h3>
+<pre><code class="javascript">let scheduler = new Scheduler();
+</code></pre>
+
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">#</a></h2>
+<h3 id="start-deltams">start( <a href="../../../primitives/#number">deltaMs</a> )<a class="headerlink" href="#start-deltams" title="Permanent link">#</a></h3>
+<p>Starts the scheduler with the given delay. </p>
+<pre><code class="javascript">scheduler.start(17);
+</code></pre>
+
+<h3 id="kill">kill( )<a class="headerlink" href="#kill" title="Permanent link">#</a></h3>
+<p>Stops the scheduler from updating. </p>
+<pre><code class="javascript">scheduler.kill()
+</code></pre>
           <aside class="copyright" role="note">
             
             Documentation built with
@@ -320,12 +394,12 @@
     </div>
     <div class="next">
       
-        <a href="../../math/vec2/" title="vec2">
+        <a href="../Emitter/" title="Emitter">
           <span class="direction">Next</span>
           <div class="page">
             <div class="stretch">
               <div class="title">
-                vec2
+                Emitter
               </div>
             </div>
             <div class="button button-next" role="button" aria-label="Next">

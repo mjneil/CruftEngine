@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Welcome to CruftEngine\n\n\nFor full source code visit \nGithub\n.", 
+            "text": "Welcome to CruftEngine\n#\n\n\nFor full source code visit \nGithub\n.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/cruft/core/Actor/", 
-            "text": "Actor extends \nEmitter\n\n\ncruft/core/Actor.js\n      \n\nThis class defines an Actor. \n\n\nImporting\n\n\nimport Actor from \ncruft/core/Actor\n\n\n\n\n\nConstructors\n\n\nActor( [ \nguid\n ] )\n\n\nguid\n - guid of actor. \n\n\nlet actor = new Actor(); \n//or\nlet actor2 = new Actor(12); //actor2.guid === 12;\n\n\n\n\nProperties\n\n\n.\nparent\n - Strong reference to parent actor.       \n\n.\ncomponents\n - Object containing strong references to the actor's components.     \n\n.\nchildren\n - Object containing strong references to the actor's children. \n\n\nMethods\n\n\naddComponent( \ncomponent\n )\n\n\nAdd a component to an actor. \n\n\nactor.addComponent(component);\n\n\n\n\ngetComponent( \ntype\n )\n\n\nGet a component of the specified type. \n\n\nvar transform = actor.getComponent(\ntransform\n);\n\n\n\n\nremoveComponent( \ntype\n )\n\n\nRemove a component of the specified type. \n\n\nactor.removeComponent(\ntransform\n); \n\n\n\n\naddChild( \nchild\n )\n\n\nAdd a child to an actor. \n\n\nactor1.addChild(actor2)\n\n\n\n\nremoveChild( \nchild\n )\n\n\nRemove a child from an actor. \n\n\nactor1.removeChild(actor2)\n\n\n\n\nsetParent( \nparent\n )\n\n\nMethod used to set actor's parent reference.      \n\n\nAddChild already takes care of setting a child's parent. \n\n\nactor1.setParent(actor2).\n\n\n\n\nupdate( \nnow\n ,  \ndeltaMs\n )\n\n\nRecursive function to update all children Actor/Component 's of an actor.       \n\n\nactor.update(now, deltaMs)\n\n\n\n\ndestroy(  )\n\n\nDESC\n\n\n//example", 
+            "text": "Actor extends \nEmitter\n#\n\n\ncruft/core/Actor.js\n      \n\nThis class defines an Actor. \n\n\nImporting\n#\n\n\nimport Actor from \ncruft/core/Actor\n;\n\n\n\n\nConstructors\n#\n\n\nActor( [ \nguid\n ] )\n#\n\n\nguid\n - guid of actor. \n\n\nlet actor = new Actor(); \n//or\nlet actor2 = new Actor(12); //actor2.guid === 12;\n\n\n\n\nProperties\n#\n\n\n.\nguid\n - guid of the actor.   \n\n.\nparent\n - Strong reference to parent actor.       \n\n.\ncomponents\n - Object containing strong references to the actor's components.     \n\n.\nchildren\n - Object containing strong references to the actor's children.         \n\n.\ninitialized\n - Whether the actor has been initialized. \n\n\nMethods\n#\n\n\naddComponent( \ncomponent\n )\n#\n\n\nAdd a component to an actor. \n\n\nactor.addComponent(component);\n\n\n\n\ngetComponent( \ntype\n )\n#\n\n\nGet a component of the specified type. \n\n\nlet transform = actor.getComponent(\ntransform\n);\n\n\n\n\nremoveComponent( \ntype\n )\n#\n\n\nRemove a component of the specified type. \n\n\nactor.removeComponent(\ntransform\n); \n\n\n\n\naddChild( \nchild\n )\n#\n\n\nAdd a child to an actor. \n\n\nlet actor1 = new Actor();\nlet actor2 = new Actor();\n\n    actor1.addChild(actor2);\n\n\n\n\nremoveChild( \nchild\n )\n#\n\n\nRemove a child from an actor. \n\n\nactor1.removeChild(actor2)\n\n\n\n\nsetParent( \nparent\n )\n#\n\n\nMethod used to set actor's parent reference.      \n\n\nAddChild already takes care of setting a child's parent. \n\n\nactor1.setParent(actor2);\n\n\n\n\nupdate( \nnow\n ,  \ndeltaMs\n )\n#\n\n\nRecursive function to update all children Actor/Component 's of an actor.       \n\n\nactor.update(now, deltaMs);\n\n\n\n\ndestroy(  )\n#\n\n\nDESC\n\n\n//example", 
             "title": "Actor"
         }, 
         {
@@ -22,7 +22,7 @@
         }, 
         {
             "location": "/cruft/core/Actor/#importing", 
-            "text": "import Actor from  cruft/core/Actor", 
+            "text": "import Actor from  cruft/core/Actor ;", 
             "title": "Importing"
         }, 
         {
@@ -37,7 +37,7 @@
         }, 
         {
             "location": "/cruft/core/Actor/#properties", 
-            "text": ". parent  - Strong reference to parent actor.        \n. components  - Object containing strong references to the actor's components.      \n. children  - Object containing strong references to the actor's children.", 
+            "text": ". guid  - guid of the actor.    \n. parent  - Strong reference to parent actor.        \n. components  - Object containing strong references to the actor's components.      \n. children  - Object containing strong references to the actor's children.          \n. initialized  - Whether the actor has been initialized.", 
             "title": "Properties"
         }, 
         {
@@ -52,7 +52,7 @@
         }, 
         {
             "location": "/cruft/core/Actor/#getcomponent-type", 
-            "text": "Get a component of the specified type.   var transform = actor.getComponent( transform );", 
+            "text": "Get a component of the specified type.   let transform = actor.getComponent( transform );", 
             "title": "getComponent( type )"
         }, 
         {
@@ -62,7 +62,7 @@
         }, 
         {
             "location": "/cruft/core/Actor/#addchild-child", 
-            "text": "Add a child to an actor.   actor1.addChild(actor2)", 
+            "text": "Add a child to an actor.   let actor1 = new Actor();\nlet actor2 = new Actor();\n\n    actor1.addChild(actor2);", 
             "title": "addChild( child )"
         }, 
         {
@@ -72,12 +72,12 @@
         }, 
         {
             "location": "/cruft/core/Actor/#setparent-parent", 
-            "text": "Method used to set actor's parent reference.        AddChild already takes care of setting a child's parent.   actor1.setParent(actor2).", 
+            "text": "Method used to set actor's parent reference.        AddChild already takes care of setting a child's parent.   actor1.setParent(actor2);", 
             "title": "setParent( parent )"
         }, 
         {
             "location": "/cruft/core/Actor/#update-now-deltams", 
-            "text": "Recursive function to update all children Actor/Component 's of an actor.         actor.update(now, deltaMs)", 
+            "text": "Recursive function to update all children Actor/Component 's of an actor.         actor.update(now, deltaMs);", 
             "title": "update( now ,  deltaMs )"
         }, 
         {
@@ -87,22 +87,167 @@
         }, 
         {
             "location": "/cruft/core/Component/", 
-            "text": "", 
+            "text": "Component extends \nEmitter\n#\n\n\ncruft/core/Component.js\n      \n\nThis class defines a Component. \n\n\nImporting\n#\n\n\nimport Component from \ncruft/core/Component\n;\n\n\n\n\nConstructors\n#\n\n\nComponent( [ \nguid\n ] )\n#\n\n\nguid\n - guid of the component. \n\n\nlet component = new Component();\n\n\n\n\nProperties\n#\n\n\n.\nguid\n - guid of the component.       \n\n.\nactor\n - Strong reference to the parent Actor.  \n\n\nMethods\n#\n\n\ninitialize( )\n#\n\n\nInitializes the component.    \n\n\ninitialize is already called once the component has been added to an active actor in the scene.  \n\n\ncomponent.initialize();\n\n\n\n\nupdate( \nnow\n, \ndeltaMs\n )\n#\n\n\nUpdate the component every game loop.       \n\n\ncomponent.update(now, deltaMs);\n\n\n\n\ndestroy(  )\n#\n\n\n//DESC\n\n\n//EXAMPLE", 
             "title": "Component"
         }, 
         {
-            "location": "/cruft/core/ActorFactory/", 
+            "location": "/cruft/core/Component/#component-extends-emitter", 
+            "text": "cruft/core/Component.js        \nThis class defines a Component.", 
+            "title": "Component extends Emitter"
+        }, 
+        {
+            "location": "/cruft/core/Component/#importing", 
+            "text": "import Component from  cruft/core/Component ;", 
+            "title": "Importing"
+        }, 
+        {
+            "location": "/cruft/core/Component/#constructors", 
             "text": "", 
+            "title": "Constructors"
+        }, 
+        {
+            "location": "/cruft/core/Component/#component-guid", 
+            "text": "guid  - guid of the component.   let component = new Component();", 
+            "title": "Component( [ guid ] )"
+        }, 
+        {
+            "location": "/cruft/core/Component/#properties", 
+            "text": ". guid  - guid of the component.        \n. actor  - Strong reference to the parent Actor.", 
+            "title": "Properties"
+        }, 
+        {
+            "location": "/cruft/core/Component/#methods", 
+            "text": "", 
+            "title": "Methods"
+        }, 
+        {
+            "location": "/cruft/core/Component/#initialize", 
+            "text": "Initializes the component.      initialize is already called once the component has been added to an active actor in the scene.    component.initialize();", 
+            "title": "initialize( )"
+        }, 
+        {
+            "location": "/cruft/core/Component/#update-now-deltams", 
+            "text": "Update the component every game loop.         component.update(now, deltaMs);", 
+            "title": "update( now, deltaMs )"
+        }, 
+        {
+            "location": "/cruft/core/Component/#destroy", 
+            "text": "//DESC  //EXAMPLE", 
+            "title": "destroy(  )"
+        }, 
+        {
+            "location": "/cruft/core/ActorFactory/", 
+            "text": "cruft/core/ActorFactory.js\n    \n\nThis class defines an ActorFactory. \n\n\nImporting\n#\n\n\nimport ActorFactory from \ncruft/core/ActorFactory\n;\n\n\n\n\nConstructors\n#\n\n\nActorFactory( )\n#\n\n\nlet factory = new ActorFactory();\n\n\n\n\nMethods\n#\n\n\nregister( \nname\n, \ncreator\n )\n#\n\n\nname\n - name to associate with the given creator function.    \n\n\ncreator\n - a function that returns an actor. \n\n\nlet EmptyCreator = () =\n {\n    return new Actor();\n}\nfactory.register(\nEmpty\n, EmptyCreator)\n\n\n\n\ncreate(  \nname\n, \nconfig\n )\n#\n\n\ncreates an actor of the given type.  \n\n\n\nlet MyCreator = (config) =\n {\n    return new Actor(config.guid);\n}\n\nfactory.register(\nMyCreator\n, MyCreator)\nlet actor = factory.create(\nMyCreator\n, {guid : 12});", 
             "title": "ActorFactory"
         }, 
         {
-            "location": "/cruft/core/Scheduler/", 
+            "location": "/cruft/core/ActorFactory/#importing", 
+            "text": "import ActorFactory from  cruft/core/ActorFactory ;", 
+            "title": "Importing"
+        }, 
+        {
+            "location": "/cruft/core/ActorFactory/#constructors", 
             "text": "", 
+            "title": "Constructors"
+        }, 
+        {
+            "location": "/cruft/core/ActorFactory/#actorfactory", 
+            "text": "let factory = new ActorFactory();", 
+            "title": "ActorFactory( )"
+        }, 
+        {
+            "location": "/cruft/core/ActorFactory/#methods", 
+            "text": "", 
+            "title": "Methods"
+        }, 
+        {
+            "location": "/cruft/core/ActorFactory/#register-name-creator", 
+            "text": "name  - name to associate with the given creator function.      creator  - a function that returns an actor.   let EmptyCreator = () =  {\n    return new Actor();\n}\nfactory.register( Empty , EmptyCreator)", 
+            "title": "register( name, creator )"
+        }, 
+        {
+            "location": "/cruft/core/ActorFactory/#create-name-config", 
+            "text": "creates an actor of the given type.    \nlet MyCreator = (config) =  {\n    return new Actor(config.guid);\n}\n\nfactory.register( MyCreator , MyCreator)\nlet actor = factory.create( MyCreator , {guid : 12});", 
+            "title": "create(  name, config )"
+        }, 
+        {
+            "location": "/cruft/core/Scheduler/", 
+            "text": "cruft/core/Scheduler.js\n      \n\nThis class defines a Scheduler. \n\n\nImporting\n#\n\n\nimport Scheduler from \ncruft/core/Scheduler\n;\n\n\n\n\nConstructors\n#\n\n\nScheduler( )\n#\n\n\nlet scheduler = new Scheduler();\n\n\n\n\nMethods\n#\n\n\nstart( \ndeltaMs\n )\n#\n\n\nStarts the scheduler with the given delay. \n\n\nscheduler.start(17);\n\n\n\n\nkill( )\n#\n\n\nStops the scheduler from updating. \n\n\nscheduler.kill()", 
             "title": "Scheduler"
         }, 
         {
+            "location": "/cruft/core/Scheduler/#importing", 
+            "text": "import Scheduler from  cruft/core/Scheduler ;", 
+            "title": "Importing"
+        }, 
+        {
+            "location": "/cruft/core/Scheduler/#constructors", 
+            "text": "", 
+            "title": "Constructors"
+        }, 
+        {
+            "location": "/cruft/core/Scheduler/#scheduler", 
+            "text": "let scheduler = new Scheduler();", 
+            "title": "Scheduler( )"
+        }, 
+        {
+            "location": "/cruft/core/Scheduler/#methods", 
+            "text": "", 
+            "title": "Methods"
+        }, 
+        {
+            "location": "/cruft/core/Scheduler/#start-deltams", 
+            "text": "Starts the scheduler with the given delay.   scheduler.start(17);", 
+            "title": "start( deltaMs )"
+        }, 
+        {
+            "location": "/cruft/core/Scheduler/#kill", 
+            "text": "Stops the scheduler from updating.   scheduler.kill()", 
+            "title": "kill( )"
+        }, 
+        {
+            "location": "/cruft/core/Emitter/", 
+            "text": "", 
+            "title": "Emitter"
+        }, 
+        {
+            "location": "/cruft/net/Cache/", 
+            "text": "cruft/net/Cache.js\n    \n\nThis class defines a Cache. \n\n\nImporting\n#\n\n\nimport Cache from \ncruft/net/Cache\n;\n\n\n\n\nMethods\n#\n\n\nregister( \nname\n, \nLoader\n )\n#\n\n\nRegister Cache loader to the given name. \n\n\nimport ObjLoader from \ncruft/net/loaders/ObjLoader\n;\ncache.register(\nobj\n, new ObjLoader());\ncache.get(\nobj!assets/models/CruftModel.obj\n).then((asset) =\n {\n    //asset is the parsed obj model\n});\n\n\n\n\nget( \npath\n )\n#\n\n\nPath to the asset to load. Optionaly prefixed with pluginname! to specify which loader to use.\n\n\ncache.get(\njson!assets/data/data.json\n).then((data) =\n {\n    console.log(data.pasword)//data is an obect. \n});\n\n\n\n\nload( ...\npaths\n )\n#\n\n\nload all of the specified paths. \n\n\ncache.load(\njson!assets/data/data.json\n, \njson!assets/data/data2.json\n).then((paths) =\n {\n    console.log(paths[\njson!assets/data.txt\n]); // contents of data.json\n})", 
+            "title": "Cache"
+        }, 
+        {
+            "location": "/cruft/net/Cache/#importing", 
+            "text": "import Cache from  cruft/net/Cache ;", 
+            "title": "Importing"
+        }, 
+        {
+            "location": "/cruft/net/Cache/#methods", 
+            "text": "", 
+            "title": "Methods"
+        }, 
+        {
+            "location": "/cruft/net/Cache/#register-name-loader", 
+            "text": "Register Cache loader to the given name.   import ObjLoader from  cruft/net/loaders/ObjLoader ;\ncache.register( obj , new ObjLoader());\ncache.get( obj!assets/models/CruftModel.obj ).then((asset) =  {\n    //asset is the parsed obj model\n});", 
+            "title": "register( name, Loader )"
+        }, 
+        {
+            "location": "/cruft/net/Cache/#get-path", 
+            "text": "Path to the asset to load. Optionaly prefixed with pluginname! to specify which loader to use.  cache.get( json!assets/data/data.json ).then((data) =  {\n    console.log(data.pasword)//data is an obect. \n});", 
+            "title": "get( path )"
+        }, 
+        {
+            "location": "/cruft/net/Cache/#load-paths", 
+            "text": "load all of the specified paths.   cache.load( json!assets/data/data.json ,  json!assets/data/data2.json ).then((paths) =  {\n    console.log(paths[ json!assets/data.txt ]); // contents of data.json\n})", 
+            "title": "load( ...paths )"
+        }, 
+        {
+            "location": "/cruft/net/Loader/", 
+            "text": "", 
+            "title": "Loader"
+        }, 
+        {
             "location": "/cruft/math/vec2/", 
-            "text": "cruft/math/vec2.js\n    \n\nThis class defines a 2d vector.     \n\n\nConstructors\n\n\nvec2( \nx\n, \ny\n )\n\n\nx\n - Initial x value of the vector.   \n\n\ny\n - Initial y value of the vector. \n\n\nlet a = new vec2(1, 2);\n\n\n\n\nProperties\n\n\n.\nx\n - Value of the x component.   \n\n.\ny\n - Value of the y component.\n\n\nStatic Methods\n\n\nzero()\n\n\nConstructs the zero vector.\n\n\nlet a = vec2.zero();\n\n\n\n\nadd( \na\n, \nb\n )\n\n\nAdds a and b, returning the result.\n\n\nlet a = new vec2(1, 2);\nlet b = new vec2(3, 4);\n\nlet c = vec2.add(a, b);\n\n\n\n\nMethods", 
+            "text": "cruft/math/vec2.js\n    \n\nThis class defines a 2d vector.     \n\n\nConstructors\n#\n\n\nvec2( \nx\n, \ny\n )\n#\n\n\nx\n - Initial x value of the vector.   \n\n\ny\n - Initial y value of the vector. \n\n\nlet a = new vec2(1, 2);\nlet b = new vec2(3, 4);\n\n\n\n\nstatic zero()\n#\n\n\nConstructs the zero vector.\n\n\nlet c = vec2.zero();\n\n\n\n\nProperties\n#\n\n\n.\nx\n - Value of the x component.   \n\n.\ny\n - Value of the y component.\n\n\nStatic Methods\n#\n\n\nstatic add( \na\n, \nb\n )\n#\n\n\nAdds a and b, returning the result.\n\n\nlet c = vec2.add(a, b);\n\n\n\n\nstatic addScalar( \na\n, \ns\n )\n#\n\n\nAdds scalar value s to a, returning the result.\n\n\nlet c = vec2.addScalar(a, 3);\n\n\n\n\nstatic clone( \na\n )\n#\n\n\nReturns clone of vector a.\n\n\nlet c = vec2.clone(a);\n\n\n\n\nstatic cross( \na\n, \nb\n )\n#\n\n\nCalculates a cross b, returning the result.\n\n\nlet c = vec2.cross(a, b);\n\n\n\n\nstatic crossScalar( \na\n, \ns\n, \nleft\n )\n#\n\n\nCalculates the cross product on a vector and a scalar. If left, then calculates s cross a, otherwise a cross s.\n\n\nlet c = vec2.crossScalar(a, 5);\nlet d = vec2.crossScalar(b, 3, true);\n\n\n\n\nstatic dot( \na\n, \nb\n )\n#\n\n\nCalculates a dot b, returning the result.\n\n\nlet c = vec2.dot(a, b);\n\n\n\n\nstatic length( \na\n )\n#\n\n\nCalculates the length of vector a.\n\n\nlet len = vec2.length(a);\n\n\n\n\nstatic lengthSquared( \na\n )\n#\n\n\nCalculates the length squared of vector a.\n\n\nlet lensq = vec.lengthSquared(a);\n\n\n\n\nstatic negate( \na\n )\n#\n\n\nReturns the inverse of vector a.\n\n\nlet inv = vec2.negate(a);\n\n\n\n\nstatic normalize( \na\n )\n#\n\n\nCalclates the normalized vector of a.\n\n\nlet norm = vec2.normalize(a);\n\n\n\n\nstatic scale( \na\n, \ns\n )\n#\n\n\nScales vector a by s.\n\n\nlet c = vec2.scale(a, 10);\n\n\n\n\nstatic sub( \na\n, \nb\n )\n#\n\n\nCalculates a - b.\n\n\nlet c = vec2.subt(a, b);\n\n\n\n\nMethods\n#\n\n\nadd( \nb\n )\n#\n\n\nAdds vector b to this, returning this.\n\n\na.add(b);\n\n\n\n\naddScalar( \ns\n )\n#\n\n\nAdds scalar value s to this, returning this.\n\n\na.addScalar(3);\n\n\n\n\nclone()\n#\n\n\nReturns clone of this.\n\n\nlet c = a.clone();\n\n\n\n\ncopy( \nb\n )\n#\n\n\nCopies vec2 b into this.\n\n\na.copy(b);\n\n\n\n\ncross( \nb\n )\n#\n\n\nCalculates this cross b, returning this.\n\n\na.cross(b);\n\n\n\n\ncrossScalar( \ns\n, \nleft\n )\n#\n\n\nCalculates the cross product on this and a scalar. If left, then calculates s cross this, otherwise this cross s.\n\n\na.crossScalar(5);\nb.crossScalar(3, true);\n\n\n\n\ndot( \nb\n )\n#\n\n\nCalculates this dot b, returning this.\n\n\na.dot(b);\n\n\n\n\nequals( \nb\n )\n#\n\n\nChecks for strict equality of this and b.\n\n\nlet eq = a.equals(b);\n\n\n\n\nlength()\n#\n\n\nCalculates the length of this.\n\n\nlet len = a.length();\n\n\n\n\nlengthSquared()\n#\n\n\nCalculates the length squared of this.\n\n\nlet lensq = a.lengthSquared();\n\n\n\n\nnegate()\n#\n\n\nInverts this vector.\n\n\na.negate();\n\n\n\n\nnormalize()\n#\n\n\nNormalizes this vector.\n\n\na.normalize();\n\n\n\n\nscale( \ns\n )\n#\n\n\nScales this by s.\n\n\na.scale(10);\n\n\n\n\nsub( \nb\n )\n#\n\n\nSubtracts this by vector b.\n\n\na.sub(b);", 
             "title": "vec2"
         }, 
         {
@@ -112,8 +257,13 @@
         }, 
         {
             "location": "/cruft/math/vec2/#vec2-x-y", 
-            "text": "x  - Initial x value of the vector.     y  - Initial y value of the vector.   let a = new vec2(1, 2);", 
+            "text": "x  - Initial x value of the vector.     y  - Initial y value of the vector.   let a = new vec2(1, 2);\nlet b = new vec2(3, 4);", 
             "title": "vec2( x, y )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#static-zero", 
+            "text": "Constructs the zero vector.  let c = vec2.zero();", 
+            "title": "static zero()"
         }, 
         {
             "location": "/cruft/math/vec2/#properties", 
@@ -126,19 +276,139 @@
             "title": "Static Methods"
         }, 
         {
-            "location": "/cruft/math/vec2/#zero", 
-            "text": "Constructs the zero vector.  let a = vec2.zero();", 
-            "title": "zero()"
+            "location": "/cruft/math/vec2/#static-add-a-b", 
+            "text": "Adds a and b, returning the result.  let c = vec2.add(a, b);", 
+            "title": "static add( a, b )"
         }, 
         {
-            "location": "/cruft/math/vec2/#add-a-b", 
-            "text": "Adds a and b, returning the result.  let a = new vec2(1, 2);\nlet b = new vec2(3, 4);\n\nlet c = vec2.add(a, b);", 
-            "title": "add( a, b )"
+            "location": "/cruft/math/vec2/#static-addscalar-a-s", 
+            "text": "Adds scalar value s to a, returning the result.  let c = vec2.addScalar(a, 3);", 
+            "title": "static addScalar( a, s )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#static-clone-a", 
+            "text": "Returns clone of vector a.  let c = vec2.clone(a);", 
+            "title": "static clone( a )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#static-cross-a-b", 
+            "text": "Calculates a cross b, returning the result.  let c = vec2.cross(a, b);", 
+            "title": "static cross( a, b )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#static-crossscalar-a-s-left", 
+            "text": "Calculates the cross product on a vector and a scalar. If left, then calculates s cross a, otherwise a cross s.  let c = vec2.crossScalar(a, 5);\nlet d = vec2.crossScalar(b, 3, true);", 
+            "title": "static crossScalar( a, s, left )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#static-dot-a-b", 
+            "text": "Calculates a dot b, returning the result.  let c = vec2.dot(a, b);", 
+            "title": "static dot( a, b )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#static-length-a", 
+            "text": "Calculates the length of vector a.  let len = vec2.length(a);", 
+            "title": "static length( a )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#static-lengthsquared-a", 
+            "text": "Calculates the length squared of vector a.  let lensq = vec.lengthSquared(a);", 
+            "title": "static lengthSquared( a )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#static-negate-a", 
+            "text": "Returns the inverse of vector a.  let inv = vec2.negate(a);", 
+            "title": "static negate( a )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#static-normalize-a", 
+            "text": "Calclates the normalized vector of a.  let norm = vec2.normalize(a);", 
+            "title": "static normalize( a )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#static-scale-a-s", 
+            "text": "Scales vector a by s.  let c = vec2.scale(a, 10);", 
+            "title": "static scale( a, s )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#static-sub-a-b", 
+            "text": "Calculates a - b.  let c = vec2.subt(a, b);", 
+            "title": "static sub( a, b )"
         }, 
         {
             "location": "/cruft/math/vec2/#methods", 
             "text": "", 
             "title": "Methods"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#add-b", 
+            "text": "Adds vector b to this, returning this.  a.add(b);", 
+            "title": "add( b )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#addscalar-s", 
+            "text": "Adds scalar value s to this, returning this.  a.addScalar(3);", 
+            "title": "addScalar( s )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#clone", 
+            "text": "Returns clone of this.  let c = a.clone();", 
+            "title": "clone()"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#copy-b", 
+            "text": "Copies vec2 b into this.  a.copy(b);", 
+            "title": "copy( b )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#cross-b", 
+            "text": "Calculates this cross b, returning this.  a.cross(b);", 
+            "title": "cross( b )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#crossscalar-s-left", 
+            "text": "Calculates the cross product on this and a scalar. If left, then calculates s cross this, otherwise this cross s.  a.crossScalar(5);\nb.crossScalar(3, true);", 
+            "title": "crossScalar( s, left )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#dot-b", 
+            "text": "Calculates this dot b, returning this.  a.dot(b);", 
+            "title": "dot( b )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#equals-b", 
+            "text": "Checks for strict equality of this and b.  let eq = a.equals(b);", 
+            "title": "equals( b )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#length", 
+            "text": "Calculates the length of this.  let len = a.length();", 
+            "title": "length()"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#lengthsquared", 
+            "text": "Calculates the length squared of this.  let lensq = a.lengthSquared();", 
+            "title": "lengthSquared()"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#negate", 
+            "text": "Inverts this vector.  a.negate();", 
+            "title": "negate()"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#normalize", 
+            "text": "Normalizes this vector.  a.normalize();", 
+            "title": "normalize()"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#scale-s", 
+            "text": "Scales this by s.  a.scale(10);", 
+            "title": "scale( s )"
+        }, 
+        {
+            "location": "/cruft/math/vec2/#sub-b", 
+            "text": "Subtracts this by vector b.  a.sub(b);", 
+            "title": "sub( b )"
         }, 
         {
             "location": "/cruft/math/vec3/", 
@@ -147,8 +417,103 @@
         }, 
         {
             "location": "/cruft/math/mat3/", 
-            "text": "", 
+            "text": "cruft/math/mat3.js\n    \n\nThis class defines a 3x3 matrix.\n\n\nConstructors\n#\n\n\nmat3()\n#\n\n\nCreats a 3x3 matrix and initializes it to the indentity matrix.\n\n\nlet a = new mat3();\nlet b = new mat3();\n\n\n\n\nProperties\n#\n\n\ndata\n - Column-major array representation of the 3x3 matrix.\n\n\nStatic Methods\n#\n\n\nstatic clone( \na\n )\n#\n\n\nCreates a copy of matrix a.\n\n\nlet c = mat3.clone(a);\n\n\n\n\nstatic multiply( \nA\n, \nB\n )\n#\n\n\nCalculates A * B.\n\n\nlet c = mat3.multiply(A, B);\n\n## Methods\n\n### add( [B](mat3.md) )\nCalculates this + B.\n\n```javascript\na.add(b);\n\n\n\n\nclone()\n#\n\n\nCreates a copy of this matrix.\n\n\nlet c = a.clone();\n\n\n\n\ncopy( \nb\n )\n#\n\n\nCopies matrix b into this.\n\n\na.copy(b);\n\n\n\n\ndeterminant()\n#\n\n\nCalculates the determinant of this matrix.\n\n\na.determinant();\n\n\n\n\nequals( \nB\n )\n#\n\n\nChecks for strict equality of this and B.\n\n\nlet eq = a.equals(b);\n\n\n\n\nidentity()\n#\n\n\nSets this matrix to the identity matrix.\n\n\na.identity();\n\n\n\n\ninvert()\n#\n\n\nInverts this matrix in place. Returns null if not invertible.\n\n\na.invert();\n\n\n\n\nmultiply( \nB\n )\n#\n\n\nMultiplies this matrix by B in place.\n\n\na.multiply(b);\n\n\n\n\nmultiplyScalar( \ns\n )\n#\n\n\nMultiplies this matrix by scalar s.\n\n\na.multiplyScalar(4);\n\n\n\n\nrotate( \nrad\n )\n#\n\n\nRotates this matrix by angle rad.\n\n\na.rotate(Math.PI / 2);\n\n\n\n\nscale(\nv\n )\n#\n\n\nScales this matrix by vec2 v.\n\n\nlet v = new vec2(5, 10);\na.scale(v);\n\n\n\n\nsubtract( \nB\n )\n#\n\n\nCalculates this - B.\n\n\na.subtract(b);\n\n\n\n\ntranslate( \nv\n )\n#\n\n\nTranslates this matrix by vec2 v.\n\n\nlet v = new vec2(1, 2);\na.translate(v);\n\n\n\n\ntranspose()\n#\n\n\nTransposes this matrix in place.\n\n\na.transpose();", 
             "title": "mat3"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#constructors", 
+            "text": "", 
+            "title": "Constructors"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#mat3", 
+            "text": "Creats a 3x3 matrix and initializes it to the indentity matrix.  let a = new mat3();\nlet b = new mat3();", 
+            "title": "mat3()"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#properties", 
+            "text": "data  - Column-major array representation of the 3x3 matrix.", 
+            "title": "Properties"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#static-methods", 
+            "text": "", 
+            "title": "Static Methods"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#static-clone-a", 
+            "text": "Creates a copy of matrix a.  let c = mat3.clone(a);", 
+            "title": "static clone( a )"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#static-multiply-a-b", 
+            "text": "Calculates A * B.  let c = mat3.multiply(A, B);\n\n## Methods\n\n### add( [B](mat3.md) )\nCalculates this + B.\n\n```javascript\na.add(b);", 
+            "title": "static multiply( A, B )"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#clone", 
+            "text": "Creates a copy of this matrix.  let c = a.clone();", 
+            "title": "clone()"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#copy-b", 
+            "text": "Copies matrix b into this.  a.copy(b);", 
+            "title": "copy( b )"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#determinant", 
+            "text": "Calculates the determinant of this matrix.  a.determinant();", 
+            "title": "determinant()"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#equals-b", 
+            "text": "Checks for strict equality of this and B.  let eq = a.equals(b);", 
+            "title": "equals( B )"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#identity", 
+            "text": "Sets this matrix to the identity matrix.  a.identity();", 
+            "title": "identity()"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#invert", 
+            "text": "Inverts this matrix in place. Returns null if not invertible.  a.invert();", 
+            "title": "invert()"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#multiply-b", 
+            "text": "Multiplies this matrix by B in place.  a.multiply(b);", 
+            "title": "multiply( B )"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#multiplyscalar-s", 
+            "text": "Multiplies this matrix by scalar s.  a.multiplyScalar(4);", 
+            "title": "multiplyScalar( s )"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#rotate-rad", 
+            "text": "Rotates this matrix by angle rad.  a.rotate(Math.PI / 2);", 
+            "title": "rotate( rad )"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#scalev", 
+            "text": "Scales this matrix by vec2 v.  let v = new vec2(5, 10);\na.scale(v);", 
+            "title": "scale(v )"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#subtract-b", 
+            "text": "Calculates this - B.  a.subtract(b);", 
+            "title": "subtract( B )"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#translate-v", 
+            "text": "Translates this matrix by vec2 v.  let v = new vec2(1, 2);\na.translate(v);", 
+            "title": "translate( v )"
+        }, 
+        {
+            "location": "/cruft/math/mat3/#transpose", 
+            "text": "Transposes this matrix in place.  a.transpose();", 
+            "title": "transpose()"
         }, 
         {
             "location": "/cruft/math/mat4/", 
@@ -157,7 +522,7 @@
         }, 
         {
             "location": "/primitives/", 
-            "text": "Built in data types in Javascript.\n\n\nNumber\n\n\nlet a = 1;\nlet b = 1.23456;\nlet c = a + b; //c = 2.23456\n\n\n\n\nBoolean\n\n\nlet a = true;\nlet b = false;\nlet c = !b \n a; //c = true\n\n\n\n\nString\n\n\nlet a = \nCruft\n;\nlet b = \nEngine\n;\nlet c = a + b; // c = \nCruftEngine\n\n\n\n\n\nObject\n\n\nlet a = { \n    Cruft : true, \n    Engine :false \n}", 
+            "text": "Built in data types in Javascript.\n\n\nNumber\n#\n\n\nlet a = 1;\nlet b = 1.23456;\nlet c = a + b; //c = 2.23456\n\n\n\n\nBoolean\n#\n\n\nlet a = true;\nlet b = false;\nlet c = !b \n a; //c = true\n\n\n\n\nString\n#\n\n\nlet a = \nCruft\n;\nlet b = \nEngine\n;\nlet c = a + b; // c = \nCruftEngine\n\n\n\n\n\nObject\n#\n\n\nlet a = { \n    Cruft : true, \n    Engine :false \n}\n\n\n\n\nArray\n#\n\n\nlet a = [ 1, 2, 3];\n    a[0] = 2; //0th element of a is now 2\n\n\n\n\nFunction\n#\n\n\nlet add = (a, b) =\n {\n    return a + b;\n}\nlet c = add(6, 6);\n\n\n\n\nFloat32Array\n#\n\n\nlet a = new Float32Array(9);", 
             "title": "Primitives"
         }, 
         {
@@ -179,6 +544,21 @@
             "location": "/primitives/#object", 
             "text": "let a = { \n    Cruft : true, \n    Engine :false \n}", 
             "title": "Object"
+        }, 
+        {
+            "location": "/primitives/#array", 
+            "text": "let a = [ 1, 2, 3];\n    a[0] = 2; //0th element of a is now 2", 
+            "title": "Array"
+        }, 
+        {
+            "location": "/primitives/#function", 
+            "text": "let add = (a, b) =  {\n    return a + b;\n}\nlet c = add(6, 6);", 
+            "title": "Function"
+        }, 
+        {
+            "location": "/primitives/#float32array", 
+            "text": "let a = new Float32Array(9);", 
+            "title": "Float32Array"
         }
     ]
 }
