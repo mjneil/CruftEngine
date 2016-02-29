@@ -46,8 +46,8 @@ export default class SpriteRenderer extends SubRenderer {
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffers[1]);
 		gl.vertexAttribPointer(program.attributes.aTexCoord, 2, gl.FLOAT, false, 0, 0); 
 
-		gl.uniformMatrix3fv(program.uniforms.vMatrix, gl.FALSE, cameraTransform.inverse);
-		gl.uniformMatrix3fv(program.uniforms.mMatrix, gl.FALSE, transform.toWorld);
+		gl.uniformMatrix3fv(program.uniforms.vMatrix, gl.FALSE, cameraTransform.inverse.data);
+		gl.uniformMatrix3fv(program.uniforms.mMatrix, gl.FALSE, transform.toWorld.data);
 
 		gl.activeTexture(gl.TEXTURE0);
 		gl.bindTexture(gl.TEXTURE_2D, texture);
