@@ -30,3 +30,8 @@ let a = {
 	Engine :false 
 }
 ```
+
+### Float32Array
+```javascript
+let a = new Float32Array(9);
+```
