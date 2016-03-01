@@ -29,7 +29,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'cruft/**/*.js': ['traceur'],
+        'cruft/**/*.js': ['traceur', 'coverage'],
         'tests/**/*.test.js': ['traceur']
     },
 
@@ -43,10 +43,16 @@ module.exports = function(config) {
         }
     },
 
+    coverageReporter: {
+      dir: 'coverage',
+      subdir: '.'
+      // Would output the results into: .'/coverage/'
+    },
+
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
 
 
     // web server port
@@ -68,7 +74,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
@@ -84,7 +90,8 @@ module.exports = function(config) {
         'karma-traceur-preprocessor',
         'karma-jasmine',
         'karma-chrome-launcher',
-        'karma-phantomjs-launcher'
+        'karma-phantomjs-launcher',
+        'karma-coverage'
     ]
   })
 }
