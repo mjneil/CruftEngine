@@ -39,6 +39,13 @@ var initialize = (config) => {
 	cache.register("json", new JsonLoader() );
 	cache.register("default", cache.loaders.text );//I dont like making TextLoader Twice
 
+	if(config.cache) {
+		var cacheConfig = config.cache;
+		for(var key in cacheConfig) {
+			cache.register(key, cacheConfig[key]);
+		}
+	}
+
 	if(config.factory) {
 		let creators = config.factory;
 		for(let name in creators){

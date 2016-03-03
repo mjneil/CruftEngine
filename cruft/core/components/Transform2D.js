@@ -1,11 +1,10 @@
-import Component from "../Component"
+import Transform from "./Transform"
 import {vec2, mat3} from "../../math/math";
 
 
 var IDENTITY_MATRIX = new mat3();
-	//mat3.identity(IDENTITY_MATRIX)//DO NOT CHANGE THIS.
 
-export default class Transform2D extends Component {
+export default class Transform2D extends Transform {
 	constructor() {
 		super();
 
@@ -88,7 +87,7 @@ export default class Transform2D extends Component {
 		this.inverse.copy(matrix).invert();
 		//TODO z-index? What are we doing with that exactly. 
 		if (parent) {
-			toWorld.copy(mat3.multiply(parent.getComponent("Transform2D").toWorld, matrix));
+			toWorld.copy(mat3.multiply(parent.getComponent("transform").toWorld, matrix));
 		} else {
 			toWorld.copy(matrix);
 		}
@@ -97,7 +96,7 @@ export default class Transform2D extends Component {
 
 		var children = this.actor.children;
 		for (let key in children) {
-			children[key].updateMatrix();
+			children[key].getComponent("transform").updateMatrix();
 		}
 	}
 

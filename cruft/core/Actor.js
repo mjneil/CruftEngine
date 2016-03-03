@@ -13,7 +13,7 @@ export default class Actor extends Emitter {
     }
 
     addComponent(component)  {
-        this.components[component.constructor.name] = component;
+        this.components[component.type] = component;
         component.actor = this;
         this.emit("addComponent", component);
     }
@@ -38,6 +38,8 @@ export default class Actor extends Emitter {
         }
 
         child.parent = this;
+        child.emit("setParent", this);
+
         this.children[child.guid] = child;
 
         if(this.initialized) {
@@ -48,9 +50,14 @@ export default class Actor extends Emitter {
     }
 
     removeChild(child) {//TODO remove the listenr. RIP. 
-        child.parent = null;
-        delete this.children[child.guid];
-        this.emit("removeChild", child);
+        if(child.parent === this){
+
+            child.parent = null;
+            child.emit("removeParent", this);
+
+            delete this.children[child.guid];
+            this.emit("removeChild", child);
+        }
     }
 
     initialize() {

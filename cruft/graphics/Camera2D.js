@@ -19,7 +19,7 @@ export default class Camera2D extends Actor {//todo set/get widht//height
 		document.body.appendChild(this._renderer.canvas);//not sure how want to manage access to the dom
 
 		this.addComponent(new Transform2D()); //think about using a height variable or somthing? :/ Hmm idk. 
-		this.getComponent("Transform2D").scale = new vec2(width/2, height/2) //might want to make variables to like set zoom and stuff idk. 
+		this.getComponent("transform").scale = new vec2(width/2, height/2) //might want to make variables to like set zoom and stuff idk. 
 
 		//todo track that script so we can delete it. 
 		//also its not in update because I want it to be the last thing that happens
@@ -40,7 +40,7 @@ export default class Camera2D extends Actor {//todo set/get widht//height
 	mouseToWorld(mouse) { //takes mouse relative to canvas and spits out where it would be on this camera. 
 
 		//cheat and dont use camera rotation * DOESN"T WORK IF YOU ROTATE CAMERA*
-		var transform = this.getComponent("Transform2D");
+		var transform = this.getComponent("transform");
 		var position = transform.position;
 		var scale = transform.scale;
 
@@ -57,8 +57,8 @@ export default class Camera2D extends Actor {//todo set/get widht//height
 		
 		if(this.target && this.target.get()){
 			var target = this.target.get();
-			var transform = this.getComponent("Transform2D");
-			var world = target.getComponent("Transform2D").getWorldPosition();
+			var transform = this.getComponent("transform");
+			var world = target.getComponent("transform").getWorldPosition();
 			var selfWorld = transform.getWorldPosition();
 			var dif = vec2.subtract(world, selfWorld);
 			var len = dif.length();

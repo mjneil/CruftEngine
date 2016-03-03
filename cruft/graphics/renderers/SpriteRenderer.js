@@ -36,8 +36,8 @@ export default class SpriteRenderer extends SubRenderer {
 		var texture = glSprite.texture;
 		var program = renderer.programManager.program;
 
-		var transform = actor.getComponent("Transform2D");
-		var cameraTransform = camera.getComponent("Transform2D");
+		var transform = actor.getComponent("transform");
+		var cameraTransform = camera.getComponent("transform");
 
 
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffers[0]);
