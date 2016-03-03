@@ -36,17 +36,16 @@ export default class Renderer {//todo pass in options for what to enable/disable
 	_render(actor, camera) {
 	
 
-		var render = actor.getComponent("Render");
+		var renderable = actor.getComponent("renderable");
 
-		if(render){
-			var plugin = this.plugins[render.renderable.constructor];//TODO renderType on anything you call render on :/ RIP.
+		if(renderable){
+			var plugin = this.plugins[renderable.renderType];//TODO renderType on anything you call render on :/ RIP.
 			if(!plugin) {
 				console.log("FATAL : ATTEMPING TO RENDER AN UNSUPPORTED RENDER COMPONENT")
 				return;
 			}
-
 			plugin.preRender();
-			plugin.render(this, render, camera);
+			plugin.render(this, renderable, camera);
 			plugin.postRender();
 
 		}
