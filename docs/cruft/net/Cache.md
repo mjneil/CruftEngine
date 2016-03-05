@@ -10,11 +10,15 @@ import Cache from "cruft/net/Cache";
 ##Methods
 
 
-### register( [name](/primitives#string), [Loader](Loader.md) )
-Register Cache loader to the given name. 
+### register( [loaders](/primitives#object) )
+[loaders](/primitives.md#object) - Object containg (name, loader) pairs. 
+
 ```javascript
 import ObjLoader from "cruft/net/loaders/ObjLoader";
-cache.register("obj", new ObjLoader());
+cache.register({
+	"obj" : new ObjLoader()
+});
+
 cache.get("obj!assets/models/CruftModel.obj").then((asset) => {
 	//asset is the parsed obj model
 });

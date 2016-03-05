@@ -26,7 +26,7 @@ let actor2 = new Actor(12); //actor2.guid === 12;
 .[components](/primitives.md#object) - Object containing strong references to the actor's components. 		
 .[children](/primitives.md#object) - Object containing strong references to the actor's children. 			
 .[initialized](/primitives.md#boolean) - Whether the actor has been initialized. 
-
+.[destroyed](/primitives.md#boolean) - Whether the actor has been destroyed. 
 ##Methods
 
 
@@ -66,7 +66,7 @@ let actor2 = new Actor();
 Remove a child from an actor. 
 
 ```javascript
-actor1.removeChild(actor2)
+actor1.removeChild(actor2);
 ```
 
 

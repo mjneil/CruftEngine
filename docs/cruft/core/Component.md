@@ -21,7 +21,7 @@ let component = new Component();
 ## Properties
 .[guid](/primitives.md#number) - guid of the component.			
 .[actor](Actor.md) - Strong reference to the parent Actor.	
-
+.[type](/primitives.md#string) - type of the component. 
 
 ##Methods
 

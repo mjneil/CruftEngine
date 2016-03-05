@@ -7,6 +7,7 @@ export default class Component extends Emitter {
 		super();
 		this.guid = guid || uuid();
 		this.actor = null;
+		this.type = "Component";
 	}
 
 	initialize() {
