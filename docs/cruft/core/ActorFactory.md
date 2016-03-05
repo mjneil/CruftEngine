@@ -17,15 +17,21 @@ let factory = new ActorFactory();
 
 ##Methods
 
-### register( [name](/primitives.md#string), [creator](/primitives.md#function) )
-[name](/primitives.md#string) - name to associate with the given creator function. 		
-[creator](/primitives.md#function) - a function that returns an actor. 
+### register( [creators](/primitives.md#object) )
+[creators](/primitives.md#object) - Object containg (name, creator) pairs. 
 
 ```javascript
+
 let EmptyCreator = () => {
 	return new Actor();
 }
-factory.register("Empty", EmptyCreator)
+
+factory.register({
+	"Empty" : EmptyCreator
+});
+
+let actor = factory.create("Empty")// actor == EmptyCreator();
+
 ```
 
 ### create(  [name](/primitives.md#string), [config](/primitives.md#object) )
@@ -36,7 +42,7 @@ let MyCreator = (config) => {
 	return new Actor(config.guid);
 }
 
-factory.register("MyCreator", MyCreator)
+factory.register({MyCreator});
 let actor = factory.create("MyCreator", {guid : 12});
 ```
 

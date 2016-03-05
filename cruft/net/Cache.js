@@ -6,8 +6,10 @@ export default class Cache {
 
 	}
 
-	register(type, loader) {
-		this.loaders[type] = loader;
+	register(loaders) {
+		for(var name in loaders){
+			this.loaders[name] = loaders[name];
+		}
 	}
 
 	
@@ -34,7 +36,7 @@ export default class Cache {
 				console.error(`Failed To Find Specified Loader`);
 			}
 
-			loader.load(url).then((asset)=>{
+			loader(url).then((asset)=>{
 				this.assets[path] = asset;
 				resolve(asset);
 			} , reject);

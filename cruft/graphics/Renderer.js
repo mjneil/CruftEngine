@@ -4,14 +4,14 @@ import ProgramManager from "./ProgramManager"
 
 
 export default class Renderer {//todo pass in options for what to enable/disable.
-	constructor(width, height) {
-		this.canvas = document.createElement("canvas" , {preserveDrawingBuffer:true});
-		this.canvas.width = width;
-		this.canvas.height = height;
+	constructor({canvas}) {
+
+		this.canvas = canvas;
+
 		this.plugins = {};
 
-		var gl = this.gl = this.canvas.getContext("webgl");
-			gl.viewport(0, 0, width, height);
+		var gl = this.gl = this.canvas.getContext("webgl", { preserveDrawingBuffer : true });
+			gl.viewport(0, 0, canvas.width, canvas.height);
 			gl.clearColor(0, 0, 0, 1);
 			gl.disable(gl.DEPTH_TEST)
 			gl.enable(gl.BLEND);
@@ -36,17 +36,16 @@ export default class Renderer {//todo pass in options for what to enable/disable
 	_render(actor, camera) {
 	
 
-		var render = actor.getComponent("Render");
+		var renderable = actor.getComponent("renderable");
 
-		if(render){
-			var plugin = this.plugins[render.renderable.constructor];//TODO renderType on anything you call render on :/ RIP.
+		if(renderable){
+			var plugin = this.plugins[renderable.renderType];//TODO renderType on anything you call render on :/ RIP.
 			if(!plugin) {
 				console.log("FATAL : ATTEMPING TO RENDER AN UNSUPPORTED RENDER COMPONENT")
 				return;
 			}
-
 			plugin.preRender();
-			plugin.render(this, render, camera);
+			plugin.render(this, renderable, camera);
 			plugin.postRender();
 
 		}

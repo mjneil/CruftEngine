@@ -1,11 +1,10 @@
 import Program from "../Program"
 import SubRenderer from "../SubRenderer";
-import Sprite from "../renderables/Sprite";
 
 export default class SpriteRenderer extends SubRenderer {
 
 	constructor() {
-		super(Sprite);
+		super("sprite");
 		this.gl = null;
 		this.program = null;
 	}
@@ -18,9 +17,8 @@ export default class SpriteRenderer extends SubRenderer {
 		});
 	}
 
-	render(renderer, render, camera) {
-		var sprite = render.renderable;
-		var actor = render.actor;
+	render(renderer, sprite, camera) {
+		var actor = sprite.actor;
 		
 		if(!sprite.loaded) return;
 
@@ -29,15 +27,15 @@ export default class SpriteRenderer extends SubRenderer {
 
 		var glSprite = sprite.data[this.guid];
 		if(!glSprite) glSprite = sprite.data[this.guid] = new GLSprite(gl);
-		if(glSprite.lastDirt !== sprite.lastDirt) glSprite.update(sprite);
+		if(glSprite.version !== sprite.version) glSprite.update(sprite);
 
 
 		var buffers = glSprite.buffers;
 		var texture = glSprite.texture;
 		var program = renderer.programManager.program;
 
-		var transform = actor.getComponent("Transform2D");
-		var cameraTransform = camera.getComponent("Transform2D");
+		var transform = actor.getComponent("transform");
+		var cameraTransform = camera.getComponent("transform");
 
 
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffers[0]);
@@ -94,7 +92,7 @@ class GLSprite {
 		this.texture = gl.createTexture();
 		this.buffers = [gl.createBuffer(), gl.createBuffer()];
 		
-		this.lastDirt = null;
+		this.version = null;
 	}
 
 	destroy() {

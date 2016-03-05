@@ -1,5 +1,4 @@
-import ImageLoader from "./ImageLoader";
-import JsonLoader from "./JsonLoader";
-import TextLoader from "./TextLoader";
-
-export { ImageLoader, JsonLoader, TextLoader };
+import image from "./image";
+import json from "./json";
+import txt from "./txt";
+export { image, json, txt };

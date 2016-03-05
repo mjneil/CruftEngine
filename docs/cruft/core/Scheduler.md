@@ -18,15 +18,19 @@ let scheduler = new Scheduler();
 
 ##Methods
 
-### start( [deltaMs](/primitives.md#number) )
-Starts the scheduler with the given delay. 
+### update( [now](/primitives.md#number),  [deltaMs](/primitives.md#number) )
+Updates all child processes of the scheduler.
+
 ```javascript
-scheduler.start(17);
+scheduler.update(now, deltaMs);
 ```
 
-### kill( )
-Stops the scheduler from updating. 
+### addChild( [child](Process.md) )
+
+Adds the proccess to the scheduler.
+
 ```javascript
-scheduler.kill()
+scheduler.addChild(new SomeProcess());
 ```
+
 

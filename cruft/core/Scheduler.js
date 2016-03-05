@@ -1,4 +1,3 @@
-import setIntervalMs from "../util/setIntervalMs";
 import Process from "./Process";
 import {UNINITIALIZED, RUNNING, FAILED, SUCCEEDED} from "./Process";//can you import default and named at same time?
 
@@ -10,19 +9,6 @@ export default class Scheduler {
 
 	addChild(proc) {
 		this.processes.push(proc);
-	}
-
-	start(delay) {
-		if(this.interval) return;
-
-		this.interval = setIntervalMs((now, deltaMs)=>{
-			this.update(now, deltaMs);//maybe pass now?
-		}, delay)
-	}
-
-	kill() {
-		clearInterval(this.interval);
-		this.interval = null;
 	}
 
 	update(now, deltaMs){

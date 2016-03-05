@@ -1,17 +1,17 @@
-
 import {cache} from "../../engine";
-import Renderable from "../Renderable";
+import Renderable from "./Renderable";
 
 export default class Sprite extends Renderable {
 
 	constructor(url, width, height) {
 		super();
-		this.dirt = 0;
+		this.renderType = "sprite";
 		this._width = null;
 		this._height = null;
 		this._url = null;
 		this._image = null;
 		this.loaded = false;
+		this.version = 0;
 
 		if(url) this.url = url;
 		if(width !== undefined) this.width = width;
@@ -19,8 +19,8 @@ export default class Sprite extends Renderable {
 		
 	}
 
-	dirty () {
-		this.dirt++;
+	set needsUpdate (value) {
+		if(value) this.version++;
 	}
 
 	get width() {
@@ -29,7 +29,7 @@ export default class Sprite extends Renderable {
 
 	set width (width) {
 		this._width = width;
-		this.dirt++;
+		this.needsUpdate = true;
 	}
 
 	get height() {
@@ -38,7 +38,7 @@ export default class Sprite extends Renderable {
 
 	set height(height) {
 		this._height = height;
-		this.dirt++;
+		this.needsUpdate = true;
 	}
 
 	get image () {
@@ -49,7 +49,7 @@ export default class Sprite extends Renderable {
 		this._image = image;
 		if(!this._width) this._width = image.width;
 		if(!this.height) this._height = image.height;
-		this.dirt++;
+		this.needsUpdate = true;
 	}
 
 	get url() {
