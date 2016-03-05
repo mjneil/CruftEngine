@@ -10,6 +10,7 @@ export default class Actor extends Emitter {
         this.components = {};
         this.children = {};
         this.initialized = false;
+        this.destroyed = false;
     }
 
     addComponent(component)  {
@@ -66,6 +67,8 @@ export default class Actor extends Emitter {
             this.components[name].initialize();
         }
 
+        this.initialized = true;
+
         for(let id in this.children) {
             this.children[id].initialize();
         }
@@ -100,7 +103,8 @@ export default class Actor extends Emitter {
             }
             this.children = null;
         }
-     
+        
+        this.destroyed = true;
         this.emit("destroy", this);
     }
 }

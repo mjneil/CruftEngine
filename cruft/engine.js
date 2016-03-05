@@ -1,8 +1,9 @@
-import Emitter from "./core/Emitter";
 
+import Emitter from "./core/Emitter";
+import setIntervalMs from "./util/setIntervalMs";
 import Actor from "./core/Actor";
 import Cache from "./net/Cache";
-import {ImageLoader, TextLoader, JsonLoader } from "./net/loaders/loaders.js"
+import * as loaders from "./net/loaders/loaders.js"
 import Factory from "./core/ActorFactory";
 import Network from "./net/Network";
 import Scheduler from "./core/Scheduler";
@@ -11,64 +12,66 @@ import MemoryManager from "./core/MemoryManager"
 
 
 export class Engine extends Emitter {
+
 	constructor() {
 		super()
+		this.views = {};
 		this.scene = null;
-		this.camera = null;
+		this.interval = null;
 	}
+
+	setScene(scene) {
+		if(this.scene) this.scene.destroy(true);
+		this.scene = scene;
+		scene.initialize();
+	}
+
+	addView(name, view) {
+		this.views[name] = view;
+	}
+
+	start(delay) {
+		if(this.interval) return;
+
+		this.interval = setIntervalMs((now, deltaMs)=>{
+			
+			if(engine.scene){
+				engine.scene.update(now, deltaMs);
+			}
+
+			scheduler.update(now, deltaMs);
+
+			//update views
+			for(let name in this.views){
+				this.views[name].update(now, deltaMs);
+			}
+
+			
+		}, delay)
+	}
+
+	kill() {
+		clearInterval(this.interval);
+		this.interval = null;
+	}
+
+
 }
 
+
 var engine = new Engine();
+
 var cache = new Cache();
+
+	cache.register(loaders);
+	cache.register({ default : cache.loaders.text });
+
 var factory = new Factory();
 var network = new Network();
 var scheduler = new Scheduler();
 var memory = new MemoryManager();
 
 
-var initialize = (config) => {
-
-	var promises = [];
-		
-	scheduler.addChild(new Script((now, deltaMs) => {
-		engine.scene.update(now, deltaMs);
-	}));
-
-	cache.register("image", new ImageLoader() );
-	cache.register("text", new TextLoader() );
-	cache.register("json", new JsonLoader() );
-	cache.register("default", cache.loaders.text );//I dont like making TextLoader Twice
-
-	if(config.cache) {
-		var cacheConfig = config.cache;
-		for(var key in cacheConfig) {
-			cache.register(key, cacheConfig[key]);
-		}
-	}
-
-	if(config.factory) {
-		let creators = config.factory;
-		for(let name in creators){
-			factory.register(name, creators[name]);
-		}
-	}
-
-	if(config.network){
-		promises.push(network.initialize(config.network.name, config.network.options));
-		if(config.network.peer){
-			promises.push(network.createSession(config.network.peer))
-		}
-	}
-
-	engine.scene = instantiate(config.scene || null);
-	memory.add(engine.scene);
-
-	return Promise.all(promises).then(()=>{
-		engine.scene.initialize();
-		scheduler.start(config.scheduler || 17);
-	});
-
-}
 
 var instantiate = (type, config) => {
 	var actor = factory.create(type, config);
@@ -78,7 +81,7 @@ var instantiate = (type, config) => {
 
 
 export default engine;
-export {cache, factory, network, scheduler, memory,  initialize, instantiate };
+export {cache, factory, network, scheduler, memory, instantiate };
 
 //****DEBUG****//
 window.engine = engine;
