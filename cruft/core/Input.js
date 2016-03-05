@@ -1,14 +1,25 @@
 import Emitter from "./Emitter";
 
-class Input extends Emitter {
+export default class Input extends Emitter {
 	
 	constructor() {
+		super()
 		this.controllers = [];
 	}
 
+	addController(controller) {
+		this.controllers.push(controller);
+	}
+
 	update() {
-		for(let controller of this.controllers){
+		for(let controller of this.controllers) {
 			controller.update();
+		}
+	}
+
+	postUpdate() {
+		for(let controller of this.controllers) {
+			controller.postUpdate();
 		}
 	}
 }

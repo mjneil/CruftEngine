@@ -9,6 +9,7 @@ import Network from "./net/Network";
 import Scheduler from "./core/Scheduler";
 import Script from "./core/processes/Script";
 import MemoryManager from "./core/MemoryManager"
+import Input from "./core/Input";
 
 
 export class Engine extends Emitter {
@@ -34,6 +35,8 @@ export class Engine extends Emitter {
 		if(this.interval) return;
 
 		this.interval = setIntervalMs((now, deltaMs)=>{
+
+			input.update();
 			
 			if(engine.scene){
 				engine.scene.update(now, deltaMs);
@@ -45,6 +48,8 @@ export class Engine extends Emitter {
 			for(let name in this.views){
 				this.views[name].update(now, deltaMs);
 			}
+
+			input.postUpdate();
 
 			
 		}, delay)
@@ -70,6 +75,7 @@ var factory = new Factory();
 var network = new Network();
 var scheduler = new Scheduler();
 var memory = new MemoryManager();
+var input = new Input();
 
 
 
@@ -81,7 +87,7 @@ var instantiate = (type, config) => {
 
 
 export default engine;
-export {cache, factory, network, scheduler, memory, instantiate };
+export {cache, factory, network, scheduler, memory, input, instantiate };
 
 //****DEBUG****//
 window.engine = engine;
