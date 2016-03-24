@@ -9,10 +9,16 @@ var createShader = (gl, type, src) => {
 	return shader
 }
 
-var createProgram = (gl, vSrc, fSrc) => {
+var createProgram = (gl, vSrc, fSrc, attributes={}) => {
 	var program = gl.createProgram();
 	gl.attachShader(program, createShader(gl, gl.VERTEX_SHADER, vSrc));
 	gl.attachShader(program, createShader(gl, gl.FRAGMENT_SHADER, fSrc));
+
+	for(var attrib in attributes) {
+		var location = attributes[attrib];
+		if(location !== null) gl.bindAttribLocation(program, location, attrib);
+	}
+
 	gl.linkProgram(program);
 	if(!gl.getProgramParameter(program, gl.LINK_STATUS)) {
 		console.log("FAILED TO COMPILE SHADER");

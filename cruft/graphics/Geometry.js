@@ -1,32 +1,41 @@
+import uuid from "../util/uuid"
+import vec3 from "../math/vec3"
 
 export default class Geometry {
-
+	
 	constructor() {
-		this.vertices = null;
-		this.normals = null;
-		this.texCoords = null;
-		this.groups = null;
+
+		this.guid = uuid();
 		this.version = 0;
-	}
 
-	static create({vertices, texCoords, normals, groups}) {
-		var geometry = new Geometry();
-
-		geometry.vertices = vertices;
-		geometry.normals = normals;
-		geometry.texCoords = texCoords;
-		geometry.groups = groups;
-
-		geometry.needsUpdate = true;
-		return geometry;
+		this.vertices = [];
+		this.vertexNormals = [];
+		this.uvs = [];
+		this.faces = [];
 	}
 
 
-	set needsUpdate (value) {
-		if(value) this.version++;
+	computeFaceNormals() {
+
+		let vertices = this.vertices;
+		for(let face of this.faces){
+			let a = vertices[face.indices[0]],
+				b = vertices[face.indices[1]],
+				c = vertices[face.indices[2]]
+
+			let ab = vec3.sub(b, a);
+			let bc = vec3.sub(c, b);
+
+			face.normal = ab.cross(bc).normalize();
+
+		}
 	}
 
-	calculateVertexNormals() {
-		
+	computeVertexNormals() {
+
+	}
+
+	needsUpdate(val) {
+		if(val) this.version++;
 	}
 }
